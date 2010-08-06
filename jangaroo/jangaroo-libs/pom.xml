@@ -1,0 +1,154 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.jangaroo</groupId>
+  <artifactId>jangaroo-libs</artifactId>
+  <packaging>pom</packaging>
+  <version>0.7.1-SNAPSHOT</version>
+
+  <name>Jangaroo standard libraries</name>
+  <description />
+  <url>http://www.coremedia.com</url>
+
+  <properties>
+    <jangaroo_version>0.7.0</jangaroo_version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>jangaroo</id>
+      <name>Jangaroo repository</name>
+      <url>http://repo.jangaroo.net/maven2</url>
+    </pluginRepository>
+
+    <pluginRepository>
+      <id>jangaroo-snapshots</id>
+      <name>Jangaroo snapshot repository</name>
+      <url>http://repo.jangaroo.net/maven2-snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <repositories>
+
+    <repository>
+      <id>jangaroo</id>
+      <name>Jangaroo repository</name>
+      <url>http://repo.jangaroo.net/maven2</url>
+    </repository>
+
+    <repository>
+      <id>jangaroo-snapshots</id>
+      <name>Jangaroo snapshot repository</name>
+      <url>http://repo.jangaroo.net/maven2-snapshots</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <build>
+    <resources>
+      <resource>
+        <directory>src/main/joo-js</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+      <resource>
+        <directory>src/main/joo-api</directory>
+        <targetPath>META-INF/joo-api</targetPath>
+      </resource>
+    </resources>
+    <outputDirectory>target/joo</outputDirectory>
+    <sourceDirectory>src/main/joo</sourceDirectory>
+    <testSourceDirectory>src/test/joo</testSourceDirectory>
+    <testOutputDirectory>target/joo-test</testOutputDirectory>
+
+    <plugins>
+      <plugin>
+        <groupId>net.jangaroo</groupId>
+        <artifactId>jangaroo-lifecycle</artifactId>
+        <version>${jangaroo_version}</version>
+        <extensions>true</extensions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${basedir}/src/main/joo-api</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-source-plugin</artifactId>
+        <configuration>
+          <excludeResources>true</excludeResources>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.0-beta-9</version>
+          <configuration>
+            <preparationGoals>clean install</preparationGoals>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>net.jangaroo</groupId>
+          <artifactId>jangaroo-maven-plugin</artifactId>
+          <version>${jangaroo_version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>net.jangaroo</groupId>
+        <artifactId>jangaroo-runtime</artifactId>
+        <version>${jangaroo_version}</version>
+        <type>jangaroo</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  
+  <modules>
+    <!--
+    <module>xmlhttprequest</module>
+    <module>jangaroo-browser</module>
+    -->
+    <module>jooflash</module>
+    <!--
+    <module>jooflexframework</module>
+    <module>joounit</module>
+
+    <module>ext-core</module>
+    <module>ext-all</module>
+    <module>ext-as</module>
+
+    <module>ckeditor</module>
+
+    <module>jangaroo-libs-bom</module>
+    -->
+  </modules>
+
+</project>

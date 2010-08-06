@@ -1,0 +1,30 @@
+<webapp-structure>
+  <registeredFiles>
+    <entry>
+      <string>currentBuild</string>
+      <path-set>
+        <pathsSet class="linked-hash-set">
+          <string>.index.html.swp</string>
+          <string>index.html</string>
+          <string>WEB-INF/classes/META-INF/joo-api/Test01.as</string>
+          <string>WEB-INF/classes/scripts/classes/Test01.js</string>
+          <string>WEB-INF/classes/scripts/Test01.js</string>
+        </pathsSet>
+      </path-set>
+    </entry>
+  </registeredFiles>
+  <dependenciesInfo>
+    <org.apache.maven.plugin.war.util.DependencyInfo>
+      <dependency>
+        <groupId>net.jangaroo</groupId>
+        <artifactId>jangaroo-browser</artifactId>
+        <version>0.6.0</version>
+        <type>jangaroo</type>
+        <scope>compile</scope>
+        <exclusions/>
+        <optional>false</optional>
+      </dependency>
+      <targetFileName>jangaroo-browser-0.6.0.jar</targetFileName>
+    </org.apache.maven.plugin.war.util.DependencyInfo>
+  </dependenciesInfo>
+</webapp-structure>

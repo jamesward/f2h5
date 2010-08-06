@@ -1,0 +1,41 @@
+<webapp-structure>
+  <registeredFiles>
+    <entry>
+      <string>currentBuild</string>
+      <path-set>
+        <pathsSet class="linked-hash-set">
+          <string>index.html</string>
+          <string>WEB-INF/classes/META-INF/joo-api/Test03.as</string>
+          <string>WEB-INF/classes/scripts/classes/Test03.js</string>
+          <string>WEB-INF/classes/scripts/Test03.js</string>
+        </pathsSet>
+      </path-set>
+    </entry>
+  </registeredFiles>
+  <dependenciesInfo>
+    <org.apache.maven.plugin.war.util.DependencyInfo>
+      <dependency>
+        <groupId>net.jangaroo</groupId>
+        <artifactId>jooflash</artifactId>
+        <version>0.6.0</version>
+        <type>jangaroo</type>
+        <scope>compile</scope>
+        <exclusions/>
+        <optional>false</optional>
+      </dependency>
+      <targetFileName>jooflash-0.6.0.jar</targetFileName>
+    </org.apache.maven.plugin.war.util.DependencyInfo>
+    <org.apache.maven.plugin.war.util.DependencyInfo>
+      <dependency>
+        <groupId>net.jangaroo</groupId>
+        <artifactId>jangaroo-browser</artifactId>
+        <version>0.6.0</version>
+        <type>jangaroo</type>
+        <scope>compile</scope>
+        <exclusions/>
+        <optional>false</optional>
+      </dependency>
+      <targetFileName>jangaroo-browser-0.6.0.jar</targetFileName>
+    </org.apache.maven.plugin.war.util.DependencyInfo>
+  </dependenciesInfo>
+</webapp-structure>

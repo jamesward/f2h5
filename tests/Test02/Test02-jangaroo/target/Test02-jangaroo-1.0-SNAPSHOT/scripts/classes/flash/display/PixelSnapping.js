@@ -1,10 +1,10 @@
-joo.classLoader.prepare("package flash.display", [""],
+joo.classLoader.prepare("package flash.display",/* {*/
 
 /**
  * The PixelSnapping class is an enumeration of constant values for setting the pixel snapping options by
  * using the pixelSnapping property of a Bitmap object.
  */
-"public class PixelSnapping",function($$private){with($$private)return[ 
+"public class PixelSnapping",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
   /**
    * A constant value used in the pixelSnapping property of a Bitmap object to specify that the bitmap image is
    * always snapped to the nearest pixel, independent of any transformation.

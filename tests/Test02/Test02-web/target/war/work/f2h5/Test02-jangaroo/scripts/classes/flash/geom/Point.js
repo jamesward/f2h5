@@ -1,4 +1,4 @@
-joo.classLoader.prepare("package flash.geom", [""],
+joo.classLoader.prepare("package flash.geom",/* {*/
 
 /**
  * The Point object represents a location in a two-dimensional coordinate system, where x  represents the horizontal
@@ -8,7 +8,7 @@ joo.classLoader.prepare("package flash.geom", [""],
  *   var myPoint:Point = new Point();
  * </code>
  */
-"public class Point",function($$private){with($$private)return[ 
+"public class Point",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   /**
    * Creates a new point. If you pass no parameters to this method, a point is created at (0,0).

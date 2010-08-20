@@ -1,6 +1,6 @@
-joo.classLoader.prepare("package flash.events", [
+joo.classLoader.prepare("package flash.events",/* {
 
-"import flash.events.Event",""],
+import flash.events.Event*/
 
 /**
  * The IEventDispatcher interface defines methods for adding or removing event listeners, checks whether specific types
@@ -17,7 +17,7 @@ joo.classLoader.prepare("package flash.events", [
  * implement the IEventDispatcher interface, create an EventDispatcher member, and write simple hooks to route calls
  * into the aggregated EventDispatcher.
  */
-"public interface IEventDispatcher",function($$private){with($$private)return[ /*
+"public interface IEventDispatcher",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ /*
 
   function IEventDispatcher():*;*/,/*
 

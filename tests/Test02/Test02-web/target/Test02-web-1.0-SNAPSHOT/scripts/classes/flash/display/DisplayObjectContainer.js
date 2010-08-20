@@ -1,6 +1,4 @@
-joo.classLoader.prepare("package flash.display", [
-
-"import flash.display.InteractiveObject",""],
+joo.classLoader.prepare("package flash.display",/* {*/
 
 /**
  * The DisplayObjectContainer class is the base class for all objects that can serve as display object containers on
@@ -14,7 +12,7 @@ joo.classLoader.prepare("package flash.display", [
  * <p>For more information, see the "Display Programming" chapter of the Programming ActionScript 3.0 book.
  * @see flash.display.DisplayObject
  */
-"public class DisplayObjectContainer extends flash.display.InteractiveObject",function($$private){with($$private)return[ 
+"public class DisplayObjectContainer extends flash.display.InteractiveObject",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$children=$$l+'children';return[ 
 
   /**
    * Calling the new DisplayObjectContainer() constructor throws an ArgumentError exception. You can, however, call

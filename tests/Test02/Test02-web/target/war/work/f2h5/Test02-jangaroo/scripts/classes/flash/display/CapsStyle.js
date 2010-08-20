@@ -1,10 +1,10 @@
-joo.classLoader.prepare("package flash.display", [""],
+joo.classLoader.prepare("package flash.display",/* {*/
 
 /**
  * The CapsStyle class is an enumeration of constant values that specify the caps style to use in drawing lines.
  * @see flash.display.Graphics#lineStyle()
  */
-"public class CapsStyle",function($$private){with($$private)return[ 
+"public class CapsStyle",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
   /**
    * Used to specify no caps in the caps parameter of the flash.display.Graphics.lineStyle() method.
    */

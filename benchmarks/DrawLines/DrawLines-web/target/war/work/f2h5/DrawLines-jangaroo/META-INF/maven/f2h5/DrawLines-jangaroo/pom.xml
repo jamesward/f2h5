@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+           http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>DrawLines</artifactId>
+    <groupId>f2h5</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>DrawLines-jangaroo</artifactId>
+  <packaging>war</packaging>
+  <name>DrawLines-jangaroo</name>
+
+  <properties>
+    <jangaroo_version>0.7.0</jangaroo_version>
+    <jangaroo_libs_version>0.7.3</jangaroo_libs_version>
+  </properties>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>jangaroo</id>
+      <name>Jangaroo repository</name>
+      <url>http://repo.jangaroo.net/maven2</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <repositories>
+    <repository>
+      <id>jangaroo</id>
+      <url>http://repo.jangaroo.net/maven2</url>
+    </repository>
+  </repositories>
+
+  <build>
+    <sourceDirectory>src/main/jangaroo</sourceDirectory>
+    <outputDirectory>target/joo</outputDirectory>
+
+    <plugins>
+      <plugin>
+        <groupId>net.jangaroo</groupId>
+        <artifactId>jangaroo-lifecycle</artifactId>
+        <version>${jangaroo_version}</version>
+        <extensions>true</extensions>
+      </plugin>
+
+      <plugin>
+        <groupId>net.jangaroo</groupId>
+        <artifactId>jangaroo-maven-plugin</artifactId>
+        <version>${jangaroo_version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+              <goal>war-package</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <failOnMissingWebXml>false</failOnMissingWebXml>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>net.jangaroo</groupId>
+      <artifactId>jooflash</artifactId>
+      <version>${jangaroo_libs_version}</version>
+      <type>jangaroo</type>
+    </dependency>
+
+    <dependency>
+      <groupId>net.jangaroo</groupId>
+      <artifactId>jooflexframework</artifactId>
+      <version>${jangaroo_libs_version}</version>
+      <type>jangaroo</type>
+    </dependency>
+
+    <dependency>
+      <groupId>net.jangaroo</groupId>
+      <artifactId>jangaroo-browser</artifactId>
+      <version>${jangaroo_libs_version}</version>
+      <type>jangaroo</type>
+    </dependency>
+
+  </dependencies>
+
+</project>

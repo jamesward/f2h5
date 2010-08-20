@@ -15,29 +15,35 @@ joo.classLoader.prepare(/*
 
 // JangarooScript runtime support. Author: Frank Wienberg
 
-"package joo", [""],
+"package joo",/* {*/
 
-"public class StandardClassLoader extends joo.SystemClassLoader",function($$private){with($$private)return[ 
+"public class StandardClassLoader extends joo.SystemClassLoader",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$imports=$$l+'imports',$createClassDeclaration=$$l+'createClassDeclaration',$init=$$l+'init';return[function(){joo.classLoader.init(joo.ClassDeclaration);}, 
 
   "private static var",{ classDeclarations/* : Array*/ :function(){return( []);}},
 
-  "private var",{ importMap/* : ImportMap*/: undefined},
+  "private var",{ imports/* : Array*/: undefined},
 
   "public function StandardClassLoader",function $StandardClassLoader() {this[$super]();
-    this[$importMap] = new joo.ImportMap();
+    this[$imports] = [];
   },
 
-  "override protected function createClassDeclaration",function createClassDeclaration(packageDef/* : String*/, directives/* : Array*/, classDef/* : String*/, memberFactory/* : Function*/,
+  "override protected function createClassDeclaration",function createClassDeclaration(packageDef/* : String*/, classDef/* : String*/, memberFactory/* : Function*/,
                                                   publicStaticMethodNames/* : Array*/, dependencies/* : Array*/)/*:SystemClassDeclaration*/ {
-    var cd/* : ClassDeclaration*/ = new joo.ClassDeclaration(packageDef, directives, classDef, memberFactory, publicStaticMethodNames, dependencies);
+    var cd/* : ClassDeclaration*/ = new joo.ClassDeclaration(packageDef, classDef, memberFactory, publicStaticMethodNames, dependencies);
     $$private.classDeclarations.push(cd); // remember all created classes for later initialization.
     return cd;
   },
 
-  "public function loadScript",function loadScript(uri/* : String*/)/* : Object*/ {
-    var script/* : Object*/ = joo.window.document.createElement("script");
+  "public function loadScript",function loadScript(uri/*:String*/)/*:Object*/ {
+    var joo__loadScript/*:Function*/ = joo.getQualifiedObject("joo__loadScript");
+    if (joo__loadScript) {
+      joo__loadScript(uri);
+      return {};
+    }
+    var document/*:**/ = joo.getQualifiedObject("document");
+    var script/*:Object*/ = document.createElement("script");
     script.type = "text/javascript";
-    joo.window.document.getElementsByTagName("HEAD")[0].appendChild(script);
+    document.getElementsByTagName("HEAD")[0].appendChild(script);
     script.src = uri;
     return script;
   },
@@ -48,7 +54,7 @@ joo.classLoader.prepare(/*
    * @param fullClassName : String the fully qualified class name (package plus name) of the class to load and import.
    */
   "public function import_",function import_(fullClassName/* : String*/)/* : void*/ {    
-    this[$importMap].addImport(fullClassName);
+    this[$imports].push(fullClassName);
   },
 
   /**
@@ -60,7 +66,7 @@ joo.classLoader.prepare(/*
    * @param args the arguments to hand over to the main method of the given class.
    */
   "public function run",function run(mainClassName/* : String, ...args*/)/* : void*/ {var args=Array.prototype.slice.call(arguments,1);
-    this.complete(function joo$StandardClassLoader$63_19()/* : void*/ {
+    this.complete(function joo$StandardClassLoader$69_19()/* : void*/ {
       var mainClass/* : SystemClassDeclaration*/ = this.getRequiredClassDeclaration(mainClassName)/*as SystemClassDeclaration*/;
       mainClass.publicConstructor["main"].apply(null,args);
     }.bind(this));
@@ -109,7 +115,7 @@ joo.classLoader.prepare(/*
   },
 
   "protected function completeAll",function completeAll()/* : void*/ {
-    $$private.classDeclarations.forEach(function joo$StandardClassLoader$112_31(classDeclaration/* : ClassDeclaration*/)/* : void*/ {
+    $$private.classDeclarations.forEach(function joo$StandardClassLoader$118_31(classDeclaration/* : ClassDeclaration*/)/* : void*/ {
       classDeclaration.complete();
       // init native class patches immediately:
       if (classDeclaration.isNative()) {
@@ -120,12 +126,15 @@ joo.classLoader.prepare(/*
 
   "protected function doCompleteCallbacks",function doCompleteCallbacks(onCompleteCallbacks/* : Array*//*Function*/)/* : void*/ {
     if (onCompleteCallbacks.length) {
-      this[$importMap].init();
-      var importMap/* : Object*/ = this[$importMap].addToMap({});
+      var importMap/* : Object*/ = {};
+      this[$imports].forEach(function joo$StandardClassLoader$130_23(fullClassName/*:String*/)/*:void*/ {
+        var className/* : String*/ = fullClassName.substring(fullClassName.lastIndexOf(".") + 1);
+        importMap[className] = joo.classLoader.getRequiredClassDeclaration(fullClassName).init();
+      });
       for (var i/*:int*/ = 0; i < onCompleteCallbacks.length; ++i) {
         (onCompleteCallbacks[i]/*as Function*/)(importMap);
       }
     }
   },
-];},[],["joo.SystemClassLoader","joo.ImportMap","joo.ClassDeclaration"]
+];},[],["joo.SystemClassLoader","joo.ClassDeclaration"]
 );

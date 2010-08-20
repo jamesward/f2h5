@@ -1,9 +1,9 @@
-joo.classLoader.prepare("package flash.text", [""],
+joo.classLoader.prepare("package flash.text",/* {*/
 
 /**
  * The TextFormat class represents character formatting information.
  */
-"public class TextFormat extends Object",function($$private){with($$private)return[ 
+"public class TextFormat extends Object",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   /**
    * Creates a TextFormat object with the specified properties.

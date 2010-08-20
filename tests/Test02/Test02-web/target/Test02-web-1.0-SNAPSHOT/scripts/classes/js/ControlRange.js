@@ -1,6 +1,6 @@
-joo.classLoader.prepare("package js", [""],
+joo.classLoader.prepare("package js",/* {*/
 
-"public interface ControlRange extends TextRange",function($$private){with($$private)return[ /*
+"public interface ControlRange extends js.TextRange",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ /*
 
   /**
    * Adds an element to the areas, controlRange, or options  collection.

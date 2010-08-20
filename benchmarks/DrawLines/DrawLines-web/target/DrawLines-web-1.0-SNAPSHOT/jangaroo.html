@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>DrawLines</title>
+    <style type="text/css">
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      body, #jangaroo-stage {
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="jangaroo-stage" width="400" height="400">
+      loading jangaroo
+    </div>
+    <script type="text/javascript" src="scripts/jangaroo-runtime.js"></script>
+    <script type="text/javascript">
+      joo.classLoader.run(
+              "joo.flash.Run",
+              "jangaroo-stage",
+              "DrawLines");
+    </script>
+  </body>
+</html>

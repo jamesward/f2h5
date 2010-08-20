@@ -5,9 +5,7 @@ joo.classLoader.prepare("package",
 
 
 
-"public class Test04 extends flash.display.Sprite",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$i=$$l+'i';return[
-
-"private var",{i:0},
+"public class Test04 extends flash.display.Sprite",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
 
 "public function Test04",function()
 {this[$super]();

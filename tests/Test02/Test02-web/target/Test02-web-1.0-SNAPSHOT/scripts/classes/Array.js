@@ -2,7 +2,7 @@ joo.classLoader.prepare(/**
  * API and documentation by Adobe�.
  * Licensed under http://creativecommons.org/licenses/by-nc-sa/3.0/
  */
-"package", [""],
+"package",/* {*/
 
 /**
  * The Array class lets you access and manipulate arrays.
@@ -33,7 +33,7 @@ joo.classLoader.prepare(/**
  * or you will lose the ability to store data in an array.</p>
  * @see Object
  */
-"public class Array extends Object",function($$private){with($$private)return[ 
+"public class Array extends Object",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   /**
    * Specifies case-insensitive sorting for the Array class sorting methods.

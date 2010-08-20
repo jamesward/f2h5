@@ -20,37 +20,37 @@
       <dependency>
         <groupId>net.jangaroo</groupId>
         <artifactId>jooflash</artifactId>
-        <version>0.7.0</version>
+        <version>0.7.3</version>
         <type>jangaroo</type>
         <scope>compile</scope>
         <exclusions/>
         <optional>false</optional>
       </dependency>
-      <targetFileName>jooflash-0.7.0.jar</targetFileName>
+      <targetFileName>jooflash-0.7.3.jar</targetFileName>
     </org.apache.maven.plugin.war.util.DependencyInfo>
     <org.apache.maven.plugin.war.util.DependencyInfo>
       <dependency>
         <groupId>net.jangaroo</groupId>
         <artifactId>jooflexframework</artifactId>
-        <version>0.7.0</version>
+        <version>0.7.3</version>
         <type>jangaroo</type>
         <scope>compile</scope>
         <exclusions/>
         <optional>false</optional>
       </dependency>
-      <targetFileName>jooflexframework-0.7.0.jar</targetFileName>
+      <targetFileName>jooflexframework-0.7.3.jar</targetFileName>
     </org.apache.maven.plugin.war.util.DependencyInfo>
     <org.apache.maven.plugin.war.util.DependencyInfo>
       <dependency>
         <groupId>net.jangaroo</groupId>
         <artifactId>jangaroo-browser</artifactId>
-        <version>0.7.0</version>
+        <version>0.7.3</version>
         <type>jangaroo</type>
         <scope>compile</scope>
         <exclusions/>
         <optional>false</optional>
       </dependency>
-      <targetFileName>jangaroo-browser-0.7.0.jar</targetFileName>
+      <targetFileName>jangaroo-browser-0.7.3.jar</targetFileName>
     </org.apache.maven.plugin.war.util.DependencyInfo>
   </dependenciesInfo>
 </webapp-structure>

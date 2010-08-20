@@ -1,7 +1,5 @@
 joo.classLoader.prepare("package flash.display",/* {
-
-import js.Element
-import flash.display.DisplayObject*/
+import js.Element*/
 
 "public class Bitmap extends flash.display.DisplayObject",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$createElement=$$l+'createElement',$_bitmapData=$$l+'_bitmapData',$_pixelSnapping=$$l+'_pixelSnapping',$_smoothing=$$l+'_smoothing';return[ 
 

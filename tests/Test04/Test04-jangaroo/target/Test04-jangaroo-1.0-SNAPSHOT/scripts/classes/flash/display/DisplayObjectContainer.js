@@ -1,6 +1,4 @@
-joo.classLoader.prepare("package flash.display",/* {
-
-import flash.display.InteractiveObject*/
+joo.classLoader.prepare("package flash.display",/* {*/
 
 /**
  * The DisplayObjectContainer class is the base class for all objects that can serve as display object containers on

@@ -9,17 +9,17 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"package mx.collections",
-[
+"package mx.collections",/*
+{
 
-"import flash.events.Event",/*
+import flash.events.Event
 
 /**
  *  Dispatched when the ICollectionView has been updated in some way.
  *
  *  @eventType mx.events.CollectionEvent.COLLECTION_CHANGE
  * /
-[Event(name="collectionChange", type="mx.events.CollectionEvent")]*/""],
+[Event(name="collectionChange", type="mx.events.CollectionEvent")]*/
 
 /**
  * The ListCollectionView class adds the properties and methods of the
@@ -50,8 +50,8 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
  *  </pre>
  */
 "public interface ListCollectionView"+
-"       extends IList",function($$private){with($$private)return[
-
+"       extends mx.collections.IList",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+/*
     ////////////////////////////////////////////////////////////////////////////////
 //
 //  ADOBE SYSTEMS INCORPORATED
@@ -63,7 +63,7 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"import mx.core.mx_internal",
+import mx.core.mx_internal*/
 
 /**
  *  @private

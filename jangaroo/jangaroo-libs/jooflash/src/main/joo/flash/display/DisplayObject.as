@@ -5,15 +5,38 @@ import flash.events.EventDispatcher;
 import js.Event;
 import flash.events.Event;
 import flash.events.MouseEvent;
-import flash.display.Stage;
-import flash.display.IBitmapDrawable;
 import flash.geom.Transform;
 
-public class DisplayObject extends EventDispatcher implements flash.display.IBitmapDrawable {
+public class DisplayObject extends EventDispatcher implements IBitmapDrawable {
+
+  private var _mouseX:Number = 0;
+  private var _mouseY:Number = 0;
+
+  public function get mouseX():Number
+  {
+    return _mouseX;
+  }
+
+  public function get mouseY():Number
+  {
+    return _mouseY;
+  }
+
+  public var alpha:Number;
+  
+  public function stopDrag():void
+  {
+
+  }
+
+  public var filters:Array;
+
+  public var visible:Boolean;
+
 
   public function DisplayObject() {
     super();
-    this._stage = flash.display.Stage.instance; // Stage singleton must be set before creating DisplayObject instances!
+    this._stage = Stage.getInstance(); // Stage singleton must be set before creating DisplayObject instances!
     this._elem = this.createElement();
     if (!isNaN(this.x)) {
       this._elem.style.left = this.x + "px";
@@ -25,6 +48,14 @@ public class DisplayObject extends EventDispatcher implements flash.display.IBit
       this._elem.style.width  = this._stage.stageWidth  + "px"; // TODO: resize according to its current content?
       this._elem.style.height = this._stage.stageHeight + "px"; // TODO: resize according to its current content?
     }
+
+    addEventListener(MouseEvent.MOUSE_MOVE, _handleMouseMove);
+  }
+
+  private function _handleMouseMove(event:MouseEvent):void
+  {
+    _mouseX = event.localX;
+    _mouseY = event.localY;
   }
 
   /**
@@ -120,7 +151,10 @@ trace(stage.stageWidth);
       if (DELEGATED_EVENT_MAP[jsType] == type) {
         this._elem.addEventListener(jsType, this.transformAndDispatch, useCapture);
       } else if (this!=this.stage && flash.events.Event.ENTER_FRAME == type) {
-        this.stage.addEventListener(type, this.dispatchWithOwnTarget, useCapture, priority, useWeakReference);
+        if (this.stage != undefined)
+        {
+          this.stage.addEventListener(type, this.dispatchWithOwnTarget, useCapture, priority, useWeakReference);
+        }
       }
     }
   }

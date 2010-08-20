@@ -1,17 +1,14 @@
 package flash.display {
-
+import js.CanvasRenderingContext2D;
 import js.Element;
 import js.HTMLCanvasElement;
-import flash.display.DisplayObject;
-import flash.display.Graphics;
-import flash.display.Stage;
 import flash.geom.Transform;
 import flash.geom.Matrix;
 
 /**
  * The Shape class is used to create lightweight shapes by using the ActionScript drawing application program interface
  * (API). The Shape class includes a graphics property, which lets you access methods from the Graphics class.
- * <p>The Sprite class also includes a graphicsproperty, and it includes other features not available to the Shape
+ * <p>The Sprite class also includes a graphics property, and it includes other features not available to the Shape
  * class. For example, a Sprite object is a display object container, whereas a Shape object is not (and cannot contain
  * child display objects). For this reason, Shape objects consume less memory than Sprite objects that contain the same
  * graphics. However, a Sprite object supports mouse click events, while a Shape object does not.

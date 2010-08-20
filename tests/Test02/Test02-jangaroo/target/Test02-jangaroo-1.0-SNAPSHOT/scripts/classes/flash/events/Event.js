@@ -1,5 +1,5 @@
-joo.classLoader.prepare("package flash.events", [""],
-"public class Event extends Object",function($$private){with($$private)return[
+joo.classLoader.prepare("package flash.events",/* {*/
+"public class Event extends Object",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$defaultPrevented=$$l+'defaultPrevented',$propagationStopped=$$l+'propagationStopped',$immediatePropagationStopped=$$l+'immediatePropagationStopped';return[
 
 
   "public function Event",function $Event(type/* : String*/, bubbles/* : Boolean = false*/, cancelable/* : Boolean = false*/) {if(arguments.length<3){if(arguments.length<2){bubbles = false;}cancelable = false;}this[$super]();

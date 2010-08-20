@@ -9,9 +9,9 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"package mx.collections",
-[
-"import flash.events.Event",""],
+"package mx.collections",/*
+{
+import flash.events.Event*/
 
 /**
  *  The ArrayCollection class is a wrapper class that exposes an Array as
@@ -47,8 +47,8 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
  *        doCelebration();
  *  </pre>
  */
-"public class ArrayCollection extends Array implements ListCollectionView",function($$private){with($$private)return[
-
+"public class ArrayCollection extends Array implements mx.collections.ListCollectionView",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(Error);},
+/*
   ////////////////////////////////////////////////////////////////////////////////
 //
 //  ADOBE SYSTEMS INCORPORATED
@@ -60,7 +60,7 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"import mx.core.mx_internal",
+import mx.core.mx_internal*/
 
 /**
  *  @private

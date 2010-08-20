@@ -5,15 +5,13 @@ import flash.events.EventDispatcher
 import js.Event
 import flash.events.Event
 import flash.events.MouseEvent
-import flash.display.Stage
-import flash.display.IBitmapDrawable
 import flash.geom.Transform*/
 
-"public class DisplayObject extends flash.events.EventDispatcher implements flash.display.IBitmapDrawable",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$addEventListener=$$l+'addEventListener',$removeEventListener=$$l+'removeEventListener',$transformAndDispatch=$$l+'transformAndDispatch',$dispatchWithOwnTarget=$$l+'dispatchWithOwnTarget',$_stage=$$l+'_stage',$_parent=$$l+'_parent',$_elem=$$l+'_elem',$_x=$$l+'_x',$_y=$$l+'_y',$_width=$$l+'_width',$_height=$$l+'_height',$_transform=$$l+'_transform';return[function(){joo.classLoader.init(flash.display.Stage,flash.events.MouseEvent,flash.geom.Transform,flash.events.Event);}, 
+"public class DisplayObject extends flash.events.EventDispatcher implements flash.display.IBitmapDrawable",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$addEventListener=$$l+'addEventListener',$removeEventListener=$$l+'removeEventListener',$transformAndDispatch=$$l+'transformAndDispatch',$dispatchWithOwnTarget=$$l+'dispatchWithOwnTarget',$_stage=$$l+'_stage',$_parent=$$l+'_parent',$_elem=$$l+'_elem',$_x=$$l+'_x',$_y=$$l+'_y',$_width=$$l+'_width',$_height=$$l+'_height',$_transform=$$l+'_transform';return[function(){joo.classLoader.init(flash.events.MouseEvent,flash.geom.Transform,flash.events.Event);}, 
 
   "public function DisplayObject",function $DisplayObject() {
     this[$super]();
-    this[$_stage] = flash.display.Stage.instance; // Stage singleton must be set before creating DisplayObject instances!
+    this[$_stage] = flash.display.Stage.getInstance(); // Stage singleton must be set before creating DisplayObject instances!
     this[$_elem] = this.createElement();
     if (!isNaN(this.x)) {
       this[$_elem].style.left = this.x + "px";

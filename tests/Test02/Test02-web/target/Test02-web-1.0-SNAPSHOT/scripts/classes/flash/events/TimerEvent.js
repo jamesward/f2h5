@@ -1,8 +1,8 @@
-joo.classLoader.prepare("package flash.events", [
+joo.classLoader.prepare("package flash.events",/* {
 
-"import flash.events.Event",""],
+import flash.events.Event*/
 
-"public class TimerEvent extends flash.events.Event",function($$private){with($$private)return[ 
+"public class TimerEvent extends flash.events.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$clone=$$l+'clone',$toString=$$l+'toString';return[ 
 
   "public static const",{ TIMER/* : String*/ : "timer"},
   "public static const",{ TIMER_COMPLETE/*:String*/ : "timerComplete"},

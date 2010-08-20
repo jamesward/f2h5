@@ -1,13 +1,12 @@
 package flash.display {
-
-import js.HTMLElement;
-import js.HTMLCanvasElement;
-import js.CanvasRenderingContext2D;
-import js.ImageData;
-import flash.geom.Matrix;
-import flash.display.IBitmapDrawable;
-import flash.geom.Rectangle;
 import flash.geom.ColorTransform;
+import flash.geom.Matrix;
+import flash.geom.Rectangle;
+
+import js.CanvasRenderingContext2D;
+import js.HTMLCanvasElement;
+import js.HTMLElement;
+import js.ImageData;
 
 public class BitmapData implements flash.display.IBitmapDrawable {
 

@@ -9,18 +9,18 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"package mx.collections", 
-[
+"package mx.collections",/* 
+{
     
-"import flash.events.IEventDispatcher",
-"import mx.events.CollectionEvent",/*
+import flash.events.IEventDispatcher
+import mx.events.CollectionEvent
 
 /**
  *  Dispatched when the IList has been updated in some way.
  *
  *  @eventType mx.events.CollectionEvent.COLLECTION_CHANGE
  * /
-[Event(name="collectionChange", type="mx.events.CollectionEvent")]*/""],
+[Event(name="collectionChange", type="mx.events.CollectionEvent")]*/
 
 /**
  *  A collection of items organized in an ordinal fashion.  
@@ -40,7 +40,7 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
  *  @see mx.collections.ICollectionView
  *  @see mx.collections.ListCollectionView
  */
-"public interface IList extends IEventDispatcher",function($$private){with($$private)return[
+"public interface IList extends flash.events.IEventDispatcher",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
 /*
     //--------------------------------------------------------------------------
     //

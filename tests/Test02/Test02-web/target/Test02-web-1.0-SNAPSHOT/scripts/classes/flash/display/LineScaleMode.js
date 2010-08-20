@@ -1,8 +1,8 @@
-joo.classLoader.prepare("package flash.display", [""],
+joo.classLoader.prepare("package flash.display",/* {*/
 /**
  * The LineScaleMode class provides values for the scaleMode parameter in the Graphics.lineStyle() method.
  */
-"public class LineScaleMode extends Object",function($$private){with($$private)return[
+"public class LineScaleMode extends Object",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
 
   /**
    * With this setting used as the scaleMode parameter of the lineStyle() method, the thickness of the line scales only

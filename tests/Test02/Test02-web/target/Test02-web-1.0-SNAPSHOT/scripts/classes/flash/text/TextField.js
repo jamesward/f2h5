@@ -1,11 +1,11 @@
-joo.classLoader.prepare("package flash.text",
-[
-  "import js.Element",
-  "import flash.display.Graphics",
-  "import flash.display.InteractiveObject",
+joo.classLoader.prepare("package flash.text",/*
+{
+  import js.Element
+  import flash.display.Graphics
+  import flash.display.InteractiveObject
   //import flash.display.DisplayObject;
   //import flash.geom.Rectangle;
-  "import flash.text.TextFormat",/*
+  import flash.text.TextFormat
   //import flash.text.StyleSheet;
   //import flash.text.TextLineMetrics;
 
@@ -31,10 +31,10 @@ joo.classLoader.prepare("package flash.text",
    * Dispatched after a control value is modified, unlike the textInput event, which is dispatched before the value is modified.
    * @eventType flash.events.Event.CHANGE
    * /
-  [Event(name="change", type="flash.events.Event")]*/""], 
+  [Event(name="change", type="flash.events.Event")]*/ 
 
   /// The TextField class is used to create display objects for text display and input.
-  "public class TextField extends flash.display.InteractiveObject",function($$private){with($$private)return[ 
+  "public class TextField extends flash.display.InteractiveObject",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$_backgroundColor=$$l+'_backgroundColor',$_border=$$l+'_border',$_borderColor=$$l+'_borderColor',$_defaultTextFormat=$$l+'_defaultTextFormat',$_htmlText=$$l+'_htmlText',$_text=$$l+'_text',$getElementName=$$l+'getElementName',$updateElementProperty=$$l+'updateElementProperty';return[ 
 
     /// Creates a new TextField instance.
     "public function TextField",function $TextField () {this[$super](); },

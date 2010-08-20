@@ -5,11 +5,22 @@ import flash.events.EventDispatcher;
 import js.Event;
 import flash.events.Event;
 import flash.events.MouseEvent;
-import flash.display.Stage;
-import flash.display.IBitmapDrawable;
 import flash.geom.Transform;
 
 public class DisplayObject extends flash.events.EventDispatcher implements flash.display.IBitmapDrawable {
+
+  public native function get mouseX():Number;
+
+  public native function get mouseY():Number;
+
+  public var alpha:Number;
+  
+  public native function stopDrag():void;
+
+  public var filters:Array;
+
+  public var visible:Boolean;
+
 
   public native function DisplayObject();
 

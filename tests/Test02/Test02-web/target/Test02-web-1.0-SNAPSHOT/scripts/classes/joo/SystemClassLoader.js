@@ -15,9 +15,9 @@ joo.classLoader.prepare(/*
 
 // JangarooScript runtime support. Author: Frank Wienberg
 
-"package joo", [""],
+"package joo",/* {*/
 
-"public class SystemClassLoader",function($$private){with($$private)return[ function()
+"public class SystemClassLoader",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(joo.NativeClassDeclaration,Error,joo.SystemClassDeclaration);}, function()
 
 {
   joo.classLoader = new joo.SystemClassLoader();
@@ -30,15 +30,16 @@ joo.classLoader.prepare(/*
   "public function SystemClassLoader",function $SystemClassLoader() {this[$super]();    
   },
 
-  "public function prepare",function prepare(packageDef/* : String*/, directives/* : Array*/, classDef/* : String*/, memberFactory/* : Function*/,
-                          publicStaticMethodNames/* : Array*/, dependencies/* : Array*/)/* : void*/ {
-    var cd/* : SystemClassDeclaration*/ = this.createClassDeclaration(packageDef, directives, classDef, memberFactory, publicStaticMethodNames, dependencies);
+  "public function prepare",function prepare(packageDef/* : String*/, classDef/* : String*/, memberFactory/* : Function*/,
+                          publicStaticMethodNames/* : Array*/, dependencies/* : Array*/)/* : SystemClassDeclaration*/ {
+    var cd/* : SystemClassDeclaration*/ = this.createClassDeclaration(packageDef, classDef, memberFactory, publicStaticMethodNames, dependencies);
     joo.SystemClassLoader.classDeclarationsByName[cd.fullClassName] = cd;
+    return cd;
   },
 
-  "protected function createClassDeclaration",function createClassDeclaration(packageDef/* : String*/, directives/* : Array*/, classDef/* : String*/, memberFactory/* : Function*/,
+  "protected function createClassDeclaration",function createClassDeclaration(packageDef/* : String*/, classDef/* : String*/, memberFactory/* : Function*/,
                           publicStaticMethodNames/* : Array*/, dependencies/* : Array*/)/* : SystemClassDeclaration*/ {
-    return new joo.SystemClassDeclaration(packageDef, directives, classDef, memberFactory, publicStaticMethodNames).init()/*as SystemClassDeclaration*/;
+    return new joo.SystemClassDeclaration(packageDef, classDef, memberFactory, publicStaticMethodNames).init()/*as SystemClassDeclaration*/;
   },
 
   "public function getClassDeclaration",function getClassDeclaration(fullClassName/* : String*/)/* : NativeClassDeclaration*/ {

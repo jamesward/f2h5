@@ -1,9 +1,9 @@
-joo.classLoader.prepare("package flash.display", [""],
+joo.classLoader.prepare("package flash.display",/* {*/
 /**
  * The JointStyle class is an enumeration of constant values that specify the joint style to use in drawing lines.
  * @see flash.display.Graphics#lineStyle()
  */
-"public class JointStyle",function($$private){with($$private)return[ 
+"public class JointStyle",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
   /**
    * Specifies beveled joints in the joints parameter of the flash.display.Graphics.lineStyle() method.
    */

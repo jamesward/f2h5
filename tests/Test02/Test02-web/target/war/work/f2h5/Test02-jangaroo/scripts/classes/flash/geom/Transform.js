@@ -1,14 +1,14 @@
-joo.classLoader.prepare("package flash.geom", [
+joo.classLoader.prepare("package flash.geom",/* {
 
-"import flash.geom.Rectangle",
-"import flash.display.DisplayObject",
-"import flash.display.Shape",""],
+import flash.geom.Rectangle
+import flash.display.DisplayObject
+import flash.display.Shape*/
 
 /**
  * The Transform class provides access to color adjustment properties and two- or three-dimensional
  * transformation objects that can be applied to a display object.
  */
-"public class Transform",function($$private){with($$private)return[ 
+"public class Transform",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$displayObject=$$l+'displayObject',$_colorTransform=$$l+'_colorTransform',$_matrix=$$l+'_matrix';return[function(){joo.classLoader.init(flash.geom.Rectangle);}, 
 
   "public function Transform",function $Transform (displayObject/* : DisplayObject*/) {this[$super]();
     this[$displayObject] = displayObject;

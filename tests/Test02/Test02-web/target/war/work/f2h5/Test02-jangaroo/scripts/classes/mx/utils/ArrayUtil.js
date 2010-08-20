@@ -9,8 +9,8 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"package mx.utils",
-[""],
+"package mx.utils",/*
+{*/
 
 /**
  *  The ArrayUtil utility class is an all-static class
@@ -19,8 +19,8 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
  *  instead you call static methods such as the 
  *  <code>ArrayUtil.toArray()</code> method.
  */
-"public class ArrayUtil",function($$private){with($$private)return[
-
+"public class ArrayUtil",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(Array);},
+/*
 	////////////////////////////////////////////////////////////////////////////////
 //
 //  ADOBE SYSTEMS INCORPORATED
@@ -32,7 +32,7 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"import mx.core.mx_internal",
+import mx.core.mx_internal*/
 
 /**
  *  @private

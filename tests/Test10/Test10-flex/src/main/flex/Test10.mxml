@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="razor.controls.*" xmlns:mx="http://ns.adobe.com/mxml/2009">
+        
+    <mx:Metadata>
+        [SWF(width="400", height="400", backgroundColor="#ffffff")]
+    </mx:Metadata>
+        
+    <VBox>
+      <Label text="Buttons that don't do anything:" autoSize="left" fontColor="0xff0000"/>
+      <Button label="One" width="50" height="18"/>
+      <TextArea id="textArea" text="Text Area" width="200" height="200" fontColor="0x0000ff" editable="true"/>        
+    </VBox>
+        
+</Application>

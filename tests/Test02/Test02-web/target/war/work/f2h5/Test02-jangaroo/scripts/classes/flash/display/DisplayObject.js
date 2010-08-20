@@ -1,19 +1,17 @@
-joo.classLoader.prepare("package flash.display", [
+joo.classLoader.prepare("package flash.display",/* {
 
-"import js.Element",
-"import flash.events.EventDispatcher",
-"import js.Event",
-"import flash.events.Event",
-"import flash.events.MouseEvent",
-"import flash.display.Stage",
-"import flash.display.IBitmapDrawable",
-"import flash.geom.Transform",""],
+import js.Element
+import flash.events.EventDispatcher
+import js.Event
+import flash.events.Event
+import flash.events.MouseEvent
+import flash.geom.Transform*/
 
-"public class DisplayObject extends flash.events.EventDispatcher implements flash.display.IBitmapDrawable",function($$private){with($$private)return[function(){joo.classLoader.init(flash.display.Stage,flash.events.MouseEvent,flash.events.Event);}, 
+"public class DisplayObject extends flash.events.EventDispatcher implements flash.display.IBitmapDrawable",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$addEventListener=$$l+'addEventListener',$removeEventListener=$$l+'removeEventListener',$transformAndDispatch=$$l+'transformAndDispatch',$dispatchWithOwnTarget=$$l+'dispatchWithOwnTarget',$_stage=$$l+'_stage',$_parent=$$l+'_parent',$_elem=$$l+'_elem',$_x=$$l+'_x',$_y=$$l+'_y',$_width=$$l+'_width',$_height=$$l+'_height',$_transform=$$l+'_transform';return[function(){joo.classLoader.init(flash.events.MouseEvent,flash.geom.Transform,flash.events.Event);}, 
 
   "public function DisplayObject",function $DisplayObject() {
     this[$super]();
-    this[$_stage] = flash.display.Stage.instance; // Stage singleton must be set before creating DisplayObject instances!
+    this[$_stage] = flash.display.Stage.getInstance(); // Stage singleton must be set before creating DisplayObject instances!
     this[$_elem] = this.createElement();
     if (!isNaN(this.x)) {
       this[$_elem].style.left = this.x + "px";
@@ -118,9 +116,9 @@ trace(stage.stageWidth);
     var jsType/* : String*/ = type.toLowerCase();
     if (newEventType) {
       if ($$private.DELEGATED_EVENT_MAP[jsType] == type) {
-        this[$_elem].addEventListener(jsType, this[$transformAndDispatch], useCapture);
+        this[$_elem].addEventListener(jsType,$$bound( this,$transformAndDispatch), useCapture);
       } else if (this!=this.stage && flash.events.Event.ENTER_FRAME == type) {
-        this.stage.addEventListener(type, this[$dispatchWithOwnTarget], useCapture, priority, useWeakReference);
+        this.stage.addEventListener(type,$$bound( this,$dispatchWithOwnTarget), useCapture, priority, useWeakReference);
       }
     }
   },
@@ -129,17 +127,17 @@ trace(stage.stageWidth);
     this[$removeEventListener](type, listener, useCapture);
     var jsType/* : String*/ = type.toLowerCase();
     if ($$private.DELEGATED_EVENT_MAP[jsType]==type) {
-      this[$_elem].removeEventListener(jsType, this[$transformAndDispatch], useCapture);
+      this[$_elem].removeEventListener(jsType,$$bound( this,$transformAndDispatch), useCapture);
     }
   },
 
-  "private bound function transformAndDispatch",function transformAndDispatch(event/* : js.Event*/)/* : Boolean*/ {
+  "private function transformAndDispatch",function transformAndDispatch(event/* : js.Event*/)/* : Boolean*/ {
     var type/* : String*/ = $$private.DELEGATED_EVENT_MAP[event.type];
     return this.dispatchEvent(new flash.events.MouseEvent(type, true, true, event.pageX - this.stage.x, event.pageY - this.stage.y, null,
             event.ctrlKey, event.altKey, event.shiftKey));
   },
 
-  "private bound function dispatchWithOwnTarget",function dispatchWithOwnTarget(event/* : flash.events.Event*/)/* : Boolean*/ {
+  "private function dispatchWithOwnTarget",function dispatchWithOwnTarget(event/* : flash.events.Event*/)/* : Boolean*/ {
     return this.dispatchEvent(event.clone());
   },
 

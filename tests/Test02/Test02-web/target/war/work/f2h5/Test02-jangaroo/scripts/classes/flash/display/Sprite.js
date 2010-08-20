@@ -1,12 +1,9 @@
-joo.classLoader.prepare("package flash.display", [
-
-"import js.Element",
-"import js.HTMLCanvasElement",
-"import flash.display.Graphics",
-"import flash.display.DisplayObjectContainer",
-"import flash.display.Shape",
-"import flash.geom.Transform",
-"import flash.geom.Matrix",""],
+joo.classLoader.prepare("package flash.display",/* {
+import js.CanvasRenderingContext2D
+import js.Element
+import js.HTMLCanvasElement
+import flash.geom.Transform
+import flash.geom.Matrix*/
 
 /**
  * The Sprite class is a basic display list building block: a display list node that can display graphics and can also
@@ -17,7 +14,7 @@ joo.classLoader.prepare("package flash.display", [
  * The Sprite class is new in ActionScript 3.0. It provides an alternative to the functionality of the MovieClip class,
  * which retains all the functionality of previous ActionScript releases to provide backward compatibility.
  */
-"public class Sprite extends flash.display.DisplayObjectContainer",function($$private){with($$private)return[ 
+"public class Sprite extends flash.display.DisplayObjectContainer",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$transform=$$l+'transform',$_graphics=$$l+'_graphics';return[function(){joo.classLoader.init(flash.display.Graphics);}, 
 
   /**
    * Creates a new Sprite instance. After you create the Sprite instance, call the

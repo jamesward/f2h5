@@ -1,4 +1,4 @@
-joo.classLoader.prepare("package flash.net", [""],
+joo.classLoader.prepare("package flash.net",/* {*/
 /**
  * A URLRequestHeader object encapsulates a single HTTP request header and consists of a name/value pair.
  * URLRequestHeader objects are used in the requestHeaders property of the URLRequest class.
@@ -13,7 +13,7 @@ joo.classLoader.prepare("package flash.net", [""],
  * @see URLRequest
  * @see URLLoader 
  */
-"public class URLRequestHeader",function($$private){with($$private)return[ 
+"public class URLRequestHeader",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   /**
    * An HTTP request header name (such as Content-Type or SOAPAction).

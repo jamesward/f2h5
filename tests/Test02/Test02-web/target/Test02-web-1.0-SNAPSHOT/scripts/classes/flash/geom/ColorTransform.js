@@ -1,9 +1,9 @@
-joo.classLoader.prepare("package flash.geom", [""],
+joo.classLoader.prepare("package flash.geom",/* {*/
 
 /**
  * The ColorTransform class lets you adjust the color values in a display object.
  */
-"public class ColorTransform",function($$private){with($$private)return[ 
+"public class ColorTransform",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$maps=$$l+'maps';return[function(){joo.classLoader.init(Array);}, 
   /**
    * A decimal value that is multiplied with the alpha transparency channel value. 
    */

@@ -1,10 +1,10 @@
-joo.classLoader.prepare("package flash.net", [
+joo.classLoader.prepare("package flash.net",/* {
 
-"import js.XMLHttpRequest",
-"import flash.events.Event",
-"import flash.events.EventDispatcher",
-"import flash.net.URLLoaderDataFormat",
-"import flash.net.URLRequest",""],
+import js.XMLHttpRequest
+import flash.events.Event
+import flash.events.EventDispatcher
+import flash.net.URLLoaderDataFormat
+import flash.net.URLRequest*/
 
 /**
  * The URLLoader class downloads data from a URL as text, binary data, or URL-encoded variables.
@@ -19,7 +19,7 @@ joo.classLoader.prepare("package flash.net", [
  * @see URLVariables
  * @see URLStream
  */
-"public class URLLoader extends flash.events.EventDispatcher",function($$private){with($$private)return[function(){joo.classLoader.init(flash.events.Event,js.XMLHttpRequest,flash.net.URLLoaderDataFormat);}, 
+"public class URLLoader extends flash.events.EventDispatcher",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$readyStateChanged=$$l+'readyStateChanged',$createEvent=$$l+'createEvent',$xmlHttpRequest=$$l+'xmlHttpRequest';return[function(){joo.classLoader.init(flash.events.Event,js.XMLHttpRequest,Error,flash.net.URLLoaderDataFormat);}, 
 
   /**
    * Indicates the number of bytes that have been loaded thus far during the load operation.
@@ -63,7 +63,7 @@ joo.classLoader.prepare("package flash.net", [
    * omitted, no load operation begins. If specified, the load operation begins immediately (see the load entry for
    * more information). 
    */
-  "public function URLLoader",function $URLLoader(request/* : URLRequest = null*/) {if(arguments.length<1){request = null;}this[$super]();
+  "public function URLLoader",function $URLLoader(request/* : URLRequest = null*/) {if(arguments.length<1){request = null;}this[$super]();this.dataFormat=this.dataFormat();
     if (request) {
       this.load(request);
     }
@@ -121,12 +121,12 @@ joo.classLoader.prepare("package flash.net", [
     } catch(e){if(is(e , Error)) {
       throw new Error("Your browser does not support XMLHttpRequest: "+e.message);
     }else throw e;}
-    this[$xmlHttpRequest].onreadystatechange = this[$readyStateChanged];
+    this[$xmlHttpRequest].onreadystatechange =$$bound( this,$readyStateChanged);
     this[$xmlHttpRequest].open(request.method, request.url, true);
     this[$xmlHttpRequest].send(null);
   },
 
-  "private bound function readyStateChanged",function readyStateChanged()/* : void*/ {
+  "private function readyStateChanged",function readyStateChanged()/* : void*/ {
     trace("URLLoader: "+this[$xmlHttpRequest].readyState);
     if (this[$xmlHttpRequest].readyState==js.XMLHttpRequest.DONE) {
       this.data = this[$xmlHttpRequest].responseText;

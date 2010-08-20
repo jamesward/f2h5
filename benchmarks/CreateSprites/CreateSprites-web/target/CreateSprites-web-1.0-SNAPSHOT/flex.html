@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>CreateSprites</title>
+    <style type="text/css">
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      body, #flash-stage {
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+      }
+      #flash-stage {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="flash-stage" width="400" height="400">
+      loading flash
+    </div>
+    <script type="text/javascript" src="swfobject.js"></script>
+    <script type="text/javascript">
+    swfobject.embedSWF("CreateSprites.swf", "flash-stage", "400", "400", "10.0.0");
+    </script>
+  </body>
+</html>

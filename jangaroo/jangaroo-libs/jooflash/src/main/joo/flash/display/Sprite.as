@@ -1,10 +1,7 @@
 package flash.display {
-
+import js.CanvasRenderingContext2D;
 import js.Element;
 import js.HTMLCanvasElement;
-import flash.display.Graphics;
-import flash.display.DisplayObjectContainer;
-import flash.display.Shape;
 import flash.geom.Transform;
 import flash.geom.Matrix;
 
@@ -18,6 +15,9 @@ import flash.geom.Matrix;
  * which retains all the functionality of previous ActionScript releases to provide backward compatibility.
  */
 public class Sprite extends DisplayObjectContainer {
+
+  public var buttonMode:Boolean;
+  public var useHandCursor:Boolean;
 
   /**
    * Creates a new Sprite instance. After you create the Sprite instance, call the

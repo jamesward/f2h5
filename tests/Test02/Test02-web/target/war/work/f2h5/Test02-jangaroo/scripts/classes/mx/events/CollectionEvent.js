@@ -9,10 +9,10 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"package mx.events",
-[
+"package mx.events",/*
+{
 
-"import flash.events.Event",""],
+import flash.events.Event*/
 
 /**
  *  The mx.events.CollectionEvent class represents an event that is  
@@ -20,8 +20,8 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
  *
  *  @see FlexEvent#CURSOR_UPDATE
  */
-"public class CollectionEvent extends flash.events.Event",function($$private){with($$private)return[
-
+"public class CollectionEvent extends flash.events.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$toString=$$l+'toString',$clone=$$l+'clone';return[
+/*
 	////////////////////////////////////////////////////////////////////////////////
 //
 //  ADOBE SYSTEMS INCORPORATED
@@ -33,7 +33,7 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"import mx.core.mx_internal",
+import mx.core.mx_internal*/
 
 /**
  *  @private

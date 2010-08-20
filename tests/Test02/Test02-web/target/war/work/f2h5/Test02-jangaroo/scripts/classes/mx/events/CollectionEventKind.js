@@ -9,8 +9,8 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"package mx.events",
-[""],
+"package mx.events",/*
+{*/
 
 /**
  *  The CollectionEventKind class contains constants for the valid values 
@@ -19,8 +19,8 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
  *
  *  @see mx.events.CollectionEvent
  */
-"public final class CollectionEventKind",function($$private){with($$private)return[
-
+"public final class CollectionEventKind",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+/*
 	////////////////////////////////////////////////////////////////////////////////
 //
 //  ADOBE SYSTEMS INCORPORATED
@@ -32,7 +32,7 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"import mx.core.mx_internal",
+import mx.core.mx_internal*/
 
 /**
  *  @private

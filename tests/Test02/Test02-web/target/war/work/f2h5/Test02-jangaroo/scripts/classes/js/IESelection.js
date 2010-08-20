@@ -1,11 +1,11 @@
-joo.classLoader.prepare("package js", [""],
+joo.classLoader.prepare("package js",/* {*/
 
 /**
  * Represents the active selection, which is a highlighted block of text or other elements in the document that a user
  * or a script can carry out some action on.
  * <code>selection</code> is a child object of the <code>document</code> object.
  */
-"public interface IESelection",function($$private){with($$private)return[ /*
+"public interface IESelection",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ /*
 
   /**
    * Retrieves the type of selection.

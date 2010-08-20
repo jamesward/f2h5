@@ -1,6 +1,6 @@
-joo.classLoader.prepare("package js", [""],
+joo.classLoader.prepare("package js",/* {*/
 
-"public class Attribute extends js.Node",function($$private){with($$private)return[ 
+"public class Attribute extends js.Node",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   /**
    * True if this attribute was explicitly given a value in the instance document, false otherwise.

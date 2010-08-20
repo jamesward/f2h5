@@ -1,9 +1,7 @@
-joo.classLoader.prepare("package flash.display", [
+joo.classLoader.prepare("package flash.display",/* {
+import js.Element*/
 
-"import js.Element",
-"import flash.display.DisplayObject",""],
-
-"public class Bitmap extends flash.display.DisplayObject",function($$private){with($$private)return[ 
+"public class Bitmap extends flash.display.DisplayObject",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$createElement=$$l+'createElement',$_bitmapData=$$l+'_bitmapData',$_pixelSnapping=$$l+'_pixelSnapping',$_smoothing=$$l+'_smoothing';return[ 
 
   /**
    * Initializes a Bitmap object to refer to the specified BitmapData object.

@@ -13,8 +13,8 @@
   <name>Test02-jangaroo</name>
 
   <properties>
-    <jangaroo_version>0.6.0</jangaroo_version>
-    <jangaroo_libs_version>0.6.1</jangaroo_libs_version>
+    <jangaroo_version>0.7.0</jangaroo_version>
+    <jangaroo_libs_version>0.7.3</jangaroo_libs_version>
   </properties>
 
   <pluginRepositories>

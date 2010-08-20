@@ -1,300 +1,7 @@
-// class js.Attribute
+// class js.TextMetrics
 joo.classLoader.prepare("package js",
-
-"public class Attribute extends js.Node",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-
-
-
-
-
-
-
-"public native function get specified",
-
-
-
-
-"public native function get name",
-
-
-
-
-
-
-
-"public native function get value",
-
-
-
-
-
-"public native function get ownerElement",
-
-];},[],["js.Node"]
-
-);
-// class js.CanvasGradient
-joo.classLoader.prepare("package js",
-"public interface CanvasGradient",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
+"public interface TextMetrics",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
 ,
-];},[],[]
-);
-// class js.CanvasPattern
-joo.classLoader.prepare("package js",
-"public interface CanvasPattern",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-];},[],[]
-);
-// class js.CanvasRenderingContext2D
-joo.classLoader.prepare("package js",
-"public interface CanvasRenderingContext2D",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-
-,
-
-
-,
-,
-
-
-,
-
-,
-
-,
-
-,
-
-,
-
-
-,
-,
-
-,
-,
-
-
-,
-,
-
-,
-,
-
-,
-
-,
-
-
-
-
-
-
-,
-
-
-,
-,
-
-,
-,
-,
-,
-,
-,
-
-
-,
-,
-
-,
-,
-
-,
-,
-
-,
-,
-
-
-,
-
-,
-
-,
-
-
-,
-
-,
-
-,
-
-,
-
-,
-
-,
-
-,
-
-,
-
-,
-
-,
-
-,
-
-,
-
-,
-
-
-,
-,
-
-,
-,
-
-,
-,
-
-,
-
-,
-
-,
-
-
-
-
-
-
-
-
-
-
-
-
-,
-
-
-
-
-
-
-
-,
-
-,
-
-,
-
-];},[],[]
-);
-// class js.Collection
-joo.classLoader.prepare("package js",
-
-"public class Collection extends Array",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-"public native function item",
-
-"public native function getNamedItem",
-
-];},[],["Array"]
-
-);
-// class js.ControlRange
-joo.classLoader.prepare("package js",
-
-"public interface ControlRange extends js.TextRange",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-
-
-
-
-
-
-
-
-
-,
-
-,
-
-];},[],["js.TextRange"]
-);
-// class js.CSSPrimitiveValue
-joo.classLoader.prepare("package js",
-"public class CSSPrimitiveValue",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-"public static const",{CSS_UNKNOWN:0},
-"public static const",{CSS_NUMBER:1},
-
-
-
-
-"public static const",{CSS_PERCENTAGE:2},
-
-
-
-"public static const",{CSS_EMS:3},
-
-
-
-"public static const",{CSS_EXS:4},
-
-
-
-
-"public static const",{CSS_PX:5},
-
-
-
-
-"public static const",{CSS_CM:6},
-
-
-
-
-"public static const",{CSS_MM:7},
-
-
-
-
-"public static const",{CSS_IN:8},
-
-
-
-
-"public static const",{CSS_PT:9},
-
-
-
-
-"public static const",{CSS_PC:10},
-"public static const",{CSS_DEG:11},
-"public static const",{CSS_RAD:12},
-"public static const",{CSS_GRAD:13},
-"public static const",{CSS_MS:14},
-"public static const",{CSS_S:15},
-"public static const",{CSS_HZ:16},
-"public static const",{CSS_KHZ:17},
-"public static const",{CSS_DIMENSION:18},
-"public static const",{CSS_STRING:19},
-"public static const",{CSS_URI:20},
-"public static const",{CSS_IDENT:21},
-"public static const",{CSS_ATTR:22},
-"public static const",{CSS_COUNTER:23},
-"public static const",{CSS_RECT:24},
-"public static const",{CSS_RGBCOLOR:25},
-
-"public function CSSPrimitiveValue",function(){
-this[$super]();
-},
 ];},[],[]
 );
 // class js.Document
@@ -416,1253 +123,145 @@ joo.classLoader.prepare("package js",
 ];},[],["js.Node"]
 
 );
-// class js.Element
-joo.classLoader.prepare("package js",
-
-"public class Element extends js.Node",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-"public native function get id",
-
-
-
-"public native function set id",
-
-
-
-"public native function get tagName",
-
-
-
-"public native function get ownerDocument",
-
-
-
-"public native function get contentWindow",
-
-
-
-"public native function get innerHTML",
-
-
-
-"public native function set innerHTML",
-
-
-
-"public native function get outerHTML",
-
-
-
-"public native function set outerHTML",
-
-
-
-"public native function get style",
-
-
-
-"public native function get runtimeStyle",
-
-
-
-"public native function get filters",
-
-
-
-"public native function get offsetLeft",
-
-
-
-"public native function get offsetTop",
-
-
-
-"public native function get offsetWidth",
-
-
-
-"public native function get offsetHeight",
-
-
-
-"public native function get offsetParent",
-
-
-
-"public native function get clientWidth",
-
-
-
-"public native function get clientHeight",
-
-
-
-"public native function get className",
-
-
-
-"public native function set className",
-
-
-
-"public native function get scrollLeft",
-
-
-
-"public native function set scrollLeft",
-
-
-
-"public native function get scrollTop",
-
-
-
-"public native function set scrollTop",
-
-
-
-"public native function focus",
-
-
-
-"public native function select",
-
-
-
-"public native function get attributes",
-
-
-
-"public native function mergeAttributes",
-
-
-
-"public native function get htmlFor",
-
-
-
-"public native function set htmlFor",
-
-
-
-"public native function get scopeName",
-
-"public native function getAttribute",
-
-
-
-"public native function removeAttribute",
-
-
-
-"public native function get type",
-
-"public native function set type",
-
-
-
-"public native function get title",
-
-
-
-"public native function get defaultChecked",
-
-
-
-"public native function set defaultChecked",
-
-
-
-"public native function get tBodies",
-
-
-
-"public native function get rows",
-
-
-
-"public native function get cells",
-
-
-
-"public native function get name",
-
-
-
-"public native function set name",
-
-
-
-"public native function get value",
-
-
-
-"public native function set value",
-
-
-
-"public native function get defaultValue",
-
-
-
-"public native function set defaultValue",
-
-
-
-"public native function get checked",
-
-
-
-"public native function set checked",
-
-
-
-"public native function get disabled",
-
-
-
-"public native function get selectedIndex",
-
-"public native function set selectedIndex",
-
-"public native function get src",
-
-"public native function set src",
-
-"public native function get href",
-
-"public native function set href",
-
-"public native function get target",
-
-"public native function set target",
-
-"public native function get colSpan",
-
-"public native function set colSpan",
-
-"public native function get rowSpan",
-
-"public native function set rowSpan",
-
-"public native function get selectionStart",
-
-"public native function set selectionStart",
-
-"public native function get selectionEnd",
-
-"public native function set selectionEnd",
-
-"public native function scrollIntoView",
-
-"public native function createTextRange",
-
-"public native function createControlRange",
-
-];},[],["js.Node"]
-
-);
-// class js.Event
-joo.classLoader.prepare("package js",
-"public class Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-"public native function get type",
-
-"public native function preventDefault",
-
-"public native function stopPropagation",
-
-"public native function get pageX",
-
-"public native function set pageX",
-
-"public native function get pageY",
-
-"public native function set pageY",
-
-"public native function get clientX",
-
-"public native function get clientY",
-
-"public native function get screenX",
-
-"public native function get screenY",
-
-"public native function get keyCode",
-
-"public native function get fromElement",
-
-"public native function get toElement",
-
-"public native function get target",
-
-"public native function set target",
-"public native function get relatedTarget",
-
-"public native function set relatedTarget",
-"public native function get shiftKey",
-
-"public native function get shiftLeft",
-
-"public native function get ctrlKey",
-
-"public native function get ctrlLeft",
-
-"public native function get altKey",
-
-"public native function get metaKey",
-
-"public native function get srcElement",
-"public native function get returnValue",
-"public native function set returnValue",
-"public native function get cancelBubble",
-"public native function set cancelBubble",
-"public native function get touches",
-"public native function initMouseEvent"
-
-
-,
-];},[],[]
-);
-// class js.HTMLCanvasElement
-joo.classLoader.prepare("package js",
-"public class HTMLCanvasElement extends js.HTMLElement",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-"public native function get width",
-
-"public native function set width",
-
-"public native function get height",
-
-"public native function set height",
-
-
-
-
-
-
-
-
-
-
-
-"public native function toDataURL",
-
-
-
-
-
-
-
-
-
-
-
-"public native function getContext",
-];},[],["js.HTMLElement"]
-);
-// class js.HTMLElement
-joo.classLoader.prepare("package js",
-"public class HTMLElement extends js.Element",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-];},[],["js.Element"]
-);
-// class js.IESelection
+// class js.XMLHttpRequest
 joo.classLoader.prepare("package js",
 
 
 
 
+"public class XMLHttpRequest",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
 
-
-"public interface IESelection",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-
-
+"public native function XMLHttpRequest",
 
 
 
 
+"public static const",{UNSENT:0},
 
 
 
 
+
+"public static const",{OPENED:1},
+
+
+
+
+"public static const",{HEADERS_RECEIVED:2},
+
+
+
+
+"public static const",{LOADING:3},
+
+
+
+
+
+"public static const",{DONE:4},
+
+
+
+
+
+
+"public var",{readyState: undefined},
+
+
+
+
+"public native function get responseText",
+
+
+
+
+
+
+
+
+
+"public native function get responseXML",
+
+
+
+
+
+"public native function get status",
+
+
+
+
+
+
+"public native function get statusText",
+
+
+
+
+
+
+
+"public native function setRequestHeader",
+
+
+
+
+
+
+"public native function overrideMimeType",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public native function open"
 ,
 
-
-
-
-
-,
-
-
-
-
-
-
-,
-
-
-
-
-
-,
-
-
-
-
-,
-
-];},[],[]
-);
-// class js.ImageData
-joo.classLoader.prepare("package js",
-"public interface ImageData",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-,
-
-,
-
-,
-
-];},[],[]
-);
-// class js.KeyEvent
-joo.classLoader.prepare("package js",
-
-
-
-
-"public class KeyEvent extends js.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-"public static const",{DOM_VK_CANCEL:3},
-"public static const",{DOM_VK_HELP:6},
-"public static const",{DOM_VK_BACK_SPACE:8},
-"public static const",{DOM_VK_TAB:9},
-"public static const",{DOM_VK_CLEAR:12},
-"public static const",{DOM_VK_RETURN:13},
-"public static const",{DOM_VK_ENTER:14},
-"public static const",{DOM_VK_SHIFT:16},
-"public static const",{DOM_VK_CONTROL:17},
-"public static const",{DOM_VK_ALT:18},
-"public static const",{DOM_VK_PAUSE:19},
-"public static const",{DOM_VK_CAPS_LOCK:20},
-"public static const",{DOM_VK_ESCAPE:27},
-"public static const",{DOM_VK_SPACE:32},
-"public static const",{DOM_VK_PAGE_UP:33},
-"public static const",{DOM_VK_PAGE_DOWN:34},
-"public static const",{DOM_VK_END:35},
-"public static const",{DOM_VK_HOME:36},
-"public static const",{DOM_VK_LEFT:37},
-"public static const",{DOM_VK_UP:38},
-"public static const",{DOM_VK_RIGHT:39},
-"public static const",{DOM_VK_DOWN:40},
-"public static const",{DOM_VK_PRINTSCREEN:44},
-"public static const",{DOM_VK_INSERT:45},
-"public static const",{DOM_VK_DELETE:46},
-"public static const",{DOM_VK_0:48},
-"public static const",{DOM_VK_1:49},
-"public static const",{DOM_VK_2:50},
-"public static const",{DOM_VK_3:51},
-"public static const",{DOM_VK_4:52},
-"public static const",{DOM_VK_5:53},
-"public static const",{DOM_VK_6:54},
-"public static const",{DOM_VK_7:55},
-"public static const",{DOM_VK_8:56},
-"public static const",{DOM_VK_9:57},
-"public static const",{DOM_VK_SEMICOLON:59},
-"public static const",{DOM_VK_EQUALS:61},
-"public static const",{DOM_VK_A:65},
-"public static const",{DOM_VK_B:66},
-"public static const",{DOM_VK_C:67},
-"public static const",{DOM_VK_D:68},
-"public static const",{DOM_VK_E:69},
-"public static const",{DOM_VK_F:70},
-"public static const",{DOM_VK_G:71},
-"public static const",{DOM_VK_H:72},
-"public static const",{DOM_VK_I:73},
-"public static const",{DOM_VK_J:74},
-"public static const",{DOM_VK_K:75},
-"public static const",{DOM_VK_L:76},
-"public static const",{DOM_VK_M:77},
-"public static const",{DOM_VK_N:78},
-"public static const",{DOM_VK_O:79},
-"public static const",{DOM_VK_P:80},
-"public static const",{DOM_VK_Q:81},
-"public static const",{DOM_VK_R:82},
-"public static const",{DOM_VK_S:83},
-"public static const",{DOM_VK_T:84},
-"public static const",{DOM_VK_U:85},
-"public static const",{DOM_VK_V:86},
-"public static const",{DOM_VK_W:87},
-"public static const",{DOM_VK_X:88},
-"public static const",{DOM_VK_Y:89},
-"public static const",{DOM_VK_Z:90},
-"public static const",{DOM_VK_CONTEXT_MENU:93},
-"public static const",{DOM_VK_NUMPAD0:96},
-"public static const",{DOM_VK_NUMPAD1:97},
-"public static const",{DOM_VK_NUMPAD2:98},
-"public static const",{DOM_VK_NUMPAD3:99},
-"public static const",{DOM_VK_NUMPAD4:100},
-"public static const",{DOM_VK_NUMPAD5:101},
-"public static const",{DOM_VK_NUMPAD6:102},
-"public static const",{DOM_VK_NUMPAD7:103},
-"public static const",{DOM_VK_NUMPAD8:104},
-"public static const",{DOM_VK_NUMPAD9:105},
-"public static const",{DOM_VK_MULTIPLY:106},
-"public static const",{DOM_VK_ADD:107},
-"public static const",{DOM_VK_SEPARATOR:108},
-"public static const",{DOM_VK_SUBTRACT:109},
-"public static const",{DOM_VK_DECIMAL:110},
-"public static const",{DOM_VK_DIVIDE:111},
-"public static const",{DOM_VK_F1:112},
-"public static const",{DOM_VK_F2:113},
-"public static const",{DOM_VK_F3:114},
-"public static const",{DOM_VK_F4:115},
-"public static const",{DOM_VK_F5:116},
-"public static const",{DOM_VK_F6:117},
-"public static const",{DOM_VK_F7:118},
-"public static const",{DOM_VK_F8:119},
-"public static const",{DOM_VK_F9:120},
-"public static const",{DOM_VK_F10:121},
-"public static const",{DOM_VK_F11:122},
-"public static const",{DOM_VK_F12:123},
-"public static const",{DOM_VK_F13:124},
-"public static const",{DOM_VK_F14:125},
-"public static const",{DOM_VK_F15:126},
-"public static const",{DOM_VK_F16:127},
-"public static const",{DOM_VK_F17:128},
-"public static const",{DOM_VK_F18:129},
-"public static const",{DOM_VK_F19:130},
-"public static const",{DOM_VK_F20:131},
-"public static const",{DOM_VK_F21:132},
-"public static const",{DOM_VK_F22:133},
-"public static const",{DOM_VK_F23:134},
-"public static const",{DOM_VK_F24:135},
-"public static const",{DOM_VK_NUM_LOCK:144},
-"public static const",{DOM_VK_SCROLL_LOCK:145},
-"public static const",{DOM_VK_COMMA:188},
-"public static const",{DOM_VK_PERIOD:190},
-"public static const",{DOM_VK_SLASH:191},
-"public static const",{DOM_VK_BACK_QUOTE:192},
-"public static const",{DOM_VK_OPEN_BRACKET:219},
-"public static const",{DOM_VK_BACK_SLASH:220},
-"public static const",{DOM_VK_CLOSE_BRACKET:221},
-"public static const",{DOM_VK_QUOTE:222},
-"public static const",{DOM_VK_META:224},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public native function initKeyEvent"
-
-,
-
-];},[],["js.Event"]
-);
-// class js.Location
-joo.classLoader.prepare("package js",
-"public interface Location",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-,
-
-
-
-
-,
-
-
-
-
-
-
-,
-
-
-
-
-
-
-
-,
-
-
-
-
-,
-];},[],[]
-);
-// class js.Navigator
-joo.classLoader.prepare("package js",
-
-"public class Navigator",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-
-
-
-"public native function get userAgent",
-
-
-
-
-"public native function get appName",
-
-
-
-
-"public native function get appCodeName",
-
-
-
-
-"public native function get appVersion",
-
-
-
-
-"public native function get cookieEnabled",
-
-
-
-
-"public native function get platform",
-
-
-
-
-"public native function get language",
-
-
-
-
-"public native function get systemLanguage",
-
-
-
-
-"public native function get mimeTypes",
-
-
-
-
-"public native function get plugins",
-
-
-
-
-"public native function get userLanguage",
-
-];},[],[]
-
-);
-// class js.Node
-joo.classLoader.prepare("package js",
-
-"public class Node",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-"public static const",{ELEMENT_NODE:1},
-
-"public static const",{ATTRIBUTE_NODE:2},
-
-"public static const",{TEXT_NODE:3},
-
-"public static const",{CDATA_SECTION_NODE:4},
-
-"public static const",{ENTITY_REFERENCE_NODE:5},
-
-"public static const",{ENTITY_NODE:6},
-
-"public static const",{PROCESSING_INSTRUCTION_NODE:7},
-
-"public static const",{COMMENT_NODE:8},
-
-"public static const",{DOCUMENT_NODE:9},
-
-"public static const",{DOCUMENT_TYPE_NODE:10},
-
-"public static const",{DOCUMENT_FRAGMENT_NODE:11},
-
-"public static const",{NOTATION_NODE:12},
-
-"public static const",{DOCUMENT_POSITION_DISCONNECTED:1},
-
-"public static const",{DOCUMENT_POSITION_PRECEDING:2},
-
-"public static const",{DOCUMENT_POSITION_FOLLOWING:4},
-
-"public static const",{DOCUMENT_POSITION_CONTAINS:8},
-
-"public static const",{DOCUMENT_POSITION_CONTAINED_BY:16},
-
-"public static const",{DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC:32},
-
-
-
-"public native function get nodeName",
-
-
-
-"public native function get localName",
-
-
-
-"public native function get namespaceURI",
-
-
-
-"public native function get nodeType",
-
-
-
-"public native function get nodeValue",
-
-
-
-"public native function get parentNode",
-
-
-
-"public native function get childNodes",
-
-
-
-"public native function get firstChild",
-
-
-
-"public native function get lastChild",
-
-
-
-"public native function get nextSibling",
-
-
-
-"public native function get previousSibling",
-
-
-
-"public native function setAttribute",
-
-
-
-"public native function removeChild",
-
-
-
-"public native function appendChild",
-
-
-
-"public native function insertBefore",
-
-
-
-"public native function replaceChild",
-
-
-
-"public native function cloneNode",
-
-
-
-"public native function getElementsByTagName",
-
-
-
-"public native function getElementsByTagNameNS",
-
-
+"public var",{onreadystatechange: undefined},
 
 "public native function addEventListener",
-
-
 
 "public native function removeEventListener",
 
 
 
-"public native function attachEvent",
 
 
 
-"public native function detachEvent",
 
-];},[],[]
 
-);
-// class js.Range
-joo.classLoader.prepare("package js",
-"public class Range",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
 
+"public native function send",
 
 
 
-"public native function get collapsed",
 
+"public native function abort",
 
 
 
-"public native function get commonAncestorContainer",
 
 
 
 
-"public native function get endContainer",
+"public native function getResponseHeader",
 
 
 
 
-"public native function get endOffset",
 
 
 
-
-"public native function get startContainer",
-
-
-
-
-"public native function get startOffset",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public native function setStart",
-
-
-
-
-
-
-
-
-
-
-
-
-"public native function setEnd",
-
-
-
-
-
-
-"public native function setStartBefore",
-
-
-
-
-
-
-"public native function setStartAfter",
-
-
-
-
-
-
-"public native function setEndBefore",
-
-
-
-
-
-
-"public native function setEndAfter",
-
-
-
-
-
-
-"public native function selectNode",
-
-
-
-
-
-
-
-"public native function selectNodeContents",
-
-
-
-
-
-
-
-"public native function collapse",
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public native function cloneContents",
-
-
-
-
-
-
-"public native function deleteContents",
-
-
-
-
-
-
-
-
-"public native function extractContents",
-
-
-
-
-
-
-
-
-"public native function insertNode",
-
-
-
-
-
-
-
-
-"public native function surroundContents",
-
-
-
-
-
-
-
-"public static native function get END_TO_END",
-
-
-
-
-
-"public static native function get END_TO_START",
-
-
-
-
-
-"public static native function get START_TO_END",
-
-
-
-
-
-"public static native function get START_TO_START",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public native function compareBoundaryPoints",
-
-
-
-
-
-"public native function cloneRange",
-
-
-
-
-
-
-"public native function detach",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public native function comparePoint",
-
-
-
-
-
-
-
-"public native function createContextualFragment",
-
-
-
-
-
-
-
-"public native function isPointInRange",
-
-
-];},[],[]
-);
-// class js.Screen
-joo.classLoader.prepare("package js",
-"public class Screen",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-"public native function get top",
-
-"public native function get left",
-
-"public native function get width",
-
-"public native function get height",
-
-"public native function get pixelDepth",
-
-"public native function get availTop",
-
-"public native function get availLeft",
-
-"public native function get availWidth",
-
-"public native function get availHeight",
-
-"public native function get colorDepth",
-];},[],[]
-);
-// class js.Selection
-joo.classLoader.prepare("package js",
-
-
-
-
-
-"public interface Selection",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-
-
-
-
-,
-
-
-
-
-,
-
-
-
-
-,
-
-
-
-
-,
-
-
-
-
-,
-
-
-
-
-,
-
-
-
-
-,
-
-
-
-
-
-
-
-
-,
-
-
-
-
-
-
-
-
-
-,
-
-
-
-
-
-
-,
-
-
-
-
-
-
-,
-
-
-
-
-
-
-
-,
-
-
-
-
-
-,
-
-
-
-
-,
-
-
-
-
-,
-
-
-
-
-,
-
-
-
-
-,
-
-
-
-
-
-
-,
-
-
-
-
-,
-
-
+"public native function getAllResponseHeaders",
 ];},[],[]
 );
 // class js.Style
@@ -2697,21 +1296,240 @@ joo.classLoader.prepare("package js",
 ];},[],[]
 
 );
-// class js.TextMetrics
+// class js.Event
 joo.classLoader.prepare("package js",
-"public interface TextMetrics",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+"public class Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+"public native function get type",
+
+"public native function preventDefault",
+
+"public native function stopPropagation",
+
+"public native function get pageX",
+
+"public native function set pageX",
+
+"public native function get pageY",
+
+"public native function set pageY",
+
+"public native function get clientX",
+
+"public native function get clientY",
+
+"public native function get screenX",
+
+"public native function get screenY",
+
+"public native function get keyCode",
+
+"public native function get fromElement",
+
+"public native function get toElement",
+
+"public native function get target",
+
+"public native function set target",
+"public native function get relatedTarget",
+
+"public native function set relatedTarget",
+"public native function get shiftKey",
+
+"public native function get shiftLeft",
+
+"public native function get ctrlKey",
+
+"public native function get ctrlLeft",
+
+"public native function get altKey",
+
+"public native function get metaKey",
+
+"public native function get srcElement",
+"public native function get returnValue",
+"public native function set returnValue",
+"public native function get cancelBubble",
+"public native function set cancelBubble",
+"public native function get touches",
+"public native function initMouseEvent"
+
+
 ,
 ];},[],[]
 );
-// class js.TextNode
+// class js.CanvasGradient
 joo.classLoader.prepare("package js",
-"public class TextNode extends js.Node",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
-"public native function get data",
+"public interface CanvasGradient",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
 
-"public native function set data",
+,
+];},[],[]
+);
+// class js.KeyEvent
+joo.classLoader.prepare("package js",
 
-"public native function appendData",
-];},[],["js.Node"]
+
+
+
+"public class KeyEvent extends js.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public static const",{DOM_VK_CANCEL:3},
+"public static const",{DOM_VK_HELP:6},
+"public static const",{DOM_VK_BACK_SPACE:8},
+"public static const",{DOM_VK_TAB:9},
+"public static const",{DOM_VK_CLEAR:12},
+"public static const",{DOM_VK_RETURN:13},
+"public static const",{DOM_VK_ENTER:14},
+"public static const",{DOM_VK_SHIFT:16},
+"public static const",{DOM_VK_CONTROL:17},
+"public static const",{DOM_VK_ALT:18},
+"public static const",{DOM_VK_PAUSE:19},
+"public static const",{DOM_VK_CAPS_LOCK:20},
+"public static const",{DOM_VK_ESCAPE:27},
+"public static const",{DOM_VK_SPACE:32},
+"public static const",{DOM_VK_PAGE_UP:33},
+"public static const",{DOM_VK_PAGE_DOWN:34},
+"public static const",{DOM_VK_END:35},
+"public static const",{DOM_VK_HOME:36},
+"public static const",{DOM_VK_LEFT:37},
+"public static const",{DOM_VK_UP:38},
+"public static const",{DOM_VK_RIGHT:39},
+"public static const",{DOM_VK_DOWN:40},
+"public static const",{DOM_VK_PRINTSCREEN:44},
+"public static const",{DOM_VK_INSERT:45},
+"public static const",{DOM_VK_DELETE:46},
+"public static const",{DOM_VK_0:48},
+"public static const",{DOM_VK_1:49},
+"public static const",{DOM_VK_2:50},
+"public static const",{DOM_VK_3:51},
+"public static const",{DOM_VK_4:52},
+"public static const",{DOM_VK_5:53},
+"public static const",{DOM_VK_6:54},
+"public static const",{DOM_VK_7:55},
+"public static const",{DOM_VK_8:56},
+"public static const",{DOM_VK_9:57},
+"public static const",{DOM_VK_SEMICOLON:59},
+"public static const",{DOM_VK_EQUALS:61},
+"public static const",{DOM_VK_A:65},
+"public static const",{DOM_VK_B:66},
+"public static const",{DOM_VK_C:67},
+"public static const",{DOM_VK_D:68},
+"public static const",{DOM_VK_E:69},
+"public static const",{DOM_VK_F:70},
+"public static const",{DOM_VK_G:71},
+"public static const",{DOM_VK_H:72},
+"public static const",{DOM_VK_I:73},
+"public static const",{DOM_VK_J:74},
+"public static const",{DOM_VK_K:75},
+"public static const",{DOM_VK_L:76},
+"public static const",{DOM_VK_M:77},
+"public static const",{DOM_VK_N:78},
+"public static const",{DOM_VK_O:79},
+"public static const",{DOM_VK_P:80},
+"public static const",{DOM_VK_Q:81},
+"public static const",{DOM_VK_R:82},
+"public static const",{DOM_VK_S:83},
+"public static const",{DOM_VK_T:84},
+"public static const",{DOM_VK_U:85},
+"public static const",{DOM_VK_V:86},
+"public static const",{DOM_VK_W:87},
+"public static const",{DOM_VK_X:88},
+"public static const",{DOM_VK_Y:89},
+"public static const",{DOM_VK_Z:90},
+"public static const",{DOM_VK_CONTEXT_MENU:93},
+"public static const",{DOM_VK_NUMPAD0:96},
+"public static const",{DOM_VK_NUMPAD1:97},
+"public static const",{DOM_VK_NUMPAD2:98},
+"public static const",{DOM_VK_NUMPAD3:99},
+"public static const",{DOM_VK_NUMPAD4:100},
+"public static const",{DOM_VK_NUMPAD5:101},
+"public static const",{DOM_VK_NUMPAD6:102},
+"public static const",{DOM_VK_NUMPAD7:103},
+"public static const",{DOM_VK_NUMPAD8:104},
+"public static const",{DOM_VK_NUMPAD9:105},
+"public static const",{DOM_VK_MULTIPLY:106},
+"public static const",{DOM_VK_ADD:107},
+"public static const",{DOM_VK_SEPARATOR:108},
+"public static const",{DOM_VK_SUBTRACT:109},
+"public static const",{DOM_VK_DECIMAL:110},
+"public static const",{DOM_VK_DIVIDE:111},
+"public static const",{DOM_VK_F1:112},
+"public static const",{DOM_VK_F2:113},
+"public static const",{DOM_VK_F3:114},
+"public static const",{DOM_VK_F4:115},
+"public static const",{DOM_VK_F5:116},
+"public static const",{DOM_VK_F6:117},
+"public static const",{DOM_VK_F7:118},
+"public static const",{DOM_VK_F8:119},
+"public static const",{DOM_VK_F9:120},
+"public static const",{DOM_VK_F10:121},
+"public static const",{DOM_VK_F11:122},
+"public static const",{DOM_VK_F12:123},
+"public static const",{DOM_VK_F13:124},
+"public static const",{DOM_VK_F14:125},
+"public static const",{DOM_VK_F15:126},
+"public static const",{DOM_VK_F16:127},
+"public static const",{DOM_VK_F17:128},
+"public static const",{DOM_VK_F18:129},
+"public static const",{DOM_VK_F19:130},
+"public static const",{DOM_VK_F20:131},
+"public static const",{DOM_VK_F21:132},
+"public static const",{DOM_VK_F22:133},
+"public static const",{DOM_VK_F23:134},
+"public static const",{DOM_VK_F24:135},
+"public static const",{DOM_VK_NUM_LOCK:144},
+"public static const",{DOM_VK_SCROLL_LOCK:145},
+"public static const",{DOM_VK_COMMA:188},
+"public static const",{DOM_VK_PERIOD:190},
+"public static const",{DOM_VK_SLASH:191},
+"public static const",{DOM_VK_BACK_QUOTE:192},
+"public static const",{DOM_VK_OPEN_BRACKET:219},
+"public static const",{DOM_VK_BACK_SLASH:220},
+"public static const",{DOM_VK_CLOSE_BRACKET:221},
+"public static const",{DOM_VK_QUOTE:222},
+"public static const",{DOM_VK_META:224},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public native function initKeyEvent"
+
+,
+
+];},[],["js.Event"]
+);
+// class js.Screen
+joo.classLoader.prepare("package js",
+"public class Screen",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+"public native function get top",
+
+"public native function get left",
+
+"public native function get width",
+
+"public native function get height",
+
+"public native function get pixelDepth",
+
+"public native function get availTop",
+
+"public native function get availLeft",
+
+"public native function get availWidth",
+
+"public native function get availHeight",
+
+"public native function get colorDepth",
+];},[],[]
 );
 // class js.TextRange
 joo.classLoader.prepare("package js",
@@ -3236,6 +2054,890 @@ joo.classLoader.prepare("package js",
 
 ];},[],[]
 );
+// class js.Attribute
+joo.classLoader.prepare("package js",
+
+"public class Attribute extends js.Node",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+
+
+
+
+
+
+"public native function get specified",
+
+
+
+
+"public native function get name",
+
+
+
+
+
+
+
+"public native function get value",
+
+
+
+
+
+"public native function get ownerElement",
+
+];},[],["js.Node"]
+
+);
+// class js.Element
+joo.classLoader.prepare("package js",
+
+"public class Element extends js.Node",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public native function get id",
+
+
+
+"public native function set id",
+
+
+
+"public native function get tagName",
+
+
+
+"public native function get ownerDocument",
+
+
+
+"public native function get contentWindow",
+
+
+
+"public native function get innerHTML",
+
+
+
+"public native function set innerHTML",
+
+
+
+"public native function get outerHTML",
+
+
+
+"public native function set outerHTML",
+
+
+
+"public native function get style",
+
+
+
+"public native function get runtimeStyle",
+
+
+
+"public native function get filters",
+
+
+
+"public native function get offsetLeft",
+
+
+
+"public native function get offsetTop",
+
+
+
+"public native function get offsetWidth",
+
+
+
+"public native function get offsetHeight",
+
+
+
+"public native function get offsetParent",
+
+
+
+"public native function get clientWidth",
+
+
+
+"public native function get clientHeight",
+
+
+
+"public native function get className",
+
+
+
+"public native function set className",
+
+
+
+"public native function get scrollLeft",
+
+
+
+"public native function set scrollLeft",
+
+
+
+"public native function get scrollTop",
+
+
+
+"public native function set scrollTop",
+
+
+
+"public native function focus",
+
+
+
+"public native function select",
+
+
+
+"public native function get attributes",
+
+
+
+"public native function mergeAttributes",
+
+
+
+"public native function get htmlFor",
+
+
+
+"public native function set htmlFor",
+
+
+
+"public native function get scopeName",
+
+"public native function getAttribute",
+
+
+
+"public native function removeAttribute",
+
+
+
+"public native function get type",
+
+"public native function set type",
+
+
+
+"public native function get title",
+
+
+
+"public native function get defaultChecked",
+
+
+
+"public native function set defaultChecked",
+
+
+
+"public native function get tBodies",
+
+
+
+"public native function get rows",
+
+
+
+"public native function get cells",
+
+
+
+"public native function get name",
+
+
+
+"public native function set name",
+
+
+
+"public native function get value",
+
+
+
+"public native function set value",
+
+
+
+"public native function get defaultValue",
+
+
+
+"public native function set defaultValue",
+
+
+
+"public native function get checked",
+
+
+
+"public native function set checked",
+
+
+
+"public native function get disabled",
+
+
+
+"public native function get selectedIndex",
+
+"public native function set selectedIndex",
+
+"public native function get src",
+
+"public native function set src",
+
+"public native function get href",
+
+"public native function set href",
+
+"public native function get target",
+
+"public native function set target",
+
+"public native function get colSpan",
+
+"public native function set colSpan",
+
+"public native function get rowSpan",
+
+"public native function set rowSpan",
+
+"public native function get selectionStart",
+
+"public native function set selectionStart",
+
+"public native function get selectionEnd",
+
+"public native function set selectionEnd",
+
+"public native function scrollIntoView",
+
+"public native function createTextRange",
+
+"public native function createControlRange",
+
+];},[],["js.Node"]
+
+);
+// class js.ControlRange
+joo.classLoader.prepare("package js",
+
+"public interface ControlRange extends js.TextRange",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+
+
+
+
+
+
+
+
+,
+
+,
+
+];},[],["js.TextRange"]
+);
+// class js.Node
+joo.classLoader.prepare("package js",
+
+"public class Node",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public static const",{ELEMENT_NODE:1},
+
+"public static const",{ATTRIBUTE_NODE:2},
+
+"public static const",{TEXT_NODE:3},
+
+"public static const",{CDATA_SECTION_NODE:4},
+
+"public static const",{ENTITY_REFERENCE_NODE:5},
+
+"public static const",{ENTITY_NODE:6},
+
+"public static const",{PROCESSING_INSTRUCTION_NODE:7},
+
+"public static const",{COMMENT_NODE:8},
+
+"public static const",{DOCUMENT_NODE:9},
+
+"public static const",{DOCUMENT_TYPE_NODE:10},
+
+"public static const",{DOCUMENT_FRAGMENT_NODE:11},
+
+"public static const",{NOTATION_NODE:12},
+
+"public static const",{DOCUMENT_POSITION_DISCONNECTED:1},
+
+"public static const",{DOCUMENT_POSITION_PRECEDING:2},
+
+"public static const",{DOCUMENT_POSITION_FOLLOWING:4},
+
+"public static const",{DOCUMENT_POSITION_CONTAINS:8},
+
+"public static const",{DOCUMENT_POSITION_CONTAINED_BY:16},
+
+"public static const",{DOCUMENT_POSITION_IMPLEMENTATION_SPECIFIC:32},
+
+
+
+"public native function get nodeName",
+
+
+
+"public native function get localName",
+
+
+
+"public native function get namespaceURI",
+
+
+
+"public native function get nodeType",
+
+
+
+"public native function get nodeValue",
+
+
+
+"public native function get parentNode",
+
+
+
+"public native function get childNodes",
+
+
+
+"public native function get firstChild",
+
+
+
+"public native function get lastChild",
+
+
+
+"public native function get nextSibling",
+
+
+
+"public native function get previousSibling",
+
+
+
+"public native function setAttribute",
+
+
+
+"public native function removeChild",
+
+
+
+"public native function appendChild",
+
+
+
+"public native function insertBefore",
+
+
+
+"public native function replaceChild",
+
+
+
+"public native function cloneNode",
+
+
+
+"public native function getElementsByTagName",
+
+
+
+"public native function getElementsByTagNameNS",
+
+
+
+"public native function addEventListener",
+
+
+
+"public native function removeEventListener",
+
+
+
+"public native function attachEvent",
+
+
+
+"public native function detachEvent",
+
+];},[],[]
+
+);
+// class js.Navigator
+joo.classLoader.prepare("package js",
+
+"public class Navigator",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+
+
+"public native function get userAgent",
+
+
+
+
+"public native function get appName",
+
+
+
+
+"public native function get appCodeName",
+
+
+
+
+"public native function get appVersion",
+
+
+
+
+"public native function get cookieEnabled",
+
+
+
+
+"public native function get platform",
+
+
+
+
+"public native function get language",
+
+
+
+
+"public native function get systemLanguage",
+
+
+
+
+"public native function get mimeTypes",
+
+
+
+
+"public native function get plugins",
+
+
+
+
+"public native function get userLanguage",
+
+];},[],[]
+
+);
+// class js.Collection
+joo.classLoader.prepare("package js",
+
+"public class Collection extends Array",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public native function item",
+
+"public native function getNamedItem",
+
+];},[],["Array"]
+
+);
+// class js.TextNode
+joo.classLoader.prepare("package js",
+"public class TextNode extends js.Node",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+"public native function get data",
+
+"public native function set data",
+
+"public native function appendData",
+];},[],["js.Node"]
+);
+// class js.CanvasRenderingContext2D
+joo.classLoader.prepare("package js",
+"public interface CanvasRenderingContext2D",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+,
+
+
+,
+,
+
+
+,
+
+,
+
+,
+
+,
+
+,
+
+
+,
+,
+
+,
+,
+
+
+,
+,
+
+,
+,
+
+,
+
+,
+
+
+
+
+
+
+,
+
+
+,
+,
+
+,
+,
+,
+,
+,
+,
+
+
+,
+,
+
+,
+,
+
+,
+,
+
+,
+,
+
+
+,
+
+,
+
+,
+
+
+,
+
+,
+
+,
+
+,
+
+,
+
+,
+
+,
+
+,
+
+,
+
+,
+
+,
+
+,
+
+,
+
+
+,
+,
+
+,
+,
+
+,
+,
+
+,
+
+,
+
+,
+
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+,
+
+,
+
+,
+
+];},[],[]
+);
+// class js.IESelection
+joo.classLoader.prepare("package js",
+
+
+
+
+
+
+"public interface IESelection",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+
+
+
+
+
+
+
+
+
+,
+
+
+
+
+
+,
+
+
+
+
+
+
+,
+
+
+
+
+
+,
+
+
+
+
+,
+
+];},[],[]
+);
+// class js.CSSPrimitiveValue
+joo.classLoader.prepare("package js",
+"public class CSSPrimitiveValue",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public static const",{CSS_UNKNOWN:0},
+"public static const",{CSS_NUMBER:1},
+
+
+
+
+"public static const",{CSS_PERCENTAGE:2},
+
+
+
+"public static const",{CSS_EMS:3},
+
+
+
+"public static const",{CSS_EXS:4},
+
+
+
+
+"public static const",{CSS_PX:5},
+
+
+
+
+"public static const",{CSS_CM:6},
+
+
+
+
+"public static const",{CSS_MM:7},
+
+
+
+
+"public static const",{CSS_IN:8},
+
+
+
+
+"public static const",{CSS_PT:9},
+
+
+
+
+"public static const",{CSS_PC:10},
+"public static const",{CSS_DEG:11},
+"public static const",{CSS_RAD:12},
+"public static const",{CSS_GRAD:13},
+"public static const",{CSS_MS:14},
+"public static const",{CSS_S:15},
+"public static const",{CSS_HZ:16},
+"public static const",{CSS_KHZ:17},
+"public static const",{CSS_DIMENSION:18},
+"public static const",{CSS_STRING:19},
+"public static const",{CSS_URI:20},
+"public static const",{CSS_IDENT:21},
+"public static const",{CSS_ATTR:22},
+"public static const",{CSS_COUNTER:23},
+"public static const",{CSS_RECT:24},
+"public static const",{CSS_RGBCOLOR:25},
+
+"public function CSSPrimitiveValue",function(){
+this[$super]();
+},
+];},[],[]
+);
+// class js.Location
+joo.classLoader.prepare("package js",
+"public interface Location",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+,
+
+
+
+
+,
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+,
+
+
+
+
+,
+];},[],[]
+);
 // class js.Window
 joo.classLoader.prepare("package js",
 
@@ -3363,129 +3065,109 @@ joo.classLoader.prepare("package js",
 ];},[],[]
 
 );
-// class js.XMLHttpRequest
+// class js.HTMLCanvasElement
+joo.classLoader.prepare("package js",
+"public class HTMLCanvasElement extends js.HTMLElement",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public native function get width",
+
+"public native function set width",
+
+"public native function get height",
+
+"public native function set height",
+
+
+
+
+
+
+
+
+
+
+
+"public native function toDataURL",
+
+
+
+
+
+
+
+
+
+
+
+"public native function getContext",
+];},[],["js.HTMLElement"]
+);
+// class js.CanvasPattern
+joo.classLoader.prepare("package js",
+"public interface CanvasPattern",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+];},[],[]
+);
+// class js.ImageData
+joo.classLoader.prepare("package js",
+"public interface ImageData",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+,
+
+,
+
+,
+
+];},[],[]
+);
+// class js.HTMLElement
+joo.classLoader.prepare("package js",
+"public class HTMLElement extends js.Element",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+];},[],["js.Element"]
+);
+// class js.Selection
 joo.classLoader.prepare("package js",
 
 
 
 
-"public class XMLHttpRequest",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
 
-"public native function XMLHttpRequest",
+"public interface Selection",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
 
 
 
 
-"public static const",{UNSENT:0},
-
-
-
-
-
-"public static const",{OPENED:1},
-
-
-
-
-"public static const",{HEADERS_RECEIVED:2},
-
-
-
-
-"public static const",{LOADING:3},
-
-
-
-
-
-"public static const",{DONE:4},
-
-
-
-
-
-
-"public var",{readyState: undefined},
-
-
-
-
-"public native function get responseText",
-
-
-
-
-
-
-
-
-
-"public native function get responseXML",
-
-
-
-
-
-"public native function get status",
-
-
-
-
-
-
-"public native function get statusText",
-
-
-
-
-
-
-
-"public native function setRequestHeader",
-
-
-
-
-
-
-"public native function overrideMimeType",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public native function open"
 ,
 
-"public var",{onreadystatechange: undefined},
 
-"public native function addEventListener",
 
-"public native function removeEventListener",
 
+,
 
 
 
 
+,
 
 
 
 
-"public native function send",
+,
 
 
 
 
-"public native function abort",
+,
+
+
+
+
+,
+
+
+
+
+,
 
 
 
@@ -3493,7 +3175,8 @@ joo.classLoader.prepare("package js",
 
 
 
-"public native function getResponseHeader",
+
+,
 
 
 
@@ -3501,6 +3184,323 @@ joo.classLoader.prepare("package js",
 
 
 
-"public native function getAllResponseHeaders",
+
+
+,
+
+
+
+
+
+
+,
+
+
+
+
+
+
+,
+
+
+
+
+
+
+
+,
+
+
+
+
+
+,
+
+
+
+
+,
+
+
+
+
+,
+
+
+
+
+,
+
+
+
+
+,
+
+
+
+
+
+
+,
+
+
+
+
+,
+
+
+];},[],[]
+);
+// class js.Range
+joo.classLoader.prepare("package js",
+"public class Range",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+
+
+"public native function get collapsed",
+
+
+
+
+"public native function get commonAncestorContainer",
+
+
+
+
+"public native function get endContainer",
+
+
+
+
+"public native function get endOffset",
+
+
+
+
+"public native function get startContainer",
+
+
+
+
+"public native function get startOffset",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public native function setStart",
+
+
+
+
+
+
+
+
+
+
+
+
+"public native function setEnd",
+
+
+
+
+
+
+"public native function setStartBefore",
+
+
+
+
+
+
+"public native function setStartAfter",
+
+
+
+
+
+
+"public native function setEndBefore",
+
+
+
+
+
+
+"public native function setEndAfter",
+
+
+
+
+
+
+"public native function selectNode",
+
+
+
+
+
+
+
+"public native function selectNodeContents",
+
+
+
+
+
+
+
+"public native function collapse",
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public native function cloneContents",
+
+
+
+
+
+
+"public native function deleteContents",
+
+
+
+
+
+
+
+
+"public native function extractContents",
+
+
+
+
+
+
+
+
+"public native function insertNode",
+
+
+
+
+
+
+
+
+"public native function surroundContents",
+
+
+
+
+
+
+
+"public static native function get END_TO_END",
+
+
+
+
+
+"public static native function get END_TO_START",
+
+
+
+
+
+"public static native function get START_TO_END",
+
+
+
+
+
+"public static native function get START_TO_START",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public native function compareBoundaryPoints",
+
+
+
+
+
+"public native function cloneRange",
+
+
+
+
+
+
+"public native function detach",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public native function comparePoint",
+
+
+
+
+
+
+
+"public native function createContextualFragment",
+
+
+
+
+
+
+
+"public native function isPointInRange",
+
+
 ];},[],[]
 );

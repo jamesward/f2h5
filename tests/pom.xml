@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>f2h5</groupId>
+  <artifactId>tests</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>f2h5</name>
+
+  <modules>
+    <module>Test01</module>
+    <module>Test02</module>
+    <module>Test03</module>
+    <module>Test04</module>
+    <module>Test05</module>
+    <module>Test06</module>
+    <module>Test07</module>
+    <module>Test08</module>
+    <module>Test09</module>
+    <module>Test10</module>
+  </modules>
+
+</project>

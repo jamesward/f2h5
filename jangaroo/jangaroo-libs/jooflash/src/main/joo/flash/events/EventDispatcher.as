@@ -92,10 +92,13 @@ public class EventDispatcher extends Object implements IEventDispatcher {
 
   public function addEventListener(type : String, listener : Function, useCapture : Boolean = false, priority : int = 0, useWeakReference : Boolean = false) : void {
     var listenersByType : Object = useCapture ? this.captureListeners : this.listeners;
-    if (!(type in listenersByType)) {
-      listenersByType[type] = [ listener ];
-    } else {
-      listenersByType[type].push(listener);
+    if (listenersByType != undefined)
+    {
+      if (!(type in listenersByType)) {
+        listenersByType[type] = [ listener ];
+      } else {
+        listenersByType[type].push(listener);
+      }
     }
   }
 
@@ -117,7 +120,11 @@ public class EventDispatcher extends Object implements IEventDispatcher {
   }
 
   public function hasEventListener(type : String) : Boolean {
-    return this.listeners[type] || this.captureListeners[type];
+    if (this.listeners != undefined)
+    {
+      return this.listeners[type] || this.captureListeners[type];
+    }
+    return false;
   }
 
   public function toString() : String {

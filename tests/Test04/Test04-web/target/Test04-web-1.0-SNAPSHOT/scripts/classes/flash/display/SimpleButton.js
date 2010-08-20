@@ -1,7 +1,5 @@
-joo.classLoader.prepare("package flash.display",/* {
+joo.classLoader.prepare("package flash.display",/* {*/
 
-import flash.display.InteractiveObject
-import flash.display.DisplayObject*/
 //import flash.media.SoundTransform;
 
 /**

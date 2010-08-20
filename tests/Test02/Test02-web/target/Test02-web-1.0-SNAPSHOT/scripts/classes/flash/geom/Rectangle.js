@@ -1,12 +1,12 @@
-joo.classLoader.prepare("package flash.geom", [
+joo.classLoader.prepare("package flash.geom",/* {
 
-"import flash.geom.Point",""],
+import flash.geom.Point*/
 
 /**
  * A Rectangle object is an area defined by its position, as indicated by its top-left corner point (x, y) and
  * by its width and its height.
  */
-"public class Rectangle",function($$private){with($$private)return[ 
+"public class Rectangle",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(flash.geom.Point);}, 
   /**
    * The height of the rectangle, in pixels.
    */

@@ -28,6 +28,10 @@
             <type>pom</type>
           </dependency>
         </dependencies>
+        <configuration>
+          <sourceFile>Test02.as</sourceFile>
+          <debug>true</debug>
+        </configuration>
       </plugin>
     </plugins>
   </build>

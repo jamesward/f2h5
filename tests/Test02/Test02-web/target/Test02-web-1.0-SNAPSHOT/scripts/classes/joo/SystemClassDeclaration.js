@@ -15,15 +15,9 @@ joo.classLoader.prepare(/*
 
 // JangarooScript runtime support. Author: Frank Wienberg
 
-"package joo", [""],
+"package joo",/* {*/
 
-"public class SystemClassDeclaration extends joo.NativeClassDeclaration",function($$private){with($$private)return[function(){joo.classLoader.init(joo.MemberDeclaration);}, 
-
-  "protected static function createDefaultConstructor",function createDefaultConstructor(superName/* : String*/)/* : Function*/ {
-    return (function $DefaultConstructor()/* : void*/ {
-      this[superName].apply(this,arguments);
-    });
-  },
+"public class SystemClassDeclaration extends joo.NativeClassDeclaration",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$doComplete=$$l+'doComplete',$doInit=$$l+'doInit';return[function(){joo.classLoader.init(joo.MemberDeclaration,Object,Error);}, 
 
   "protected static function createPublicConstructor",function createPublicConstructor(cd/* : NativeClassDeclaration*/)/* : Function*/ {
     return function joo$SystemClassDeclaration$constructor()/* : void*/ {
@@ -44,11 +38,20 @@ joo.classLoader.prepare(/*
       return (type["$class"]/*as NativeClassDeclaration*/).isInstance(object);
     }
     return false;
+  },
+
+  "private static function boundMethod",function boundMethod(object/*:Object*/, methodName/*:String*/)/*:Function*/ {
+    return object['$$b_'+methodName] ||
+      (object['$$b_'+methodName] = function joo$SystemClassDeclaration$45_36()/*:**/ {
+        return object[methodName].apply(object,arguments);
+      });
   },function()
 
 {
-  // publish as "joo.is()" for use from JavaScript:
-  joo.getQualifiedObject("joo")["is"] = $$private.is_;
+  // publish "is" and "boundMethod" as "joo.is" and "joo.boundMethod" for use from JavaScript:
+  var jooPackage/*:**/ = joo.getQualifiedObject("joo");
+  jooPackage["is"] = $$private.is_;
+  jooPackage["boundMethod"] = $$private.boundMethod;
 },
 
   "protected var",{
@@ -61,16 +64,13 @@ joo.classLoader.prepare(/*
           privateStatics/* : Object*/: undefined,
           memberDeclarations/* : **/: undefined /* Function, then Array */,
           memberDeclarationsByQualifiedName/* : Object*/: undefined,
-          initializerNames/* : Array*/: undefined/*<String>*/, // names of slots that contain initializer functions
           staticInitializers/* : Array*/: undefined/*<MemberDeclaration>*/,
-          boundMethodNames/* : Array*/: undefined/*<String>*/,  // names of slots that contain methods that need to be bound to "this"
           publicStaticMethodNames/* : Array*/: undefined},
 
-  "public function SystemClassDeclaration",function $SystemClassDeclaration(packageDef/* : String*/, directives/* : Array*/, classDef/* : String*/, memberDeclarations/* : Function*/,
+  "public function SystemClassDeclaration",function $SystemClassDeclaration(packageDef/* : String*/, classDef/* : String*/, memberDeclarations/* : Function*/,
           publicStaticMethodNames/* : Array*/) {this[$super]();
     var packageName/* : String*/ = packageDef.split(/\s+//*as String*/)[1] || "";
     this.package_ = joo.getOrCreatePackage(packageName);
-    this.parseDirectives(packageName, directives);
     var classMatch/* : Array*/ = classDef.match(/^\s*((public|internal|final|dynamic)\s+)*class\s+([A-Za-z][a-zA-Z$_0-9]*)(\s+extends\s+([a-zA-Z$_0-9.]+))?(\s+implements\s+([a-zA-Z$_0-9.,\s]+))?\s*$/)/*as Array*/;
     var interfaces/* : String*/;
     if (classMatch) {
@@ -103,22 +103,17 @@ joo.classLoader.prepare(/*
       this.package_[this.className] = publicConstructor;
     }
     this.create(fullClassName, publicConstructor);
-    var jooPackage/*:**/ = joo.getQualifiedObject("joo");
-    this.privateStatics = { "assert": jooPackage.assert, "is": $$private.is_, "trace": jooPackage.trace };
+    this.privateStatics = {};
   },
 
   "public function isNative",function isNative()/* : Boolean*/ {
     return this.native_;
   },
 
-  //noinspection JSUnusedLocalSymbols
-  "protected function parseDirectives",function parseDirectives(packageName/* : String*/, directives/* : Array*/)/* : void*/ { },
-
   "protected override function doComplete",function doComplete()/* : void*/ {
     this.superClassDeclaration = joo.classLoader.getRequiredClassDeclaration(this.extends_);
     this.superClassDeclaration.complete();
     this.level = this.superClassDeclaration.level + 1;
-    this.privateStatics.$super = "$" + this.level+"super";
     var Super/* : Function*/ = this.superClassDeclaration.Public;
     if (!this.native_) {
       this.publicConstructor.prototype = new Super();
@@ -128,10 +123,8 @@ joo.classLoader.prepare(/*
   },
 
   "protected function initMembers",function initMembers()/* : void*/ {
-    this.initializerNames = [];
     this.staticInitializers = [];
-    this.boundMethodNames = [];
-    var memberDeclarations/* : Array*/ = this.memberDeclarations(this.privateStatics);
+    var memberDeclarations/* : Array*/ = this.memberDeclarations("$" + this.level, this.privateStatics);
     this.memberDeclarations = [];
     this.memberDeclarationsByQualifiedName = {};
     this.constructor_ = null;
@@ -162,52 +155,15 @@ joo.classLoader.prepare(/*
           }
       }
     }
-    var defaultConstructor/* : Function*/ = this.native_ ? this.publicConstructor :
-      this.publicConstructor.prototype["$"+this.level+"super"] =
-      this.initializerNames.length==0 ? this.superClassDeclaration.constructor_ : $$private.createSuperCall(this);
-    if (!this.constructor_) {
-      // create empty default constructor:
-      this.constructor_ = defaultConstructor;
-    }
-    if (this.boundMethodNames.length>0) {
-      this.constructor_ = $$private.createMethodBindingConstructor(this.constructor_, this.boundMethodNames);
-    }
-  },
-
-  // must be defined static because otherwise, jooc will add .bind(this) to all function expressions!
-  "private static function createSuperCall",function createSuperCall(cd/* : SystemClassDeclaration*/)/* : Function*/ {
-    if (cd.extends_=="Object") {
-      return function $super()/* : void*/ {
-        for (var i/*:int*/ =0; i<cd.initializerNames.length; ++i) {
-          var slot/* : String*/ = cd.initializerNames[i]/*as String*/;
-          this[slot] = this[slot]();
-        }
-      };
-    }
-    return function $super()/* : void*/ {
-      cd.superClassDeclaration.constructor_.apply(this,arguments);
-      for (var i/*:int*/ =0; i<cd.initializerNames.length; ++i) {
-        var slot/* : String*/ = cd.initializerNames[i]/*as String*/;
-        this[slot] = this[slot]();
+    if (!this.isInterface) {
+      if (!this.native_) {
+        this.publicConstructor.prototype["$" + this.level + "super"] = this.superClassDeclaration.constructor_;
       }
-    };
-  },
-
-  // must be defined static because otherwise, jooc will add .bind(this) to all function expressions!
-  "private static function createMethodBindingConstructor",function createMethodBindingConstructor(constructor_/* : Function*/, boundMethodNames/* : Array*/)/* : Function*/ {
-    return function $bindMethods()/* : void*/ {
-      for (var i/*:int*/ =0; i<boundMethodNames.length; ++i) {
-        var slot/* : String*/ = boundMethodNames[i]/*as String*/;
-        this[slot] = this[slot].bind(this);
+      if (!this.constructor_) {
+        // reuse native public constructor or super class constructor:
+        this.constructor_ = this.native_ ? this.publicConstructor : this.superClassDeclaration.constructor_;
       }
-      constructor_.apply(this, arguments);
-    };
-  },
-
-  "protected function _initSlot",function _initSlot(memberDeclaration/* : MemberDeclaration*/)/* : void*/ {
-    memberDeclaration.slot = memberDeclaration.isPrivate() && !memberDeclaration.isStatic()
-            ? this.privateStatics["$"+memberDeclaration.memberName] = "$" + this.level + memberDeclaration.memberName
-            : memberDeclaration.memberName;
+    }
   },
 
   "protected function initMethod",function initMethod(memberDeclaration/* : MemberDeclaration*/, member/* : Function*/)/* : void*/ {
@@ -217,7 +173,7 @@ joo.classLoader.prepare(/*
       }
       this.constructor_ = memberDeclaration.isNative() ? this.publicConstructor : member;
     } else {
-      this._initSlot(memberDeclaration);
+      memberDeclaration.initSlot(this.level);
       if (memberDeclaration.isNative()) {
         member = memberDeclaration.getNativeMember(this.publicConstructor);
       }
@@ -238,15 +194,12 @@ joo.classLoader.prepare(/*
         this._storeMember(this._createMemberDeclaration(memberDeclaration, {_namespace: joo.MemberDeclaration.NAMESPACE_PRIVATE}), superMethod);
       }
       this._storeMember(memberDeclaration, member);
-      if (memberDeclaration.isBound()) {
-        this.boundMethodNames.push(memberDeclaration.slot);
-      }
     }
   },
 
   "protected function _createMemberDeclaration",function _createMemberDeclaration(memberDeclaration/* : MemberDeclaration*/, changedProperties/* : Object*/)/* : MemberDeclaration*/ {
     var newMemberDeclaration/* : MemberDeclaration*/ = memberDeclaration.clone(changedProperties);
-    this._initSlot(newMemberDeclaration);
+    newMemberDeclaration.initSlot(this.level);
     return newMemberDeclaration;
   },
 
@@ -268,8 +221,6 @@ joo.classLoader.prepare(/*
       if (memberDeclaration.hasInitializer()) {
         if (_static) {
           this.staticInitializers.push(memberDeclaration);
-        } else {
-          this.initializerNames.push(memberDeclaration.slot);
         }
       }
     }
@@ -292,5 +243,5 @@ joo.classLoader.prepare(/*
   "public function getMemberDeclaration",function getMemberDeclaration(namespace_/* : String*/, memberName/* : String*/)/* : MemberDeclaration*/ {
     return this.memberDeclarationsByQualifiedName[namespace_+"::"+memberName];
   },
-];},[],["joo.NativeClassDeclaration","Array","Error","joo.MemberDeclaration","Object"]
+];},[],["joo.NativeClassDeclaration","Error","joo.MemberDeclaration","Object"]
 );

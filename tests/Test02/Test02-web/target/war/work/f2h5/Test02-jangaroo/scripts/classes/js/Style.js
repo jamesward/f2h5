@@ -1,6 +1,6 @@
-joo.classLoader.prepare("package js",[""],
+joo.classLoader.prepare("package js",/*{*/
 
-"public class Style",function($$private){with($$private)return[ 
+"public class Style",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   "public native function getPropertyValue"/*(propertyName : String) : String;*/,
 

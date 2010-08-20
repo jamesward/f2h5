@@ -58,7 +58,7 @@ Function.prototype.bind = function(object) {
 
      */
     classLoader: {
-      prepare: function(packageDef, directives, classDef, memberFactory) {
+      prepare: function(packageDef, classDef, memberFactory) {
         var classMatch = classDef.match(/^\s*((public|internal|final|dynamic)\s+)*class\s+([A-Za-z][a-zA-Z$_0-9]*)(\s+extends\s+([a-zA-Z$_0-9.]+))?(\s+implements\s+([a-zA-Z$_0-9.,\s]+))?\s*$/);
         var className = classMatch[3];
         var $extends = classMatch[5];
@@ -72,11 +72,11 @@ Function.prototype.bind = function(object) {
           publicConstructor.prototype = clone(superConstructor.prototype);
         } else {
           superConstructor = Object;
-          $extends = "Object";
         }
-        publicConstructor.prototype[$extends] = superConstructor;
-        var privateStatics = {$super: $extends};
-        var members = memberFactory(privateStatics);
+        var level = "$" + className + "_";
+        publicConstructor.prototype[level + "super"] = superConstructor;
+        var privateStatics = {};
+        var members = memberFactory(level, privateStatics);
         var staticInitializer;
         for (var i = 0; i < members.length; ++i) {
           var memberDeclaration = members[i];

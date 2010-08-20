@@ -9,8 +9,8 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"package mx.utils",
-[""],
+"package mx.utils",/*
+{*/
 
 /**
  *  The StringUtil utility class is an all-static class with methods for
@@ -19,8 +19,8 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
  *  instead you call methods such as 
  *  the <code>StringUtil.substitute()</code> method.  
  */
-"public class StringUtil",function($$private){with($$private)return[
-
+"public class StringUtil",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(Array,RegExp);},
+/*
     ////////////////////////////////////////////////////////////////////////////////
 //
 //  ADOBE SYSTEMS INCORPORATED
@@ -32,7 +32,7 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"import mx.core.mx_internal",
+import mx.core.mx_internal*/
 
 /**
  *  @private

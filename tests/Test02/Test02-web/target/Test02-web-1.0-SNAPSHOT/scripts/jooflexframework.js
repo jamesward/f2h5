@@ -1,3 +1,80 @@
+// class mx.collections.ListCollectionView
+joo.classLoader.prepare(
+
+
+
+
+
+
+
+
+
+
+"package mx.collections",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public interface ListCollectionView\n"+
+"extends mx.collections.IList",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"mx_internal static const",{VERSION:"3.3.0.4852"},
+
+
+];},[],["mx.collections.IList"]
+);
 // class mx.collections.ArrayCollection
 joo.classLoader.prepare(
 
@@ -11,8 +88,6 @@ joo.classLoader.prepare(
 
 
 "package mx.collections",
-[
-"import flash.events.Event",""],
 
 
 
@@ -48,7 +123,9 @@ joo.classLoader.prepare(
 
 
 
-"public class ArrayCollection extends Array implements ListCollectionView",function($$private){with($$private)return[
+
+
+"public class ArrayCollection extends Array implements mx.collections.ListCollectionView",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(Error);},
 
 
 
@@ -61,7 +138,7 @@ joo.classLoader.prepare(
 
 
 
-"import mx.core.mx_internal",
+
 
 
 
@@ -205,17 +282,6 @@ joo.classLoader.prepare(
 
 
 "package mx.collections",
-[
-
-"import flash.events.IEventDispatcher",
-"import mx.events.CollectionEvent",
-
-
-
-
-
-
-""],
 
 
 
@@ -235,7 +301,18 @@ joo.classLoader.prepare(
 
 
 
-"public interface IList extends IEventDispatcher",function($$private){with($$private)return[
+
+
+
+
+
+
+
+
+
+
+
+"public interface IList extends flash.events.IEventDispatcher",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
 
 
 
@@ -396,551 +473,6 @@ joo.classLoader.prepare(
 ];},[],["flash.events.IEventDispatcher"]
 
 );
-// class mx.collections.ListCollectionView
-joo.classLoader.prepare(
-
-
-
-
-
-
-
-
-
-
-"package mx.collections",
-[
-
-"import flash.events.Event",
-
-
-
-
-
-
-""],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public interface ListCollectionView\n"+
-"extends IList",function($$private){with($$private)return[
-
-
-
-
-
-
-
-
-
-
-
-
-"import mx.core.mx_internal",
-
-
-
-
-
-"mx_internal static const",{VERSION:"3.3.0.4852"},
-
-
-];},[],["mx.collections.IList"]
-);
-// class mx.events.CollectionEvent
-joo.classLoader.prepare(
-
-
-
-
-
-
-
-
-
-
-"package mx.events",
-[
-
-"import flash.events.Event",""],
-
-
-
-
-
-
-
-"public class CollectionEvent extends flash.events.Event",function($$private){with($$private)return[
-
-
-
-
-
-
-
-
-
-
-
-
-"import mx.core.mx_internal",
-
-
-
-
-
-"mx_internal static const",{VERSION:"3.3.0.4852"},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public static const",{COLLECTION_CHANGE:"collectionChange"},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public function CollectionEvent",function(type,bubbles,
-cancelable,
-kind,location,
-oldLocation,items)
-{if(arguments.length<7){if(arguments.length<6){if(arguments.length<5){if(arguments.length<4){if(arguments.length<3){if(arguments.length<2){bubbles=false;}cancelable=false;}kind=null;}location=-1;}oldLocation=-1;}items=null;}
-this[$super](type,bubbles,cancelable);
-
-this.kind=kind;
-this.location=location;
-this.oldLocation=oldLocation;
-this.items=items?items:[];
-},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public var",{kind: undefined},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public var",{items: undefined},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public var",{location: undefined},
-
-
-
-
-
-
-
-
-
-
-
-
-"public var",{oldLocation: undefined},
-
-
-
-
-
-
-
-
-
-
-"override public function toString",function()
-{
-return this.formatToString("CollectionEvent","kind","location",
-"oldLocation","type","bubbles",
-"cancelable","eventPhase");
-},
-
-
-
-
-
-
-
-
-
-
-"override public function clone",function()
-{
-return new mx.events.CollectionEvent(this.type,this.bubbles,this.cancelable,this.kind,this.location,this.oldLocation,this.items);
-},
-];},[],["flash.events.Event"]
-
-);
-// class mx.events.CollectionEventKind
-joo.classLoader.prepare(
-
-
-
-
-
-
-
-
-
-
-"package mx.events",
-[""],
-
-
-
-
-
-
-
-
-"public final class CollectionEventKind",function($$private){with($$private)return[
-
-
-
-
-
-
-
-
-
-
-
-
-"import mx.core.mx_internal",
-
-
-
-
-
-"mx_internal static const",{VERSION:"3.3.0.4852"},
-
-
-
-
-
-
-
-
-
-
-
-"public static const",{ADD:"add"},
-
-
-
-
-
-
-"public static const",{MOVE:"move"},
-
-
-
-
-
-"public static const",{REFRESH:"refresh"},
-
-
-
-
-"public static const",{REMOVE:"remove"},
-
-
-
-
-
-"public static const",{REPLACE:"replace"},
-
-
-
-
-
-
-"mx_internal static const",{EXPAND:"expand"},
-
-
-
-
-
-"public static const",{RESET:"reset"},
-
-
-
-
-
-
-"public static const",{UPDATE:"update"},
-];},[],[]
-
-);
-// class mx.utils.ArrayUtil
-joo.classLoader.prepare(
-
-
-
-
-
-
-
-
-
-
-"package mx.utils",
-[""],
-
-
-
-
-
-
-
-
-"public class ArrayUtil",function($$private){with($$private)return[
-
-
-
-
-
-
-
-
-
-
-
-
-"import mx.core.mx_internal",
-
-
-
-
-
-"mx_internal static const",{VERSION:"3.3.0.4852"},
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public static function toArray",function(obj)
-{
-if(!obj)
-return[];
-
-else if(is(obj,Array))
-return obj;
-
-else
-return[obj];
-},
-
-
-
-
-
-
-
-
-
-
-
-
-
-"public static function getItemIndex",function(item,source)
-{
-var n=source.length;
-for(var i=0;i<n;i++)
-{
-if(source[i]===item)
-return i;
-}
-
-return-1;
-},
-];},["toArray","getItemIndex"],["Array"]
-
-);
-// class mx.utils.DescribeTypeCache
-joo.classLoader.prepare("package mx.utils",[""],
-"public class DescribeTypeCache",function($$private){with($$private)return[
-"public function DescribeTypeCache",function(){this[$super]();
-},
-
-"static function describeType",function(obj){
-return undefined;
-},
-
-];},["describeType"],[]
-);
 // class mx.utils.ObjectUtil
 joo.classLoader.prepare(
 
@@ -954,23 +486,6 @@ joo.classLoader.prepare(
 
 
 "package mx.utils",
-[
-
-
-"import flash.utils.Dictionary",
-"import flash.utils.getQualifiedClassName",
-
-
-"import mx.collections.IList",""],
-
-
-
-
-
-
-
-
-"public class ObjectUtil",function($$private){with($$private)return[
 
 
 
@@ -983,7 +498,24 @@ joo.classLoader.prepare(
 
 
 
-"import mx.core.mx_internal",
+
+
+
+
+"public class ObjectUtil",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(mx.collections.IList,Date,Class,flash.utils.Dictionary,Array,Error);},
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2236,8 +1768,124 @@ return result;
 
 
 "private static var",{CLASS_INFO_CACHE:function(){return({});}},
-];},["compare","copy","isSimple","numericCompare","stringCompare","dateCompare","toString","getClassInfo","hasMetadata"],["flash.utils.Dictionary","Date","Array","Class","Number","mx.collections.IList"]
+];},["compare","copy","isSimple","numericCompare","stringCompare","dateCompare","toString","getClassInfo","hasMetadata"],["flash.utils.Dictionary","Date","Array","Class","Error","Number","mx.collections.IList"]
 
+);
+// class mx.utils.ArrayUtil
+joo.classLoader.prepare(
+
+
+
+
+
+
+
+
+
+
+"package mx.utils",
+
+
+
+
+
+
+
+
+
+"public class ArrayUtil",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(Array);},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"mx_internal static const",{VERSION:"3.3.0.4852"},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public static function toArray",function(obj)
+{
+if(!obj)
+return[];
+
+else if(is(obj,Array))
+return obj;
+
+else
+return[obj];
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public static function getItemIndex",function(item,source)
+{
+var n=source.length;
+for(var i=0;i<n;i++)
+{
+if(source[i]===item)
+return i;
+}
+
+return-1;
+},
+];},["toArray","getItemIndex"],["Array"]
+
+);
+// class mx.utils.DescribeTypeCache
+joo.classLoader.prepare("package mx.utils",
+"public class DescribeTypeCache",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+"public function DescribeTypeCache",function(){this[$super]();
+},
+
+"static function describeType",function(obj){
+return undefined;
+},
+
+];},["describeType"],[]
 );
 // class mx.utils.StringUtil
 joo.classLoader.prepare(
@@ -2252,16 +1900,6 @@ joo.classLoader.prepare(
 
 
 "package mx.utils",
-[""],
-
-
-
-
-
-
-
-
-"public class StringUtil",function($$private){with($$private)return[
 
 
 
@@ -2271,10 +1909,20 @@ joo.classLoader.prepare(
 
 
 
+"public class StringUtil",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(Array,RegExp);},
 
 
 
-"import mx.core.mx_internal",
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2433,5 +2081,357 @@ str=str.replace(new RegExp("\\{"+i+"\\}","g"),String(args[i]));
 return str;
 },
 ];},["trim","trimArrayElements","isWhitespace","substitute"],["Array","RegExp","String"]
+
+);
+// class mx.events.CollectionEvent
+joo.classLoader.prepare(
+
+
+
+
+
+
+
+
+
+
+"package mx.events",
+
+
+
+
+
+
+
+
+
+
+"public class CollectionEvent extends flash.events.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$toString=$$l+'toString',$clone=$$l+'clone';return[
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"mx_internal static const",{VERSION:"3.3.0.4852"},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public static const",{COLLECTION_CHANGE:"collectionChange"},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public function CollectionEvent",function(type,bubbles,
+cancelable,
+kind,location,
+oldLocation,items)
+{if(arguments.length<7){if(arguments.length<6){if(arguments.length<5){if(arguments.length<4){if(arguments.length<3){if(arguments.length<2){bubbles=false;}cancelable=false;}kind=null;}location=-1;}oldLocation=-1;}items=null;}
+this[$super](type,bubbles,cancelable);
+
+this.kind=kind;
+this.location=location;
+this.oldLocation=oldLocation;
+this.items=items?items:[];
+},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public var",{kind: undefined},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public var",{items: undefined},
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"public var",{location: undefined},
+
+
+
+
+
+
+
+
+
+
+
+
+"public var",{oldLocation: undefined},
+
+
+
+
+
+
+
+
+
+
+"override public function toString",function()
+{
+return this.formatToString("CollectionEvent","kind","location",
+"oldLocation","type","bubbles",
+"cancelable","eventPhase");
+},
+
+
+
+
+
+
+
+
+
+
+"override public function clone",function()
+{
+return new mx.events.CollectionEvent(this.type,this.bubbles,this.cancelable,this.kind,this.location,this.oldLocation,this.items);
+},
+];},[],["flash.events.Event"]
+
+);
+// class mx.events.CollectionEventKind
+joo.classLoader.prepare(
+
+
+
+
+
+
+
+
+
+
+"package mx.events",
+
+
+
+
+
+
+
+
+
+"public final class CollectionEventKind",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"mx_internal static const",{VERSION:"3.3.0.4852"},
+
+
+
+
+
+
+
+
+
+
+
+"public static const",{ADD:"add"},
+
+
+
+
+
+
+"public static const",{MOVE:"move"},
+
+
+
+
+
+"public static const",{REFRESH:"refresh"},
+
+
+
+
+"public static const",{REMOVE:"remove"},
+
+
+
+
+
+"public static const",{REPLACE:"replace"},
+
+
+
+
+
+
+"mx_internal static const",{EXPAND:"expand"},
+
+
+
+
+
+"public static const",{RESET:"reset"},
+
+
+
+
+
+
+"public static const",{UPDATE:"update"},
+];},[],[]
 
 );

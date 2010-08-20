@@ -1,4 +1,4 @@
-joo.classLoader.prepare("package flash.net", [""],
+joo.classLoader.prepare("package flash.net",/* {*/
 
 /**
  * The URLVariables class allows you to transfer variables between a Flash� application and a server.
@@ -6,7 +6,7 @@ joo.classLoader.prepare("package flash.net", [""],
  * and with flash.net package functions.
  * @see URLLoader
  */
-"public class URLVariables",function($$private){with($$private)return[ 
+"public class URLVariables",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   /**
    * Creates a new URLVariables object.

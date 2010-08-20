@@ -1,5 +1,5 @@
-joo.classLoader.prepare("package js", [""],
-"public interface Location",function($$private){with($$private)return[ /*
+joo.classLoader.prepare("package js",/* {*/
+"public interface Location",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ /*
 
   /**
    * The part of the URL that follows the # symbol, including the # symbol.

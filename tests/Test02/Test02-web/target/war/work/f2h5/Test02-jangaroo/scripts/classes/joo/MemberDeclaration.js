@@ -15,9 +15,9 @@ joo.classLoader.prepare(/*
 
 // JangarooScript runtime support. Author: Frank Wienberg
 
-"package joo", [""],
+"package joo",/* {*/
 
-"public class MemberDeclaration",function($$private){with($$private)return[ 
+"public class MemberDeclaration",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(RegExp,Error,Object);}, 
 
   "public static const",{
           METHOD_TYPE_GET/* : String*/ : "get",
@@ -32,7 +32,6 @@ joo.classLoader.prepare(/*
           STATIC/* : String*/ : "static",
           FINAL/* : String*/ : "final",
           NATIVE/* : String*/ : "native",
-          BOUND/* : String*/ : "bound",
           OVERRIDE/* : String*/ : "override"},
 
   "private static var",{ SUPPORTS_GETTERS_SETTERS/* : Boolean*/: undefined},
@@ -64,7 +63,6 @@ joo.classLoader.prepare(/*
           _static/* : Boolean*/ : false,
           _final/* : Boolean*/ : false,
           _native/* : Boolean*/ : false,
-          _bound/* : Boolean*/ : false,
           _override/* : Boolean*/ : false,
           _cloneFactory/* : Function*/: undefined},
   "public var",{
@@ -82,7 +80,6 @@ joo.classLoader.prepare(/*
           case joo.MemberDeclaration.STATIC:
           case joo.MemberDeclaration.FINAL:
           case joo.MemberDeclaration.NATIVE:
-          case joo.MemberDeclaration.BOUND:
           case joo.MemberDeclaration.OVERRIDE:
             this["_"+token] = true; break;
           case joo.MemberDeclaration.MEMBER_TYPE_VAR:
@@ -129,12 +126,14 @@ joo.classLoader.prepare(/*
     return this._override;
   },
 
-  "public function isBound",function isBound()/* : Boolean*/ {
-    return this._bound;
-  },
-
   "public function isMethod",function isMethod()/* : Boolean*/ {
     return this.memberType==joo.MemberDeclaration.MEMBER_TYPE_FUNCTION;
+  },
+
+  "internal function initSlot",function initSlot(level/* : int*/)/* : void*/ {
+    this.slot = this.isPrivate() && !this.isStatic()
+            ? "$" + level + this.memberName
+            : this.memberName;
   },
 
   // public function retrieveMember(source : Object) : Function
@@ -228,7 +227,7 @@ joo.classLoader.prepare(/*
 
   "public function _getCloneFactory",function _getCloneFactory()/* : Function*/ {
     if (!this._cloneFactory) {
-      this._cloneFactory = function joo$MemberDeclaration$231_28()/* : void*/ { };
+      this._cloneFactory = function joo$MemberDeclaration$230_28()/* : void*/ { };
       this._cloneFactory.prototype = this;
     }
     return this._cloneFactory;
@@ -250,9 +249,6 @@ joo.classLoader.prepare(/*
     }
     if (this._override) {
       sb.push(joo.MemberDeclaration.OVERRIDE);
-    }
-    if (this._bound) {
-      sb.push(joo.MemberDeclaration.BOUND);
     }
     sb.push(this.memberType);
     if (this.getterOrSetter) {

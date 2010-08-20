@@ -1,10 +1,10 @@
-joo.classLoader.prepare("package flash.utils", [
+joo.classLoader.prepare("package flash.utils",/* {
 
-"import flash.events.EventDispatcher",
-"import flash.events.TimerEvent",/*
+import flash.events.EventDispatcher
+import flash.events.TimerEvent
 
 [Event(name="timerComplete",type="flash.events.TimerEvent")]
-[Event(name="timer",type="flash.events.TimerEvent")]*/""],
+[Event(name="timer",type="flash.events.TimerEvent")]*/
 /**
  * The Timer class is the interface to timers, which let you run code on
    a specified time sequence. Use the <code>start()</code> method to
@@ -16,7 +16,7 @@ joo.classLoader.prepare("package flash.utils", [
    slightly offset intervals. Memory-intensive scripts may also offset
    the events.
  */
-"public class Timer extends flash.events.EventDispatcher",function($$private){with($$private)return[function(){joo.classLoader.init(flash.events.TimerEvent);},
+"public class Timer extends flash.events.EventDispatcher",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$_delay=$$l+'_delay',$_repeatCount=$$l+'_repeatCount',$_currentCount=$$l+'_currentCount',$tick=$$l+'tick',$checkComplete=$$l+'checkComplete',$timer=$$l+'timer';return[function(){joo.classLoader.init(flash.events.TimerEvent);},
 
 
   /**
@@ -107,7 +107,7 @@ joo.classLoader.prepare("package flash.utils", [
    */
   "public function start",function start()/* : void*/ {
     if (!this[$timer]) {
-      this[$timer] = window.setInterval(this[$tick], this[$_delay]);
+      this[$timer] = window.setInterval($$bound(this,$tick), this[$_delay]);
     }
   },
 
@@ -135,7 +135,7 @@ joo.classLoader.prepare("package flash.utils", [
     this[$_currentCount] = 0;
   },
 
-  "private bound function tick",function tick()/* : void*/ {
+  "private function tick",function tick()/* : void*/ {
     if (!this[$timer]) {
       // oops, a tick occurred although timer has been stopped:
       return;

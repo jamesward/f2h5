@@ -1,7 +1,7 @@
-joo.classLoader.prepare("package flash.events", [
+joo.classLoader.prepare("package flash.events",/* {
 
-"import flash.events.IEventDispatcher",
-"import flash.events.Event",/*
+import flash.events.IEventDispatcher
+import flash.events.Event
 
 /**
  * Dispatched when Flash Player gains operating system focus and becomes active.
@@ -31,7 +31,7 @@ joo.classLoader.prepare("package flash.events", [
  * <li>target	Any DisplayObject instance with a listener registered for the deactivate event.
  * </ul>
  * /
-[Event(name="deactivate",type="flash.events.Event")]*/""],
+[Event(name="deactivate",type="flash.events.Event")]*/
 
 /**
  * The EventDispatcher class implements the IEventDispatcher interface and is the base class for the DisplayObject
@@ -50,7 +50,7 @@ joo.classLoader.prepare("package flash.events", [
  * implement the IEventDispatcher interface, create an EventDispatcher member, and write simple hooks to route calls
  * into the aggregated EventDispatcher.
  */
-"public class EventDispatcher extends Object implements IEventDispatcher",function($$private){with($$private)return[ 
+"public class EventDispatcher extends Object implements flash.events.IEventDispatcher",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$captureListeners=$$l+'captureListeners',$listeners=$$l+'listeners',$target=$$l+'target';return[ 
 
   /**
    * Aggregates an instance of the EventDispatcher class.

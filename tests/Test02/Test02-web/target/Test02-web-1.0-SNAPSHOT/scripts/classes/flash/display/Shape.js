@@ -1,24 +1,21 @@
-joo.classLoader.prepare("package flash.display", [
-
-"import js.Element",
-"import js.HTMLCanvasElement",
-"import flash.display.DisplayObject",
-"import flash.display.Graphics",
-"import flash.display.Stage",
-"import flash.geom.Transform",
-"import flash.geom.Matrix",""],
+joo.classLoader.prepare("package flash.display",/* {
+import js.CanvasRenderingContext2D
+import js.Element
+import js.HTMLCanvasElement
+import flash.geom.Transform
+import flash.geom.Matrix*/
 
 /**
  * The Shape class is used to create lightweight shapes by using the ActionScript drawing application program interface
  * (API). The Shape class includes a graphics property, which lets you access methods from the Graphics class.
- * <p>The Sprite class also includes a graphicsproperty, and it includes other features not available to the Shape
+ * <p>The Sprite class also includes a graphics property, and it includes other features not available to the Shape
  * class. For example, a Sprite object is a display object container, whereas a Shape object is not (and cannot contain
  * child display objects). For this reason, Shape objects consume less memory than Sprite objects that contain the same
  * graphics. However, a Sprite object supports mouse click events, while a Shape object does not.
  * @see flash.display.Graphics
  * @see flash.display.Sprite
  */
-"public class Shape extends flash.display.DisplayObject",function($$private){with($$private)return[ 
+"public class Shape extends flash.display.DisplayObject",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$createElement=$$l+'createElement',$transform=$$l+'transform',$_graphics=$$l+'_graphics';return[function(){joo.classLoader.init(flash.display.Graphics);}, 
 
   /**
    * Creates a new Shape object.
@@ -36,8 +33,8 @@ joo.classLoader.prepare("package flash.display", [
   "internal static function createCanvas",function createCanvas()/* : HTMLCanvasElement*/ {
     var canvas/* : HTMLCanvasElement*/ = window.document.createElement("canvas")/*as HTMLCanvasElement*/;
     // TODO: adjust width and height when drawing into the canvas!
-    canvas.width = flash.display.Stage.instance.stageWidth;
-    canvas.height = flash.display.Stage.instance.stageHeight;
+    canvas.width = flash.display.Stage.getInstance().stageWidth;
+    canvas.height = flash.display.Stage.getInstance().stageHeight;
     return canvas;
   },
 

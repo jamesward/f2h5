@@ -1,4 +1,4 @@
-joo.classLoader.prepare("package flash.display", [""],
+joo.classLoader.prepare("package flash.display",/* {*/
 
 /**
  * The IBitmapDrawable interface is implemented by objects that can be passed as the source parameter of the
@@ -8,7 +8,7 @@ joo.classLoader.prepare("package flash.display", [""],
  * @see flash.display.BitmapData
  * @see flash.display.DisplayObject
  */
-"public interface IBitmapDrawable",function($$private){with($$private)return[ 
+"public interface IBitmapDrawable",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
 ];},[],[]
 );

@@ -1,10 +1,9 @@
 package flash.display {
-
-import js.Element;
-import flash.display.DisplayObjectContainer;
+import flash.events.Event;
 import flash.events.TimerEvent;
 import flash.utils.Timer;
-import flash.events.Event;
+
+import js.Element;
 
 /**
  * The Stage class represents the main drawing area. The Stage represents the entire area where Flash� content is shown.
@@ -44,8 +43,7 @@ import flash.events.Event;
  * </ul>
  */
 public class Stage extends flash.display.DisplayObjectContainer {
-
-  internal static var instance : Stage;
+  public static native function getInstance(id:String = "stage") : Stage;
 
   public native function Stage(id : String);
 

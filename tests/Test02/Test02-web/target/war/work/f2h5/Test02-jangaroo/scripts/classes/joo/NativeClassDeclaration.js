@@ -15,9 +15,9 @@ joo.classLoader.prepare(/*
 
 // JangarooScript runtime support. Author: Frank Wienberg
 
-"package joo", [""],
+"package joo",/* {*/
 
-"public class NativeClassDeclaration",function($$private){with($$private)return[ 
+"public class NativeClassDeclaration",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(Error);}, 
 
   "internal static function createEmptyConstructor",function createEmptyConstructor(constructor_/* : Function*/)/* : Function*/ {
     var emptyConstructor/* : Function*/ = function joo$NativeClassDeclaration$23_39()/* : void*/ {

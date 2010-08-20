@@ -1,9 +1,9 @@
-joo.classLoader.prepare("package js", [""],
+joo.classLoader.prepare("package js",/* {*/
 
 /**
  * The XMLHttpRequest object can be used by scripts to programmatically connect to their originating server via HTTP. 
  */
-"public class XMLHttpRequest",function($$private){with($$private)return[ 
+"public class XMLHttpRequest",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   "public native function XMLHttpRequest"/*();*/,
 

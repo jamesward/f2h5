@@ -1,6 +1,6 @@
-joo.classLoader.prepare("package js", [""],
+joo.classLoader.prepare("package js",/* {*/
 
-"public class Node",function($$private){with($$private)return[ 
+"public class Node",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   "public static const",{ ELEMENT_NODE/* : int*/ : 1},
 

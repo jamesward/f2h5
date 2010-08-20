@@ -9,15 +9,15 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"package mx.utils",
-[
+"package mx.utils",/*
+{
 
 //import flash.utils.ByteArray;
-"import flash.utils.Dictionary",
-"import flash.utils.getQualifiedClassName",
+import flash.utils.Dictionary
+import flash.utils.getQualifiedClassName
 //import flash.xml.XMLNode;
 
-"import mx.collections.IList",""],
+import mx.collections.IList*/
 
 /**
  *  The ObjectUtil class is an all-static class with methods for
@@ -26,8 +26,8 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
  *  instead you simply call static methods such as the 
  *  <code>ObjectUtil.isSimple()</code> method.
  */
-"public class ObjectUtil",function($$private){with($$private)return[
-
+"public class ObjectUtil",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(mx.collections.IList,Date,Class,flash.utils.Dictionary,Array,Error);},
+/*
     ////////////////////////////////////////////////////////////////////////////////
 //
 //  ADOBE SYSTEMS INCORPORATED
@@ -39,7 +39,7 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-"import mx.core.mx_internal",
+import mx.core.mx_internal*/
 
 /**
  *  @private
@@ -1292,6 +1292,6 @@ joo.classLoader.prepare(////////////////////////////////////////////////////////
      * @private
      */ 
     "private static var",{ CLASS_INFO_CACHE/*:Object*/ :function(){return( {});}},
-];},["compare","copy","isSimple","numericCompare","stringCompare","dateCompare","toString","getClassInfo","hasMetadata"],["flash.utils.Dictionary","Date","Array","Class","Number","mx.collections.IList"]
+];},["compare","copy","isSimple","numericCompare","stringCompare","dateCompare","toString","getClassInfo","hasMetadata"],["flash.utils.Dictionary","Date","Array","Class","Error","Number","mx.collections.IList"]
 
 );

@@ -5,7 +5,6 @@
       <path-set>
         <pathsSet class="linked-hash-set">
           <string>expressInstall.swf</string>
-          <string>.index.html.swp</string>
           <string>index.html</string>
           <string>swfobject.js</string>
         </pathsSet>
@@ -45,6 +44,7 @@
           <string>scripts/classes/flash/utils/Timer.js</string>
           <string>scripts/classes/flash/display/BitmapData.js</string>
           <string>scripts/classes/flash/display/IBitmapDrawable.js</string>
+          <string>scripts/classes/flash/display/FrameLabel.js</string>
           <string>scripts/classes/flash/display/Stage.js</string>
           <string>scripts/classes/flash/display/CapsStyle.js</string>
           <string>scripts/classes/flash/display/Sprite.js</string>
@@ -52,6 +52,7 @@
           <string>scripts/classes/flash/display/DisplayObject.js</string>
           <string>scripts/classes/flash/display/GradientType.js</string>
           <string>scripts/classes/flash/display/InterpolationMethod.js</string>
+          <string>scripts/classes/flash/display/BitmapDataChannel.js</string>
           <string>scripts/classes/flash/display/JointStyle.js</string>
           <string>scripts/classes/flash/display/SimpleButton.js</string>
           <string>scripts/classes/flash/display/PixelSnapping.js</string>

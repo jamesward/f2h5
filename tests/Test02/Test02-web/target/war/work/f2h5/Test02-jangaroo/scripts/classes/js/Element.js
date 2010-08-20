@@ -1,6 +1,6 @@
-joo.classLoader.prepare("package js", [""],
+joo.classLoader.prepare("package js",/* {*/
 
-"public class Element extends js.Node",function($$private){with($$private)return[ 
+"public class Element extends js.Node",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   "public native function get id"/*() : String;*/,
 

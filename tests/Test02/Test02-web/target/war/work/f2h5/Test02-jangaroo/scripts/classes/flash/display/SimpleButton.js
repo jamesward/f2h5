@@ -1,13 +1,11 @@
-joo.classLoader.prepare("package flash.display", [
+joo.classLoader.prepare("package flash.display",/* {*/
 
-"import flash.display.InteractiveObject",
-"import flash.display.DisplayObject",""],
 //import flash.media.SoundTransform;
 
 /**
  * The SimpleButton class lets you control all instances of button symbols in a SWF file.
  */
-"public class SimpleButton extends flash.display.InteractiveObject",function($$private){with($$private)return[ 
+"public class SimpleButton extends flash.display.InteractiveObject",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$getElementName=$$l+'getElementName',$_upState=$$l+'_upState',$_overState=$$l+'_overState',$_downState=$$l+'_downState',$_hitTestState=$$l+'_hitTestState',$_enabled=$$l+'_enabled',$_trackAsMenu=$$l+'_trackAsMenu',$_useHandCursor=$$l+'_useHandCursor';return[ 
 
   /**
    * Creates a new SimpleButton instance.

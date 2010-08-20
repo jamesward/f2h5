@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>Test03</artifactId>
+    <groupId>f2h5</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>Test03-flex</artifactId>
+  <packaging>swf</packaging>
+  <name>Test03-flex</name>
+
+  <build>
+    <sourceDirectory>src/main/flex</sourceDirectory>
+    <finalName>Test03</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-maven-plugin</artifactId>
+	<extensions>true</extensions>
+        <dependencies>
+          <dependency>
+            <groupId>com.adobe.flex</groupId>
+            <artifactId>compiler</artifactId>
+            <version>4.1.0.16076</version>
+            <type>pom</type>
+          </dependency>
+        </dependencies>
+        <configuration>
+          <sourceFile>Test03.as</sourceFile>
+          <debug>true</debug>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>flexmojos-repository</id>
+      <url>http://repository.sonatype.org/content/groups/public/</url>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>flexmojos-repository</id>
+      <url>http://repository.sonatype.org/content/groups/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.adobe.flex.framework</groupId>
+      <artifactId>flex-framework</artifactId>
+      <version>4.1.0.16076</version>
+      <type>pom</type>
+    </dependency>
+  </dependencies>
+
+</project>

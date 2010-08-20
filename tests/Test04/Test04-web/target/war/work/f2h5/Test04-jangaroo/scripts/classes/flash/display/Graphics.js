@@ -1,14 +1,10 @@
 joo.classLoader.prepare("package flash.display",/* {
 
-import js.CanvasRenderingContext2D
-import js.CanvasGradient
-import flash.display.CapsStyle
-import flash.display.JointStyle
-import flash.display.LineScaleMode
-import flash.display.GradientType
 import flash.geom.Matrix
 import flash.geom.Point
-import ArgumentError*/
+
+import js.CanvasGradient
+import js.CanvasRenderingContext2D*/
 
 "public class Graphics",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$context=$$l+'context',$insideFill=$$l+'insideFill',$_beginFill=$$l+'_beginFill',$createGradientStyle=$$l+'createGradientStyle';return[function(){joo.classLoader.init(flash.geom.Matrix,flash.display.CapsStyle,Math,flash.display.GradientType,flash.display.JointStyle,flash.geom.Point);}, 
 
@@ -437,7 +433,8 @@ package {
   "public function drawRoundRect",function drawRoundRect(x/* : Number*/, y/* : Number*/, width/* : Number*/, height/* : Number*/,
                                 ellipseWidth/* : Number*/, ellipseHeight/* : Number = NaN*/)/* : void*/ {if(arguments.length<6){ellipseHeight = NaN;}
     if (ellipseHeight==0 || ellipseWidth==0) {
-      return this.drawRect(x, y, width, height);
+      this.drawRect(x, y, width, height);
+      return;
     }
     if (isNaN(ellipseHeight)) {
       ellipseHeight = ellipseWidth;

@@ -1,5 +1,5 @@
-joo.classLoader.prepare("package flash.net", [
-"import flash.net.URLRequestMethod",""],
+joo.classLoader.prepare("package flash.net",/* {
+import flash.net.URLRequestMethod*/
 
 /**
  * The URLRequest class captures all of the information in a single HTTP request.
@@ -25,7 +25,7 @@ joo.classLoader.prepare("package flash.net", [
  * @see URLStream
  * @see FileReference 
  */
-"public class URLRequest",function($$private){with($$private)return[function(){joo.classLoader.init(flash.net.URLRequestMethod);}, 
+"public class URLRequest",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(flash.net.URLRequestMethod);}, 
 
   /**
    * Creates a URLRequest object. If System.useCodePage is true, the request is encoded using the system code page,
@@ -34,7 +34,7 @@ joo.classLoader.prepare("package flash.net", [
    * @param url (default = null) The URL to be requested. You can set the URL later by using the url property.
    * @see flash.system.System.useCodePage 
    */
-  "public function URLRequest",function $URLRequest(url/* : String = null*/) {if(arguments.length<1){url = null;}this[$super]();
+  "public function URLRequest",function $URLRequest(url/* : String = null*/) {if(arguments.length<1){url = null;}this[$super]();this.method=this.method();
     this.url = url;
   },
 

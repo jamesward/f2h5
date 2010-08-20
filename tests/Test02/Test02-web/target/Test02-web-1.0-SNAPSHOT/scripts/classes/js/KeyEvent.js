@@ -1,9 +1,9 @@
-joo.classLoader.prepare("package js",[""],
+joo.classLoader.prepare("package js",/*{*/
 
 /**
  * An event created using document.createEvent("KeyboardEvent").
  */
-"public class KeyEvent extends js.Event",function($$private){with($$private)return[ 
+"public class KeyEvent extends js.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   "public static const",{ DOM_VK_CANCEL/* : Number*/ : 3},
   "public static const",{ DOM_VK_HELP/* : Number*/ : 6},

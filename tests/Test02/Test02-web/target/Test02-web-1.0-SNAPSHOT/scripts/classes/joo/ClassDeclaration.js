@@ -15,79 +15,54 @@ joo.classLoader.prepare(/*
 
 // JangarooScript runtime support. Author: Frank Wienberg
 
-"package joo", [""],
+"package joo",/* {*/
 
-"public class ClassDeclaration extends joo.SystemClassDeclaration",function($$private){with($$private)return[ 
+"public class ClassDeclaration extends joo.SystemClassDeclaration",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$dependencies=$$l+'dependencies',$doComplete=$$l+'doComplete',$createInitializingStaticMethod=$$l+'createInitializingStaticMethod',$deleteInitializingStaticMethod=$$l+'deleteInitializingStaticMethod',$doInit=$$l+'doInit',$isInstance=$$l+'isInstance';return[ 
 
-  "private var",{ importMap/* : ImportMap*/: undefined},
   "private var",{ dependencies/* : Array*/: undefined},
 
-  "public function ClassDeclaration",function $ClassDeclaration(packageDef/*:String*/, directives/* : Array*/, classDef/*:String*/, memberDeclarations/*:Function*/,
+  "public function ClassDeclaration",function $ClassDeclaration(packageDef/*:String*/, classDef/*:String*/, memberDeclarations/*:Function*/,
           publicStaticMethods/* : Array*/, dependencies/* : Array*/) {
-    this[$super](packageDef, directives, classDef, memberDeclarations, publicStaticMethods);
+    this[$super](packageDef, classDef, memberDeclarations, publicStaticMethods);
     this[$dependencies] = dependencies;
   },
 
   "public function getDependencies",function getDependencies()/* : Array*/ {
-    var dependencies/*:Array*/ = this[$dependencies]
-      ? this[$dependencies]            // new compiler output: explicit runtime dependencies
-      : this[$importMap].getImports(); // backwards-compatibility for older compiler output
-    dependencies = dependencies.concat([this[$importMap].findQualifiedName(this.extends_)]);
-    return dependencies;
-  },
-
-  "override protected function parseDirectives",function parseDirectives(packageName/* : String*/, directives/* : Array*/)/*:void*/ {
-    // super.parseDirectives(packageName, directives); // we know it's empty!
-    this[$importMap] = new joo.ImportMap();
-    this[$importMap].addImport(packageName+".*");
-    directives.forEach(this[$parseDirective]);
-  },
-
-  "private bound function parseDirective",function parseDirective(directive/* : String*/)/* : void*/ {
-    var importMatch/* : Array*/ = directive.match(/^\s*import\s+(([a-zA-Z$_0-9]+\.)*(\*|[a-zA-Z$_0-9]+))\s*$/)/*as Array*/;
-    if (importMatch) {
-      this[$importMap].addImport(importMatch[1]);
-    }
-    // else: TODO! use namespace, annotations, package-scope functions, namespace declarations...
+    return this[$dependencies];
   },
 
   "override protected function doComplete",function doComplete()/*:void*/ {
-    this.extends_ = this[$importMap].findQualifiedName(this.extends_);
     this[$doComplete]();
-    for (var i/*:int*/ =0; i<this.interfaces.length; ++i) {
-      this.interfaces[i] = this[$importMap].findQualifiedName(this.interfaces[i]);
-    }
-    this[$importMap].addToMap(this.privateStatics);
     $$private.createInitializingConstructor(this);
-    this.publicStaticMethodNames.forEach(this[$createInitializingStaticMethod]);
+    this.publicStaticMethodNames.forEach($$bound(this,$createInitializingStaticMethod));
   },
 
   "private static function createInitializingConstructor",function createInitializingConstructor(classDeclaration/* : ClassDeclaration*/)/* : void*/ {
     // anonymous function has to be inside a static function, or jooc will add ".bind(this)":
-    classDeclaration.constructor_ = function joo$ClassDeclaration$67_37()/* : void*/ {
+    classDeclaration.constructor_ = function joo$ClassDeclaration$42_37()/* : void*/ {
       classDeclaration.init();
-      assert((classDeclaration.constructor_!=null), "C:\\Users\\fwienber\\p4\\jangaroo\\target\\checkout\\jangaroo-core\\jangaroo-runtime\\src\\main\\joo\\joo\\ClassDeclaration.as", 69, 7); // must have been set, at least to a default constructor!
+      assert((classDeclaration.constructor_!=null), "C:\\Users\\fwienber\\p4\\jangaroo\\target\\checkout\\jangaroo-core\\jangaroo-runtime\\src\\main\\joo\\joo\\ClassDeclaration.as", 44, 7); // must have been set, at least to a default constructor!
       classDeclaration.constructor_.apply(this, arguments);
     };
   },
 
-  "private bound function createInitializingStaticMethod",function createInitializingStaticMethod(methodName/* : String*/)/* : void*/ {
+  "private function createInitializingStaticMethod",function createInitializingStaticMethod(methodName/* : String*/)/* : void*/ {
     var classDeclaration/* : ClassDeclaration*/ = this;
-    classDeclaration.publicConstructor[methodName] = function joo$ClassDeclaration$76_54()/* : **/ {
+    classDeclaration.publicConstructor[methodName] = function joo$ClassDeclaration$51_54()/* : **/ {
       //assert(!classDeclaration.inited);
       classDeclaration.init();
       return classDeclaration.publicConstructor[methodName].apply(null, arguments);
     };
   },
 
-  "private bound function deleteInitializingStaticMethod",function deleteInitializingStaticMethod(methodName/* : String*/)/* : void*/ {
+  "private function deleteInitializingStaticMethod",function deleteInitializingStaticMethod(methodName/* : String*/)/* : void*/ {
     delete this.publicConstructor[methodName];
   },
 
   "protected override function doInit",function doInit()/*:void*/ {
-    this.publicStaticMethodNames.forEach(this[$deleteInitializingStaticMethod]);
+    this.publicStaticMethodNames.forEach($$bound(this,$deleteInitializingStaticMethod));
     this[$doInit]();
-    this.interfaces.forEach(function joo$ClassDeclaration$90_29(interface_/* : String*/, i/* : uint*/, interfaces/* : Array*/)/* : void*/ {
+    this.interfaces.forEach(function joo$ClassDeclaration$65_29(interface_/* : String*/, i/* : uint*/, interfaces/* : Array*/)/* : void*/ {
       interfaces[i] = joo.classLoader.getRequiredClassDeclaration(interface_);
       interfaces[i].init();
     });
@@ -113,7 +88,7 @@ joo.classLoader.prepare(/*
    * <code>ClassDefinition</code> parameter. It returns <code>true</code> if so;
    * otherwise it returns <code>false</code>.
    */
-  "protected bound function isAssignableFrom",function isAssignableFrom(cd/* : NativeClassDeclaration*/)/* : Boolean*/ {
+  "protected function isAssignableFrom",function isAssignableFrom(cd/* : NativeClassDeclaration*/)/* : Boolean*/ {
     do {
       if (this===cd) {
         return true;
@@ -121,7 +96,7 @@ joo.classLoader.prepare(/*
       // TODO: optimize: pre-calculate set of all implemented interfaces of a class!
       if (this.isInterface) {
         // I am an interface: search all implemented interfaces recursively:
-        if (cd.interfaces.some(this.isAssignableFrom)) {
+        if (cd.interfaces.some($$bound(this,"isAssignableFrom"))) {
           return true;
         }
       }
@@ -130,5 +105,5 @@ joo.classLoader.prepare(/*
     return false;
   },
 
-];},[],["joo.SystemClassDeclaration","joo.ImportMap","Array"]
+];},[],["joo.SystemClassDeclaration"]
 );

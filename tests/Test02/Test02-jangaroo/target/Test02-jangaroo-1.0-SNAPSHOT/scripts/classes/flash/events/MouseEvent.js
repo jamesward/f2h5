@@ -1,10 +1,10 @@
-joo.classLoader.prepare("package flash.events",
-[
-  "import flash.display.InteractiveObject",
-  "import flash.events.Event",""],
+joo.classLoader.prepare("package flash.events",/*
+{
+  import flash.display.InteractiveObject
+  import flash.events.Event*/
 
   /// Flash&#xAE; Player dispatches MouseEvent objects into the event flow whenever mouse events occur.
-  "public class MouseEvent extends flash.events.Event",function($$private){with($$private)return[ 
+  "public class MouseEvent extends flash.events.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$clone=$$l+'clone',$toString=$$l+'toString';return[ 
 
     /// Defines the value of the type property of a click event object.
     "public static const",{ CLICK/* : String*/ : "click"},

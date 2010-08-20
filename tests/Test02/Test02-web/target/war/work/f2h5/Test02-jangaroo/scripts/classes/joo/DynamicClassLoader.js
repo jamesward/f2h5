@@ -15,11 +15,9 @@ joo.classLoader.prepare(/*
 
 // JangarooScript runtime support. Author: Frank Wienberg
 
-"package joo", [
+"package joo",/* {*/
 
-"import Error",""],
-
-"public class DynamicClassLoader extends joo.StandardClassLoader",function($$private){with($$private)return[ 
+"public class DynamicClassLoader extends joo.StandardClassLoader",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$onCompleteCallbacks=$$l+'onCompleteCallbacks',$pendingDependencies=$$l+'pendingDependencies',$pendingClassState=$$l+'pendingClassState',$prepare=$$l+'prepare',$doCompleteCallbacks=$$l+'doCompleteCallbacks',$internalDoCompleteCallbacks=$$l+'internalDoCompleteCallbacks',$createClassLoadErrorHandler=$$l+'createClassLoadErrorHandler',$import_=$$l+'import_',$run=$$l+'run',$load=$$l+'load',$determineUrlPrefix=$$l+'determineUrlPrefix',$complete=$$l+'complete',$loadPendingDependencies=$$l+'loadPendingDependencies';return[ 
 
   "public static const",{ STANDARD_URL_PREFIX/*:String*/ : "scripts/classes/"},
 
@@ -31,12 +29,18 @@ joo.classLoader.prepare(/*
     return true;
   },
 
+  "public static var",{ INSTANCE/*:DynamicClassLoader*/: undefined},
 
   "public var",{ urlPrefix/* : String*/: undefined},
   "private var",{ onCompleteCallbacks/* : Array*//*<Function>*/ :function(){return( []);}},
 
-  "public function DynamicClassLoader",function $DynamicClassLoader() {this[$super]();
-    joo.classLoader = this;
+  "public function DynamicClassLoader",function $DynamicClassLoader() {this[$super]();this[$onCompleteCallbacks]=this[$onCompleteCallbacks]();this[$pendingDependencies]=this[$pendingDependencies]();this[$pendingClassState]=this[$pendingClassState]();
+    this.debug = joo.classLoader.debug;
+    this.urlPrefix = joo.classLoader['urlPrefix'];
+    joo.classLoader = joo.DynamicClassLoader.INSTANCE = this;
+    if (!this.urlPrefix) {
+      this.urlPrefix = this[$determineUrlPrefix]();
+    }
   },
 
   /**
@@ -49,9 +53,8 @@ joo.classLoader.prepare(/*
    */
   "private var",{ pendingClassState/* : Object*//*<String,Boolean>*/ :function(){return( {});}},
 
-  "override protected function createClassDeclaration",function createClassDeclaration(packageDef/* : String*/, directives/* : Array*/, classDef/* : String*/, memberFactory/* : Function*/,
-                                                     publicStaticMethodNames/* : Array*/, dependencies/* : Array*/)/*:SystemClassDeclaration*/ {
-    var cd/* : ClassDeclaration*/ = this[$createClassDeclaration](packageDef, directives, classDef, memberFactory, publicStaticMethodNames, dependencies)/*as ClassDeclaration*/;
+  "override public function prepare",function prepare(packageDef/*:String*/, classDef/*:String*/, memberFactory/*:Function*/, publicStaticMethodNames/*:Array*/, dependencies/*:Array*/)/*:SystemClassDeclaration*/ {
+    var cd/*:SystemClassDeclaration*/ = this[$prepare](packageDef, classDef, memberFactory, publicStaticMethodNames, dependencies);
     this[$pendingDependencies].push(cd);
     if (delete this[$pendingClassState][cd.fullClassName]) {
       if (this.debug) {
@@ -70,7 +73,7 @@ joo.classLoader.prepare(/*
   "override protected function doCompleteCallbacks",function doCompleteCallbacks(onCompleteCallbacks/* : Array*//*Function*/)/*:void*/ {
     this[$onCompleteCallbacks] = [];
     // "invoke later":
-    joo.window.setTimeout(function joo$DynamicClassLoader$73_23()/* : void*/ {
+    joo.getQualifiedObject("setTimeout")(function joo$DynamicClassLoader$76_38()/* : void*/ {
       this.completeAll();
       this[$internalDoCompleteCallbacks](onCompleteCallbacks);
     }.bind(this), 0);
@@ -82,7 +85,7 @@ joo.classLoader.prepare(/*
 
   // separate factory function to move the anonymous function out of the caller's scope:
   "private function createClassLoadErrorHandler",function createClassLoadErrorHandler(fullClassName/*:String*/, url/*:String*/)/*:Function*/ {
-    return function joo$DynamicClassLoader$85_12()/*:void*/ {
+    return function joo$DynamicClassLoader$88_12()/*:void*/ {
       this.classLoadErrorHandler(fullClassName, url);
     }.bind(this);
   },
@@ -110,10 +113,6 @@ joo.classLoader.prepare(/*
 
   "private function load",function load(fullClassName/* : String*/)/* : void*/ {
     if (!this.getClassDeclaration(fullClassName)) {
-      if (joo.window.joo__loadClasses) {
-        joo.window.joo__loadClasses(fullClassName);
-        return;
-      }
       if (this[$onCompleteCallbacks].length==0) {
         if (this[$pendingClassState][fullClassName]===undefined) {
           // we are not yet in completion phase: just add to pending classes:
@@ -126,9 +125,9 @@ joo.classLoader.prepare(/*
         if (this[$pendingClassState][fullClassName]!==true) {
           // trigger loading:
           this[$pendingClassState][fullClassName] = true;
-          var url/* : String*/ = this.getUri(fullClassName);
+          var url/*:String*/ = this.getUri(fullClassName);
           if (this.debug) {
-            trace("triggering to load class "+fullClassName+" from URL "+url+".");
+            trace("triggering to load class " + fullClassName + " from URL " + url + ".");
           }
           var script/*:Object*/ = this.loadScript(url);
           // script.onerror does not work in IE, but since this feature is for debugging only, we don't mind:
@@ -139,19 +138,25 @@ joo.classLoader.prepare(/*
   },
 
   "protected function getBaseUri",function getBaseUri()/* : String*/ {
-    if (typeof this.urlPrefix != "string") {
-      this.urlPrefix = this[$determineUrlPrefix]();
-    }
     return this.urlPrefix;
   },
 
   "private function determineUrlPrefix",function determineUrlPrefix()/*:String*/ {/*
     const*/var RUNTIME_URL_PATTERN/*:RegExp*/ = /^(.*)\bjangaroo-runtime[^.]*\.js$/;
-    var scripts/*:Array*/ = joo.window.document.getElementsByTagName("SCRIPT");
-    for (var i/*:int*/ =0; i<scripts.length; ++i) {
-      var match/*:Array*/ = RUNTIME_URL_PATTERN.exec(scripts[i].src);
-      if (match) {
-        return match[1] + "classes/";
+    var document/*:**/ = joo.getQualifiedObject("document");
+    if (document) {
+      var scripts/*:Array*/ = document["getElementsByTagName"]("SCRIPT");
+      for (var i/*:int*/ =0; i<scripts.length; ++i) {
+        var match/*:Array*/ = RUNTIME_URL_PATTERN.exec(scripts[i].src);
+        if (match) {
+          var code/*:String*/ = scripts[i]["innerHTML"];
+          if (code && code.length) {
+            joo.getQualifiedObject("setTimeout")(function joo$DynamicClassLoader$154_46()/* : void*/ {
+              joo.getQualifiedObject("eval")(code);
+            }, 0);
+          }
+          return match[1] + "classes/";
+        }
       }
     }
     if (this.debug) {

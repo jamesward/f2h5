@@ -1,10 +1,9 @@
-joo.classLoader.prepare("package flash.display", [
+joo.classLoader.prepare("package flash.display",/* {
+import flash.events.Event
+import flash.events.TimerEvent
+import flash.utils.Timer
 
-"import js.Element",
-"import flash.display.DisplayObjectContainer",
-"import flash.events.TimerEvent",
-"import flash.utils.Timer",
-"import flash.events.Event",""],
+import js.Element*/
 
 /**
  * The Stage class represents the main drawing area. The Stage represents the entire area where Flash� content is shown.
@@ -43,16 +42,22 @@ joo.classLoader.prepare("package flash.display", [
  *   <li>y
  * </ul>
  */
-"public class Stage extends flash.display.DisplayObjectContainer",function($$private){with($$private)return[function(){joo.classLoader.init(flash.events.Event,flash.events.TimerEvent);}, 
+"public class Stage extends flash.display.DisplayObjectContainer",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$x=$$l+'x',$y=$$l+'y',$createElement=$$l+'createElement',$enterFrame=$$l+'enterFrame',$id=$$l+'id',$_frameRate=$$l+'_frameRate',$frameTimer=$$l+'frameTimer';return[function(){joo.classLoader.init(flash.events.Event,flash.events.TimerEvent,flash.utils.Timer);}, 
 
-  "internal static var",{ instance/* : Stage*/: undefined},
+  "private static var",{ instance/* : Stage*/: undefined},
+  "public static function getInstance",function getInstance(id/*:String = "stage"*/)/* : Stage*/ {if(arguments.length<1){id = "stage";}
+    if (!$$private.instance) {
+      new flash.display.Stage(id);
+    }
+    return $$private.instance;
+  },
 
   "public function Stage",function $Stage(id/* : String*/) {
     this[$id] = id;
-    flash.display.Stage.instance = this;
+    $$private.instance = this;
     this[$super]();
     this[$frameTimer] = new flash.utils.Timer(1000/this[$_frameRate]);
-    this[$frameTimer].addEventListener(flash.events.TimerEvent.TIMER, this[$enterFrame]);
+    this[$frameTimer].addEventListener(flash.events.TimerEvent.TIMER, $$bound(this,$enterFrame));
     this[$frameTimer].start();
   },
 
@@ -72,7 +77,7 @@ joo.classLoader.prepare("package flash.display", [
   },
 
   "public function set stageHeight",function set$stageHeight (value/* : int*/)/* : void*/ {
-    this.getElement().offsetHeight = value;
+    this.getElement()['offsetHeight'] = value; // TODO: setter for offsetHeight!
   },
 
   /// Specifies the current width, in pixels, of the Stage.
@@ -81,7 +86,7 @@ joo.classLoader.prepare("package flash.display", [
   },
 
   "public function set stageWidth",function set$stageWidth (value/* : int*/)/* : void*/ {
-    this.getElement().offsetWidth = value;    
+    this.getElement()['offsetWidth'] = value; // TODO: setter for offsetWidth
   },
 
   "override protected function createElement",function createElement()/*:Element*/ {
@@ -99,7 +104,7 @@ joo.classLoader.prepare("package flash.display", [
     return element;
   },
 
-  "private bound function enterFrame",function enterFrame()/* : void*/ {
+  "private function enterFrame",function enterFrame()/* : void*/ {
     this.dispatchEvent(new flash.events.Event(flash.events.Event.ENTER_FRAME, false, false));
   },
 
@@ -138,5 +143,5 @@ joo.classLoader.prepare("package flash.display", [
   "private var",{ id/* : String*/: undefined},
   "private var",{ _frameRate/* : Number*/ : 30},
   "private var",{ frameTimer/* : Timer*/: undefined},
-];},[],["flash.display.DisplayObjectContainer","flash.utils.Timer","flash.events.TimerEvent","flash.events.Event"]
+];},["getInstance"],["flash.display.DisplayObjectContainer","flash.utils.Timer","flash.events.TimerEvent","flash.events.Event"]
 );

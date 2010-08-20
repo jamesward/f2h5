@@ -1,13 +1,12 @@
 joo.classLoader.prepare("package flash.display",/* {
-
-import js.HTMLElement
-import js.HTMLCanvasElement
-import js.CanvasRenderingContext2D
-import js.ImageData
+import flash.geom.ColorTransform
 import flash.geom.Matrix
-import flash.display.IBitmapDrawable
 import flash.geom.Rectangle
-import flash.geom.ColorTransform*/
+
+import js.CanvasRenderingContext2D
+import js.HTMLCanvasElement
+import js.HTMLElement
+import js.ImageData*/
 
 "public class BitmapData implements flash.display.IBitmapDrawable",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$_transparent=$$l+'_transparent',$_width=$$l+'_width',$_height=$$l+'_height',$context=$$l+'context';return[function(){joo.classLoader.init(flash.geom.Rectangle);}, 
 

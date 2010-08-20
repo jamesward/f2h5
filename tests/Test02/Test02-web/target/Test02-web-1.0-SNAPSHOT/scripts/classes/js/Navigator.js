@@ -1,6 +1,6 @@
-joo.classLoader.prepare("package js", [""],
+joo.classLoader.prepare("package js",/* {*/
 
-"public class Navigator",function($$private){with($$private)return[ 
+"public class Navigator",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
 
   /**
    * String passed by browser as user-agent header. (ie: Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1))

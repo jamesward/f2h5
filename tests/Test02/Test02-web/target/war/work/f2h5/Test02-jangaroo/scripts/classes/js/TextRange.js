@@ -1,11 +1,11 @@
-joo.classLoader.prepare("package js", [""],
+joo.classLoader.prepare("package js",/* {*/
 
 /**
  * Documentation copied from http://msdn.microsoft.com/en-us/library/ms535872%28VS.85%29.aspx
  *
  * <p>There is no public standard that applies to this interface.
  */
-"public interface TextRange",function($$private){with($$private)return[ /*
+"public interface TextRange",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ /*
 
 
   /**

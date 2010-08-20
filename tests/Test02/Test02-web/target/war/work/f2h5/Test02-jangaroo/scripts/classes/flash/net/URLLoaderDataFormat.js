@@ -1,9 +1,9 @@
-joo.classLoader.prepare("package flash.net", [""],
+joo.classLoader.prepare("package flash.net",/* {*/
 
 /**
  * The URLLoaderDataFormat class provides values that specify how downloaded data is received. 
  */
-"public class URLLoaderDataFormat",function($$private){with($$private)return[ 
+"public class URLLoaderDataFormat",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[ 
   /**
    * Specifies that downloaded data is received as raw binary data.
    */

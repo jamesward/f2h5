@@ -1,5 +1,6 @@
 package joo.flash {
 
+import flash.display.DisplayObject;
 import flash.display.Stage;
 import joo.classLoader;
 import joo.DynamicClassLoader;

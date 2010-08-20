@@ -1,10 +1,10 @@
-joo.classLoader.prepare("package flash.geom", [""],
+joo.classLoader.prepare("package flash.geom",/* {*/
 
 /**
  * The Matrix class represents a transformation matrix that determines how to map points from one coordinate
  * space to another.
  */
-"public class Matrix",function($$private){with($$private)return[ 
+"public class Matrix",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(flash.geom.Point);}, 
 
   /**
    * Creates a new two-dimensional Matrix object.

@@ -27,73 +27,21 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.salesforce.objects
 {
-	import mx.utils.ObjectProxy;
-	import com.salesforce.XmlWriter;
-	import flash.utils.*;
-
-	[Bindable]
-	public class ProcessWorkitemRequest extends ObjectProxy
-  	{
-  		
-  		public var _action:String;
-  		public var nextOwnerId:String;
-  		public var comment:String;
-  		public var workitemId:String;
-  		
-  		public static var APPROVE_ACTION:String = "Approve";
-  		public static var REJECT_ACTION:String = "Reject";
-  		public static var REMOVE_ACTION:String = "Remove";
-  		
-    	public function ProcessWorkitemRequest():void { 
+  /**
+   * Not implemented at this time
+   * 
+   * @see http://www.salesforce.com/us/developer/docs/api/Content/sforce_api_calls_process.htm#processworkitemrequest Apex Developer Guide
+   * 
+   * @author rhess
+   * 
+   */	
+  public class ProcessWorkitemRequest
+  {
+    public function ProcessWorkitemRequest(o:Object):void { 
+    throw('not implemented');
     
-    	}
-    	public function get action():String {
-    		return _action;
-    	}
-    	public function set action(value:String):void {
-    		if (value != APPROVE_ACTION && value != REJECT_ACTION && value != REMOVE_ACTION) {
-    			throw("You must specify 'Approve', 'Reject' or 'Remove' for the action parameter.");
-    		} else {
-    			_action = value;
-    		}
-    	}
-    	
-    	
-    	
-  		/**
-		 * @private
-		 * 
-		 */		
-		public function toXml(sobjectNs:String, name:String, writer:XmlWriter):void
-  		{
-    		writer.writeStartElement(name, sobjectNs);
-    		writer.writeXsiType('ProcessWorkitemRequest');  // need to apply our own xsi type
-
-    		var classInfo:XML = describeType(this); // used to walk thru the variable names of this class
-    		
-    		for each (var v:XML in classInfo..accessor) {
-         		var propName:String = v.@name;
-           		var propVal:Object = this[propName];
-           		
-           		if (!propVal || propName == "uid") continue;			// skip empty properties
-        		if (propVal is Array) {
-            		for (var propArrayVal:String in propVal) {
-                		writer.writeNameValueNode( propName, propVal[propArrayVal]);
-            		}
-        		} else {
-        			writer.writeNameValueNode( propName , propVal);
-        		}
-        		
-    		}
-    		
-    		writer.writeEndElement(name, sobjectNs);
-  		}	
-  	
-    	
-    	
-    	
-    	
-  	}
+    }
+  }
 }
 
 

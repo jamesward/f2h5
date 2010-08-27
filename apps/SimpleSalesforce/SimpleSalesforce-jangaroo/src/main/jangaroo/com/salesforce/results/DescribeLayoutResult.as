@@ -29,6 +29,7 @@ package com.salesforce.results
 {
 	import mx.utils.ObjectProxy;
 	import mx.collections.ArrayCollection;
+	import mx.controls.List;
 	import mx.events.IndexChangedEvent;
 
 	import com.salesforce.results.*;
@@ -62,8 +63,7 @@ package com.salesforce.results
 		public var recordTypeMappings:ArrayCollection;
 		private var i:int;
 		
-		//TG: Changed to allow obj = null when we load this object serialized from disk
-		public function DescribeLayoutResult(obj:ObjectProxy=null) {
+		public function DescribeLayoutResult(obj:ObjectProxy) {
 			for (var key:String in obj) {
 				var val:Object = obj[key];	
 				if (key == "layouts") {

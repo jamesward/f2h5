@@ -2,6 +2,7 @@ package
 {
 
 import flash.display.Sprite;
+import flash.text.TextField;
 
 import com.salesforce.Connection;
 
@@ -18,6 +19,7 @@ public class SimpleSalesforce extends Sprite
   public function SimpleSalesforce()
   {
     con = new Connection();
+    con.serverUrl = "https://localhost/services/Soap/u/9.0";
 
     var lr:LoginRequest = new LoginRequest();
     lr.username = "dev@mavericks.demo";
@@ -29,12 +31,18 @@ public class SimpleSalesforce extends Sprite
 
   private function loginSuccess(result:LoginResult):void
   {
-    con.query("SELECT Id, LastName FROM Contact", new AsyncResponder(querySuccess));
+    con.query("SELECT Id, FirstName, LastName FROM Contact", new AsyncResponder(querySuccess));
   }
 
   private function querySuccess(result:QueryResult):void
   {
-    trace("I found " + result.size + " records!");
+    for (var i:int = 0; i < result.size; i++)
+    {
+      var tf:TextField = new TextField();
+      tf.y = i * 15;
+      tf.text = result.records[i].FirstName + " " + result.records[i].LastName;
+      addChild(tf);
+    }
   }
 }
 }

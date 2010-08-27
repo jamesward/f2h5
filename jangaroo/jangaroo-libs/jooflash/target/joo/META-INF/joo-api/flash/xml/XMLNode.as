@@ -1,6 +1,5 @@
 package flash.xml {
 public class XMLNode {
-  public function XMLNode() {
-  }
+  public native function XMLNode();
 }
 }

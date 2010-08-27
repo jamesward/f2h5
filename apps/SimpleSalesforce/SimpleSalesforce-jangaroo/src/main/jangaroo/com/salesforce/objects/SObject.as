@@ -27,16 +27,13 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.salesforce.objects
 {
+	import mx.collections.ArrayCollection;
+	import mx.utils.ObjectProxy;
 	import com.salesforce.XmlWriter;
 	import com.salesforce.results.*;
-	
-	import flash.net.registerClassAlias;
+	import flash.events.EventDispatcher;
+	import mx.binding.utils.BindingUtils;
 	import flash.utils.ByteArray;
-	
-	import mx.collections.ArrayCollection;
-	import mx.core.IUID;
-	import mx.utils.ObjectProxy;
-	import mx.utils.UIDUtil;
 	
 	/**
 	 * The basic object that holds all salesforce.com record data.  Created by the toolkit as a response 
@@ -53,23 +50,10 @@ package com.salesforce.objects
 	 * @author  Dave Carroll saleforce.com
 	 * 
 	 */	
-
-	public dynamic class SObject extends ObjectProxy implements IUID
-	{	  
-	  override public function get uid():String
-	  {
-	    if (this.Id != undefined)
-	    {
-	      return this.Id;
-	    }
-	    return UIDUtil.createUID(); 
-	  }
-	  
-	  override public function set uid(uid:String):void
-	  {
-	    this.Id = uid;
-	  }
-	  
+    //[Bindable]
+	public dynamic class SObject extends ObjectProxy
+	{
+	
 		/**
 		 * Generic constructor for a normal SObject, used by an application to create an empty object
 		 * or passed to the application with data filled in from an API request.
@@ -77,7 +61,7 @@ package com.salesforce.objects
 		 * When the obj is a String, the object is being created from code (new SObject("Account")).
 		 * 
 		 */ 	
-		public function SObject(obj:Object=null) {
+		public function SObject(obj:Object) {
 			if (obj is String) {
 				this.type = obj as String;
 			} else if (obj is ObjectProxy) {
@@ -115,20 +99,9 @@ package com.salesforce.objects
     		writer.writeEndElement(name, sobjectNs);
   		}
   		
-  		public function getFields():Array
-  		{
-  			var fieldArray:Array = new Array();
-  			for (var f:String in this) 
-  			{
-  				fieldArray.push(f);
-  			}
-  			return fieldArray;
-  		}
-  		
 		private function writeValue(sobjectNs:String, writer:XmlWriter, name:String, val:Object):void
   		{
-    		if (val == null)
-    		{
+    		if (val == null) {
         		writer.writeNameValueNode("fieldsToNull", name);
         		return;
     		}
@@ -146,12 +119,14 @@ package com.salesforce.objects
 			for (var i:String in obj) {
 				var key:String = i;
 				var val:Object = obj[i];
-				if (i != "xsi:type") {
-					if (i.toLowerCase() == "id") {
+                                if (i == undefined || i == "object")  {
+                                          continue;
+                                } else if (i != "xsi:type") {
+					if (i == "Id") {
 						if (val is ArrayCollection) {
-							this["Id"] = (val as ArrayCollection)[0];
+							this[i] = (val as ArrayCollection)[0];
 						} else {
-							this["Id"] = val;
+							this[i] = val;
 						}
 					} else if (val is ObjectProxy) {
 						//This could be a parent record (SObject) or
@@ -215,14 +190,5 @@ package com.salesforce.objects
 			return Base64.decode( this[field] );
 		}
 		
-		//TG: added so we can clone SObjects
-		public function clone():SObject
-		{
-			registerClassAlias("SObjectAlias", SObject);
-			var bytes : ByteArray = new ByteArray();
-			bytes.writeObject( this );
-			bytes.position = 0;
-			return bytes.readObject() as SObject;
-		}
 	}	
 }

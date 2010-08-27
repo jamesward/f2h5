@@ -110,5 +110,6 @@ public class URLLoader extends flash.events.EventDispatcher {
    * @see Working with external data 
    */
   public native function load(request : URLRequest) : void;
+
 }
 }

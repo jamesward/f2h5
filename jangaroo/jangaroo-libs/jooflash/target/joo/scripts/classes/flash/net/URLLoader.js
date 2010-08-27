@@ -123,13 +123,25 @@ import flash.net.URLRequest*/
     }else throw e;}
     this[$xmlHttpRequest].onreadystatechange =$$bound( this,$readyStateChanged);
     this[$xmlHttpRequest].open(request.method, request.url, true);
-    this[$xmlHttpRequest].send(null);
+    for/* each*/ (var $1 in request.requestHeaders)
+    {var h/*:URLRequestHeader*/ = request.requestHeaders[$1];
+      this[$xmlHttpRequest].setRequestHeader(h.name, h.value);
+    }
+    this[$xmlHttpRequest].setRequestHeader("Content-Type", request.contentType);
+    this[$xmlHttpRequest].send(request.data);
   },
 
   "private function readyStateChanged",function readyStateChanged()/* : void*/ {
     trace("URLLoader: "+this[$xmlHttpRequest].readyState);
-    if (this[$xmlHttpRequest].readyState==js.XMLHttpRequest.DONE) {
-      this.data = this[$xmlHttpRequest].responseText;
+    if (this[$xmlHttpRequest].readyState==4) {
+      if (this.dataFormat == flash.net.URLLoaderDataFormat.TEXT)
+      {
+        this.data = this[$xmlHttpRequest].responseText;
+      }
+      else if (this.dataFormat == "xml")
+      {
+        this.data = this[$xmlHttpRequest].responseXML;
+      }
     }
     var event/* : flash.events.Event*/ = this[$createEvent]();
     if (event) {
@@ -139,12 +151,13 @@ import flash.net.URLRequest*/
 
   "private function createEvent",function createEvent()/* : flash.events.Event*/ {
     switch (this[$xmlHttpRequest].readyState) {
-      case js.XMLHttpRequest.OPENED: return new flash.events.Event(flash.events.Event.OPEN, false, false);
-      case js.XMLHttpRequest.DONE: return new flash.events.Event(flash.events.Event.COMPLETE, false, false);
+      case 1: return new flash.events.Event(flash.events.Event.OPEN, false, false);
+      case 4: return new flash.events.Event(flash.events.Event.COMPLETE, false, false);
     }
     return null;
     
   },
   "private var",{ xmlHttpRequest/* : XMLHttpRequest*/: undefined},
+
 ];},[],["flash.events.EventDispatcher","flash.net.URLLoaderDataFormat","js.XMLHttpRequest","Error","flash.events.Event"]
 );

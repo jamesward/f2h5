@@ -27,7 +27,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.salesforce.objects
 {
-	import mx.rpc.IResponder;
+	import com.salesforce.AsyncResponder;
 	
 	public class LoginRequest
 	{
@@ -35,7 +35,7 @@ package com.salesforce.objects
 		public var server_url:String;
 		public var username:String;
 		public var password:String;
-		public var callback: IResponder;
+		public var callback: AsyncResponder;
 		/**
 		 * Fill in the paramaters for a local login or scontrol session login, required are
 		 * server url + session id 

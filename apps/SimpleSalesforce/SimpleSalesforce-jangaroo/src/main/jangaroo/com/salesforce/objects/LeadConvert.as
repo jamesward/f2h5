@@ -59,6 +59,8 @@ package com.salesforce.objects
     		writer.writeStartElement(name, sobjectNs);
     		//writer.writeXsiType('SingleEmailMessage');  // need to apply our own xsi type
 
+                /*
+                // E4X not supported by Jangaroo
     		var classInfo:XML = describeType(this); // used to walk thru the variable names of this class
     		
     		for each (var v:XML in classInfo..variable) {
@@ -75,6 +77,7 @@ package com.salesforce.objects
         		}
         		
     		}
+                */
     		
     		writer.writeEndElement(name, sobjectNs);
   		}

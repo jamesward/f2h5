@@ -1,3 +1,12 @@
+// class QName
+joo.classLoader.prepare("package",
+
+
+"public final class QName",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+];},[],[]
+);
 // class joo.flash.Run
 joo.classLoader.prepare("package joo.flash",
 
@@ -444,6 +453,313 @@ joo.classLoader.prepare("package flash.text",
 
 ];},[],[]
 );
+// class flash.utils.ByteArray
+joo.classLoader.prepare("package flash.utils",
+
+
+
+"public class ByteArray extends Array",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[function(){joo.classLoader.init(flash.net.ObjectEncoding);},
+
+"public var",{bytesAvailable: undefined},
+"public static var",{defaultObjectEncoding:function(){return(flash.net.ObjectEncoding.AMF3);}},
+"public var",{endian: undefined},
+"public var",{length: undefined},
+"public var",{objectEncoding: undefined},
+"public var",{position:0},
+
+"public function clear",function()
+{
+this.splice(0,this.length);
+},
+
+"public function compress",function(algorithm)
+{
+
+},
+
+"public function deflate",function()
+{
+
+},
+
+"public function inflate",function()
+{
+
+},
+
+"public function uncompress",function(algorithm)
+{
+
+},
+
+
+"public function readBoolean",function()
+{
+return(this.readByte())?true:false;
+},
+
+
+"public function readByte",function()
+{
+return this.readUnsignedByte()-128;
+},
+
+"public function readBytes",function(bytes,offset,length)
+{if(arguments.length<3){if(arguments.length<2){offset=0;}length=0;}
+if(length==0)
+{
+length=this.length-this.position;
+}
+bytes.concat(this.slice(offset,offset+length));
+},
+
+"public function readDouble",function()
+{
+var b1=this.readByte();
+var b2=this.readByte();
+var b3=this.readByte();
+var b4=this.readByte();
+var b5=this.readByte();
+var b6=this.readByte();
+var b7=this.readByte();
+var b8=this.readByte();
+
+var sign=1-((b1>>7)<<1);
+var exp=(((b1<<4)&0x7FF)|(b2>>4))-1023;
+
+var sig=(((b2&0xF)<<16)|(b3<<8)|b4).toString(2)+
+((b5>>7)?'1':'0')+
+(((b5&0x7F)<<24)|(b6<<16)|(b7<<8)|b8).toString(2);
+
+sig=parseInt(sig,2);
+
+if(sig==0&&exp==-1023)
+{
+return 0.0;
+}
+
+return sign*(1.0+Math.pow(2,-52)*sig)*Math.pow(2,exp);
+},
+
+"public function readFloat",function()
+{
+var b1=this.readByte();
+var b2=this.readByte();
+var b3=this.readByte();
+var b4=this.readByte();
+
+var sign=1-((b1>>7)<<1);
+var exp=(((b1<<1)&0xFF)|(b2>>7))-127;
+var sig=((b2&0x7F)<<16)|(b3<<8)|b4;
+if(sig==0&&exp==-127)
+{
+return 0.0;
+}
+
+return sign*(1+Math.pow(2,-23)*sig)*Math.pow(2,exp);
+},
+
+"public function readInt",function()
+{
+var x=(this.readByte()<<24)|
+(this.readByte()<<16)|
+(this.readByte()<<8)|
+(this.readByte());
+
+if(x>int.MAX_VALUE)
+{
+return x-(int.MAX_VALUE*2);
+}
+
+return x;
+},
+
+"public function readMultiByte",function(length,charSet)
+{
+
+return"";
+},
+
+"public function readObject",function()
+{
+
+return{};
+},
+
+"public function readShort",function()
+{
+var x=(this.readByte()<<8)|
+(this.readByte());
+return(x>=32768)?x-65536:x;
+},
+
+"public function readUnsignedByte",function()
+{
+return this[this.position++]&0xFF;
+},
+
+"public function readUnsignedInt",function()
+{
+return(this.readByte()<<24)|
+(this.readByte()<<16)|
+(this.readByte()<<8)|
+(this.readByte());
+},
+
+"public function readUnsignedShort",function()
+{
+return(this.readByte()<<8)|
+(this.readByte());
+},
+
+"public function readUTF",function()
+{
+return this.readUTFBytes(this.readUnsignedShort());
+},
+
+"public function readUTFBytes",function(length)
+{
+var str="";
+
+while(length>0)
+{
+str+=String.fromCharCode(this.readUnsignedByte());
+length--;
+}
+return str;
+},
+
+
+"public function writeBoolean",function(value)
+{
+if(value)
+{
+this.writeByte(1);
+}
+else
+{
+this.writeByte(0);
+}
+},
+
+"public function writeByte",function(value)
+{
+this.push(value&0xff);
+this.position++;
+},
+
+"public function writeBytes",function(bytes,offset,length)
+{if(arguments.length<3){if(arguments.length<2){offset=0;}length=0;}
+
+},
+
+"public function writeDouble",function(value)
+{
+
+},
+
+"public function writeFloat",function(value)
+{
+
+},
+
+"public function writeInt",function(value)
+{
+var b1=(value<<24);
+var b2=(value<<16);
+var b3=(value<<8);
+var b4=(value);
+
+this.writeByte(b1);
+this.writeByte(b2);
+this.writeByte(b3);
+this.writeByte(b4);
+},
+
+"public function writeMultiByte",function(value,charSet)
+{
+
+},
+
+"public function writeObject",function(object)
+{
+
+},
+
+"public function writeShort",function(value)
+{
+
+},
+
+"public function writeUnsignedInt",function(value)
+{
+var b1=(value<<24);
+var b2=(value<<16);
+var b3=(value<<8);
+var b4=(value);
+
+this.writeByte(b1);
+this.writeByte(b2);
+this.writeByte(b3);
+this.writeByte(b4);
+},
+
+"public function writeUTF",function(value)
+{
+var length=value.length;
+
+var b1=(value<<8);
+var b2=(value);
+
+this.writeByte(b1);
+this.writeByte(b2);
+
+this.writeUTFBytes(value);
+},
+
+"public function writeUTFBytes",function(value)
+{
+for(var i=0;i<value.length;i++)
+{
+this.writeByte(value.charCodeAt(i));
+}
+},
+
+];},[],["Array","flash.net.ObjectEncoding","Math","String"]
+);
+// class flash.utils.IDataOutput
+joo.classLoader.prepare("package flash.utils",
+
+"public interface IDataOutput",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{endian: undefined},
+"public var",{objectEncoding: undefined},
+
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+
+];},[],[]
+);
+// class flash.utils.Endian
+joo.classLoader.prepare("package flash.utils",
+
+"public final class Endian",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public static const",{BIG_ENDIAN:"bigEndian"},
+"public static const",{LITTLE_ENDIAN:"littleEndian"},
+];},[],[]
+);
 // class flash.utils.Dictionary
 joo.classLoader.prepare("package flash.utils",
 
@@ -451,6 +767,20 @@ joo.classLoader.prepare("package flash.utils",
 
 "public function Dictionary",function(weak){if(arguments.length<1){weak=false;}this[$super]();
 },
+];},[],[]
+
+);
+// class flash.utils.IExternalizable
+joo.classLoader.prepare("package flash.utils",
+
+
+"public interface IExternalizable",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+,
+
+,
+
 ];},[],[]
 
 );
@@ -614,6 +944,119 @@ this.dispatchEvent(new flash.events.TimerEvent(flash.events.TimerEvent.TIMER_COM
 
 "private var",{timer:null},
 ];},[],["flash.events.EventDispatcher","flash.events.TimerEvent"]
+);
+// class flash.utils.Proxy
+joo.classLoader.prepare("package flash.utils",
+
+
+"public class Proxy",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"protected function callProperty",function(name)
+{var rest=Array.prototype.slice.call(arguments,1);
+
+},
+
+"protected function deleteProperty",function(name)
+{
+return false;
+},
+
+"protected function getDescendants",function(name)
+{
+
+},
+
+"protected function getProperty",function(name)
+{
+
+},
+
+"protected function hasProperty",function(name)
+{
+return false;
+},
+
+"protected function isAttribute",function(name)
+{
+return false;
+},
+
+"protected function nextName",function(index)
+{
+return"";
+},
+
+"protected function nextNameIndex",function(index)
+{
+return-1;
+},
+
+"protected function nextValue",function(index)
+{
+
+},
+
+"protected function setProperty",function(name,value)
+{
+
+},
+
+];},[],[]
+);
+// class flash.utils.IDataInput
+joo.classLoader.prepare("package flash.utils",
+
+
+"public interface IDataInput",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{bytesAvailable: undefined},
+"public var",{endian: undefined},
+"public var",{objectEncoding: undefined},
+
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+,
+];},[],[]
+);
+// class flash.xml.XMLDocument
+joo.classLoader.prepare("package flash.xml",
+
+"public class XMLDocument extends flash.xml.XMLNode",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+];},[],["flash.xml.XMLNode"]
+);
+// class flash.xml.XMLNodeType
+joo.classLoader.prepare("package flash.xml",
+
+
+"public final class XMLNodeType",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public static const",{ELEMENT_NODE:1},
+"public static const",{TEXT_NODE:3},
+
+];},[],[]
+);
+// class flash.xml.XMLNode
+joo.classLoader.prepare("package flash.xml",
+"public class XMLNode",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+"public function XMLNode",function(){this[$super]();
+},
+];},[],[]
 );
 // class flash.display.BitmapData
 joo.classLoader.prepare("package flash.display",
@@ -889,6 +1332,18 @@ joo.classLoader.prepare("package flash.display",
 "public interface IBitmapDrawable",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
 
 ];},[],[]
+);
+// class flash.display.Loader
+joo.classLoader.prepare("package flash.display",
+
+
+"public class Loader extends flash.display.DisplayObjectContainer",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{content: undefined},
+"public var",{contentLoaderInfo: undefined},
+
+];},[],["flash.display.DisplayObjectContainer"]
 );
 // class flash.display.FrameLabel
 joo.classLoader.prepare("package flash.display",
@@ -1298,6 +1753,7 @@ return this[$_mouseY];
 
 "public var",{visible: undefined},
 
+"public var",{name: undefined},
 
 "public function DisplayObject",function(){
 this[$super]();
@@ -1978,6 +2434,51 @@ joo.classLoader.prepare("package flash.display",
 "public static const",{NEVER:"never"},
 
 ];},[],[]
+);
+// class flash.display.LoaderInfo
+joo.classLoader.prepare("package flash.display",
+
+
+
+
+
+
+
+
+
+
+"public class LoaderInfo extends flash.events.EventDispatcher",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{actionScriptVersion: undefined},
+"public var",{applicationDomain: undefined},
+"public var",{bytes: undefined},
+"public var",{bytesLoaded: undefined},
+"public var",{bytesTotal: undefined},
+"public var",{childAllowsParent: undefined},
+"public var",{content: undefined},
+"public var",{contentType: undefined},
+"public var",{frameRate: undefined},
+"public var",{height: undefined},
+"public var",{isURLInaccessible: undefined},
+"public var",{loader: undefined},
+"public var",{loaderURL: undefined},
+"public var",{parameters: undefined},
+"public var",{parentAllowsChild: undefined},
+"public var",{sameDomain: undefined},
+"public var",{sharedEvents: undefined},
+"public var",{swfVersion: undefined},
+"public var",{uncaughtErrorEvents: undefined},
+"public var",{url: undefined},
+"public var",{width: undefined},
+
+"public static function getLoaderInfoByDefinition",function(object)
+{
+return null;
+},
+
+];},["getLoaderInfoByDefinition"],["flash.events.EventDispatcher"]
+
 );
 // class flash.display.DisplayObjectContainer
 joo.classLoader.prepare("package flash.display",
@@ -3220,6 +3721,161 @@ joo.classLoader.prepare("package flash.filters",
 },
 ];},[],["flash.filters.BitmapFilter"]
 );
+// class flash.ui.Mouse
+joo.classLoader.prepare("package flash.ui",
+
+
+"public final class Mouse",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public static var",{cursor: undefined},
+"public static var",{supportsCursor: undefined},
+
+"public static function hide",function()
+{
+
+},
+
+"public static function show",function()
+{
+
+},
+];},["hide","show"],[]
+);
+// class flash.system.Capabilities
+joo.classLoader.prepare("package flash.system",
+
+
+"public final class Capabilities",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public static var",{avHardwareDisable: undefined},
+"public static var",{cpuArchitecture: undefined},
+"public static var",{hasAccessibility: undefined},
+"public static var",{hasAudio: undefined},
+"public static var",{hasAudioEncoder: undefined},
+"public static var",{hasEmbeddedVideo: undefined},
+"public static var",{hasIME: undefined},
+"public static var",{hasMP3: undefined},
+"public static var",{hasPrinting: undefined},
+"public static var",{hasScreenBroadcast: undefined},
+"public static var",{hasScreenPlayback: undefined},
+"public static var",{hasStreamingAudio: undefined},
+"public static var",{hasStreamingVideo: undefined},
+"public static var",{hasTLS: undefined},
+"public static var",{hasVideoEncoder: undefined},
+"public static var",{isDebugger: undefined},
+"public static var",{isEmbeddedInAcrobat: undefined},
+"public static var",{language: undefined},
+"public static var",{localFileReadDisable: undefined},
+"public static var",{manufacturer: undefined},
+"public static var",{maxLevelIDC: undefined},
+"public static var",{os: undefined},
+"public static var",{pixelAspectRatio: undefined},
+"public static var",{playerType: undefined},
+"public static var",{screenColor: undefined},
+"public static var",{screenDPI: undefined},
+"public static var",{screenResolutionX: undefined},
+"public static var",{screenResolutionY: undefined},
+"public static var",{serverString: undefined},
+"public static var",{supports32BitProcesses: undefined},
+"public static var",{supports64BitProcesses: undefined},
+"public static var",{touchscreenType: undefined},
+"public static var",{version: undefined},
+
+];},[],[]
+
+);
+// class flash.system.LoaderContext
+joo.classLoader.prepare("package flash.system",
+
+
+"public class LoaderContext",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{allowCodeImport: undefined},
+"public var",{applicationDomain:null},
+"public var",{checkPolicyFile:false},
+"public var",{securityDomain:null},
+
+"public function LoaderContext",function(checkPolicyFile,applicationDomain,securityDomain)
+{if(arguments.length<3){if(arguments.length<2){if(arguments.length<1){checkPolicyFile=false;}applicationDomain=null;}securityDomain=null;}this[$super]();
+
+},
+
+];},[],[]
+
+);
+// class flash.system.SecurityDomain
+joo.classLoader.prepare("package flash.system",
+
+
+"public class SecurityDomain",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public static var",{currentDomain: undefined},
+
+];},[],[]
+);
+// class flash.system.ApplicationDomain
+joo.classLoader.prepare("package flash.system",
+
+
+"public final class ApplicationDomain",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public static var",{currentDomain: undefined},
+"public var",{domainMemory: undefined},
+"public static var",{MIN_DOMAIN_MEMORY_LENGTH: undefined},
+"public var",{parentDomain: undefined},
+
+"public function getDefinition",function(name)
+{
+return{};
+},
+
+"public function hasDefinition",function(name)
+{
+return false;
+},
+
+];},[],[]
+);
+// class flash.system.Security
+joo.classLoader.prepare("package flash.system",
+
+
+"public class Security",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public static var",{exactSettings: undefined},
+"public static var",{sandboxType: undefined},
+
+"public static function allowDomain",function()
+{var domains=arguments;
+
+},
+
+"public static function allowInsecureDomain",function()
+{var domains=arguments;
+
+},
+
+"public static function loadPolicyFile",function(url)
+{
+
+},
+
+"public static function showSettings",function(panel)
+{if(arguments.length<1){panel="default";}
+
+},
+
+"public static const",{LOCAL_TRUSTED:"localTrusted"},
+"public static const",{LOCAL_WITH_FILE:"localWithFile"},
+"public static const",{LOCAL_WITH_NETWORK:"localWithNetwork"},
+"public static const",{REMOTE:"remote"},
+
+];},["allowDomain","allowInsecureDomain","loadPolicyFile","showSettings"],[]
+
+);
 // class flash.geom.Transform
 joo.classLoader.prepare("package flash.geom",
 
@@ -4135,6 +4791,26 @@ this.redOffset,this.greenOffset,this.blueOffset,this.alphaOffset].join(", ")+")]
 
 ];},[],["Array"]
 );
+// class flash.events.NetStatusEvent
+joo.classLoader.prepare("package flash.events",
+
+
+"public class NetStatusEvent extends flash.events.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{info: undefined},
+
+"public function NetStatusEvent",function(type,bubbles,cancelable,info)
+{if(arguments.length<4){if(arguments.length<3){if(arguments.length<2){bubbles=false;}cancelable=false;}info=null;}
+this[$super](type,bubbles,cancelable);
+this.info=info;
+},
+
+"public static const",{NET_STATUS:"netStatus"},
+
+];},[],["flash.events.Event"]
+
+);
 // class flash.events.MouseEvent
 joo.classLoader.prepare("package flash.events",
 
@@ -4226,6 +4902,64 @@ return this.formatToString("Event","type","bubbles","cancelable","eventPhase",
 "public function updateAfterEvent",function(){
 
 },
+];},[],["flash.events.Event"]
+);
+// class flash.events.ErrorEvent
+joo.classLoader.prepare("package flash.events",
+
+
+"public class ErrorEvent extends flash.events.TextEvent",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public var",{errorID: undefined},
+
+"public static const",{ERROR:"error"},
+];},[],["flash.events.TextEvent"]
+
+);
+// class flash.events.FocusEvent
+joo.classLoader.prepare("package flash.events",
+
+
+"public class FocusEvent extends flash.events.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{isRelatedObjectInaccessible: undefined},
+"public var",{keyCode: undefined},
+"public var",{relatedObject: undefined},
+"public var",{shiftKey: undefined},
+
+"public static const",{FOCUS_IN:"focusIn"},
+"public static const",{FOCUS_OUT:"focusOut"},
+"public static const",{KEY_FOCUS_CHANGE:"keyFocusChange"},
+"public static const",{MOUSE_FOCUS_CHANGE:"mouseFocusChange"},
+
+];},[],["flash.events.Event"]
+
+);
+// class flash.events.ContextMenuEvent
+joo.classLoader.prepare("package flash.events",
+
+
+"public class ContextMenuEvent extends flash.events.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{contextMenuOwner: undefined},
+
+"public var",{isMouseTargetInaccessible: undefined},
+
+"public var",{mouseTarget: undefined},
+
+"public function ContextMenuEvent",function(type,bubbles,cancelable,mouseTarget,contextMenuOwner)
+{if(arguments.length<5){if(arguments.length<4){if(arguments.length<3){if(arguments.length<2){bubbles=false;}cancelable=false;}mouseTarget=null;}contextMenuOwner=null;}
+this[$super](type,bubbles,cancelable);
+this.mouseTarget=mouseTarget;
+this.contextMenuOwner=contextMenuOwner;
+this.isMouseTargetInaccessible=this.isMouseTargetInaccessible;
+},
+
+"public static const",{MENU_ITEM_SELECT:"menuItemSelect"},
+"public static const",{MENU_SELECT:"menuSelect"},
+
 ];},[],["flash.events.Event"]
 );
 // class flash.events.EventDispatcher
@@ -4621,6 +5355,152 @@ return this.formatToString("TimerEvent","type","bubbles","cancelable");
 },
 ];},[],["flash.events.Event"]
 );
+// class flash.events.TextEvent
+joo.classLoader.prepare("package flash.events",
+
+
+"public class TextEvent extends flash.events.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{text: undefined},
+
+];},[],["flash.events.Event"]
+);
+// class flash.events.HTTPStatusEvent
+joo.classLoader.prepare("package flash.events",
+
+
+"public class HTTPStatusEvent extends flash.events.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{status: undefined},
+
+"public function HTTPStatusEvent",function(type,bubbles,cancelable,status)
+{if(arguments.length<4){if(arguments.length<3){if(arguments.length<2){bubbles=false;}cancelable=false;}status=0;}
+this[$super](type,bubbles,cancelable);
+this.status=status;
+},
+
+"public static const",{HTTP_STATUS:"httpStatus"},
+
+];},[],["flash.events.Event"]
+
+);
+// class flash.events.IOErrorEvent
+joo.classLoader.prepare("package flash.events",
+
+
+"public class IOErrorEvent extends flash.events.ErrorEvent",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public static const",{IO_ERROR:"ioError"},
+
+];},[],["flash.events.ErrorEvent"]
+
+);
+// class flash.events.SecurityErrorEvent
+joo.classLoader.prepare("package flash.events",
+
+
+"public class SecurityErrorEvent extends flash.events.ErrorEvent",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public static const",{SECURITY_ERROR:"securityError"},
+
+];},[],["flash.events.ErrorEvent"]
+);
+// class flash.events.ProgressEvent
+joo.classLoader.prepare("package flash.events",
+
+"public class ProgressEvent extends flash.events.Event",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public var",{bytesLoaded: undefined},
+"public var",{bytesTotal: undefined},
+
+"public static const",{PROGRESS:"progress"},
+"public static const",{SOCKET_DATA:"socketData"},
+];},[],["flash.events.Event"]
+);
+// class flash.events.AsyncErrorEvent
+joo.classLoader.prepare("package flash.events",
+
+
+"public class AsyncErrorEvent extends flash.events.ErrorEvent",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{error: undefined},
+
+"public function AsyncErrorEvent",function(type,bubbles,cancelable,text,error)
+{if(arguments.length<5){if(arguments.length<4){if(arguments.length<3){if(arguments.length<2){bubbles=false;}cancelable=false;}text="";}error=null;}
+this[$super](type,bubbles,cancelable);
+this.text=text;
+this.error=error;
+},
+
+"public static const",{ASYNC_ERROR:"asyncError"},
+
+];},[],["flash.events.ErrorEvent"]
+
+);
+// class flash.errors.IllegalOperationError
+joo.classLoader.prepare("package flash.errors",
+
+
+"public dynamic class IllegalOperationError extends Error",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+
+];},[],["Error"]
+);
+// class flash.net.NetConnection
+joo.classLoader.prepare("package flash.net",
+
+
+
+"public class NetConnection extends flash.events.EventDispatcher",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public var",{client: undefined},
+"public var",{connected: undefined},
+"public var",{connectedProxyType: undefined},
+"public static var",{defaultObjectEncoding: undefined},
+"public var",{farID: undefined},
+"public var",{farNonce: undefined},
+"public var",{maxPeerConnections: undefined},
+"public var",{nearID: undefined},
+"public var",{nearNonce: undefined},
+"public var",{objectEncoding: undefined},
+"public var",{protocol: undefined},
+"public var",{proxyType: undefined},
+"public var",{unconnectedPeerStreams: undefined},
+"public var",{uri: undefined},
+"public var",{usingTLS: undefined},
+
+"public function addHeader",function(operation,mustUnderstand,param)
+{if(arguments.length<3){if(arguments.length<2){mustUnderstand=false;}param=null;}
+
+},
+
+"public function call",function(command,responder)
+{var arguments=Array.prototype.slice.call(arguments,2);
+
+},
+
+"public function close",function()
+{
+
+},
+
+"public function connect",function(command)
+{var arguments=Array.prototype.slice.call(arguments,1);
+
+},
+
+
+
+];},[],["flash.events.EventDispatcher"]
+
+);
 // class flash.net.URLLoader
 joo.classLoader.prepare("package flash.net",
 
@@ -4747,13 +5627,25 @@ throw new Error("Your browser does not support XMLHttpRequest: "+e.message);
 }else throw e;}
 this[$xmlHttpRequest].onreadystatechange=$$bound(this,$readyStateChanged);
 this[$xmlHttpRequest].open(request.method,request.url,true);
-this[$xmlHttpRequest].send(null);
+for(var $1 in request.requestHeaders)
+{var h=request.requestHeaders[$1];
+this[$xmlHttpRequest].setRequestHeader(h.name,h.value);
+}
+this[$xmlHttpRequest].setRequestHeader("Content-Type",request.contentType);
+this[$xmlHttpRequest].send(request.data);
 },
 
 "private function readyStateChanged",function(){
 trace("URLLoader: "+this[$xmlHttpRequest].readyState);
-if(this[$xmlHttpRequest].readyState==js.XMLHttpRequest.DONE){
+if(this[$xmlHttpRequest].readyState==4){
+if(this.dataFormat==flash.net.URLLoaderDataFormat.TEXT)
+{
 this.data=this[$xmlHttpRequest].responseText;
+}
+else if(this.dataFormat=="xml")
+{
+this.data=this[$xmlHttpRequest].responseXML;
+}
 }
 var event=this[$createEvent]();
 if(event){
@@ -4763,13 +5655,14 @@ this.dispatchEvent(event);
 
 "private function createEvent",function(){
 switch(this[$xmlHttpRequest].readyState){
-case js.XMLHttpRequest.OPENED:return new flash.events.Event(flash.events.Event.OPEN,false,false);
-case js.XMLHttpRequest.DONE:return new flash.events.Event(flash.events.Event.COMPLETE,false,false);
+case 1:return new flash.events.Event(flash.events.Event.OPEN,false,false);
+case 4:return new flash.events.Event(flash.events.Event.COMPLETE,false,false);
 }
 return null;
 
 },
 "private var",{xmlHttpRequest: undefined},
+
 ];},[],["flash.events.EventDispatcher","flash.net.URLLoaderDataFormat","js.XMLHttpRequest","Error","flash.events.Event"]
 );
 // class flash.net.URLRequestHeader
@@ -4807,7 +5700,8 @@ joo.classLoader.prepare("package flash.net",
 
 
 "public function URLRequestHeader",function(name,value){if(arguments.length<2){if(arguments.length<1){name="";}value="";}this[$super]();
-
+this.name=name;
+this.value=value;
 },
 
 ];},[],[]
@@ -4881,7 +5775,7 @@ this.url=url;
 
 
 
-"public var",{contentType: undefined},
+"public var",{contentType:"application/x-www-form-urlencoded"},
 
 
 
@@ -4943,6 +5837,31 @@ this.url=url;
 
 "public var",{url: undefined},
 ];},[],["flash.net.URLRequestMethod"]
+);
+// class flash.net.ObjectEncoding
+joo.classLoader.prepare("package flash.net",
+
+
+"public final class ObjectEncoding",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+"public static const",{AMF0:0},
+"public static const",{AMF3:3},
+"public static const",{DEFAULT:3},
+];},[],[]
+);
+// class flash.net.Responder
+joo.classLoader.prepare("package flash.net",
+
+
+"public class Responder",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+"public function Responder",function(result,status)
+{if(arguments.length<2){status=null;}this[$super]();
+
+},
+
+];},[],[]
 );
 // class flash.net.URLLoaderDataFormat
 joo.classLoader.prepare("package flash.net",
@@ -5010,6 +5929,17 @@ return"";
 
 ];},[],[]
 );
+// class flash.net.registerClassAlias
+joo.classLoader.prepare("package flash.net",
+
+
+"public function registerClassAlias",function(aliasName,classObject)
+{
+
+
+},,[]
+
+);
 // class ArgumentError
 joo.classLoader.prepare("package",
 "public class ArgumentError extends Error",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
@@ -5020,4 +5950,21 @@ this.message="Error #"+id+": Parameter "+msg+" must have a legal value.";
 },
 
 ];},[],["Error"]
+);
+// class XML
+joo.classLoader.prepare("package",
+
+
+"public final class XML",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+];},[],[]
+);
+// class XMLList
+joo.classLoader.prepare("package",
+
+"public final class XMLList",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super';return[
+
+
+];},[],[]
 );

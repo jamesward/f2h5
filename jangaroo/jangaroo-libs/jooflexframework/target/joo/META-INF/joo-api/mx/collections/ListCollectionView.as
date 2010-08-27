@@ -63,13 +63,11 @@ public interface ListCollectionView
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-import mx.core.mx_internal;
-
 /**
  *  @private
  *  Version string for this class.
  */
-mx_internal static const VERSION:String = "3.3.0.4852";
+public static const VERSION:String = "4.1.0.16076";
 ;
 
 }

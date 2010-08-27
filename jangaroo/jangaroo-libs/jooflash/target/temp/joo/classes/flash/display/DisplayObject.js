@@ -33,6 +33,7 @@ return this[$_mouseY];
 
 "public var",{visible: undefined},
 
+"public var",{name: undefined},
 
 "public function DisplayObject",function(){
 this[$super]();

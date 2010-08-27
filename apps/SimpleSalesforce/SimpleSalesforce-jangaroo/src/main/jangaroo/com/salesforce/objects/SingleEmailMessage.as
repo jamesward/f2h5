@@ -48,41 +48,14 @@ package com.salesforce.objects
 	 */
 	public dynamic class SingleEmailMessage extends BaseEmail 
 	{
-		public var bccAddresses:Array; // array or comma seperated? the sample messages do not show an array
-		public var ccAddresses:Array;
-		public var charset:String;
-	    public var documentAttachments:Array; // 11.0
-	    public var fileAttachments:Array; // array of EmailFileAttachment 
+		public var bccAddresses:String; // array or comma seperated? the sample messages do not show an array
+		public var toAddresses:String;
+		public var ccAddresses:String;
 		public var htmlBody:String;
+		public var charset:String;
 		public var plainTextBody:String;
-
-		/**
-		 * targetObjectId - Optional. The object ID of the contact, lead, or user the email will be sent to. 
-		 * The object ID you enter sets the context and ensures that merge fields in the template contain the correct data. 
-		 * At least one value must be specified in the toAddresses, 
-		 * ccAddresses, bccAddresses, targetObjectId, or targetObjectIds field.
-		*/
-		public var targetObjectId:String;    
-		public var toAddresses:Array;
+		public var targetObjectId:String;
 		
-		/**
-		* whatId -- Optional if you specify a contact for the targetObjectId field, 
-			you can specify a whatId as well. This helps to further ensure that merge fields in the template contain the correct data. 
-			The value must be one of the following types:	Account, Asset, Campaign, Case, Contract, Opportunity, Order, Product, Solution
-			or Custom object
-		*/
-		public var whatId:String; 
-		
-    	/**
-    	* possible priority values for emailPriority, also found in EmailPriority.as
-    	*/    	
-    	public static const HIGHETS:String = "Highest";
-    	public static const HIGH:String = "High";
-    	public static const NORMAL:String = "Normal";
-    	public static const LOW:String = "Low";
-    	public static const LOWEST:String = "Lowest";
-
-
 		public function SingleEmailMessage(obj:ObjectProxy = null) {	
 			super(obj);
 			for (var key:String in obj) {
@@ -100,7 +73,7 @@ package com.salesforce.objects
 <ns1:messages 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:type="SingleEmailMessage">
-		<toAddresses>bbb@salesforce.com</toAddresses>
+		<toAddresses>rhess@salesforce.com</toAddresses>
 		<plainTextBody> body of the 
  message</plainTextBody>
  </ns1:messages>
@@ -116,29 +89,26 @@ package com.salesforce.objects
     		writer.writeStartElement(name, sobjectNs);
     		writer.writeXsiType('SingleEmailMessage');  // need to apply our own xsi type
 
+                /*
+                // E4X not supported by Jangaroo
+
     		var classInfo:XML = describeType(this); // used to walk thru the variable names of this class
     		
     		for each (var v:XML in classInfo..variable) {
          		var propName:String = v.@name;
            		var propVal:Object = this[propName];
            		
-           		// skip empty properties, unless they are boolean, thus seralized false.
-           		if (!propVal && typeof(this[propName])!='boolean' ) {
-           			continue;			
-           		} 
-           			
+           		if (!propVal) continue;			// skip empty properties
         		if (propVal is Array) {
-            		for (var propArrayVal:Object in propVal) {
-            			if ( propVal[propArrayVal] is EmailFileAttachment) 
-            			   propVal[propArrayVal].toXml(sobjectNs,propName,writer);
-            			else 
-                		   writer.writeNameValueNode( propName, propVal[propArrayVal]);
+            		for (var propArrayVal:String in propVal) {
+                		writer.writeNameValueNode( propName, propVal[propArrayVal]);
             		}
         		} else {
         			writer.writeNameValueNode( propName , propVal);
         		}
         		
     		}
+                */
     		
     		writer.writeEndElement(name, sobjectNs);
   		}	

@@ -27,10 +27,10 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.salesforce.results
 {
-	import com.salesforce.objects.SObject;
-	
 	import mx.collections.ArrayCollection;
 	import mx.utils.ObjectProxy;
+	
+	import com.salesforce.objects.SObject;
 	
 	/**
 	 * Class returned as a result of the call to Query() and QueryMore(), contains a result code and an array of records, 
@@ -44,32 +44,28 @@ package com.salesforce.results
 	
 	public dynamic class QueryResult
 	{
-		public var records:ArrayCollection;
-		public var done:Boolean;
-		public var size:int;
-		public var queryLocator:String;
-		public var passThrough:Object;
+		//[Bindable] public var records:ArrayCollection;
+		//[Bindable] public var success:Boolean;
 		
-		public function QueryResult(result:ObjectProxy=null) {
+		public function QueryResult(result:ObjectProxy) {
 			
 			for (var i:String in result) {
 				var val:Object = result[i];
 				if (i != "xsi:type") {
 					if (i == "records" ) {
-						/* This might be the array of records.
-						 * If so, we need to loop, on the other hand
-						 * when only a single record is returned, it's not actually
-						 * an arraycollection, so we need to force it.
-						 */ 
+						//This might be the array of records.
+						//If so, we need to loop 
 						var records:ArrayCollection = val as ArrayCollection;
 						var sobjects:ArrayCollection = new ArrayCollection(null);
+						// When only a single record is returned, it's not actually
+						// an arraycollection, so we need to force it.
 						if (records == null) {
 							records = new ArrayCollection();
 							records.addItem(val);
 						}
-						var recordCount:int = records.length;
-						for (var x:int = 0;x<recordCount;x++) {
-							sobjects.addItem(new SObject(records[x]));
+						for (var x:int = 0;x<records.length;x++) {
+							//sobjects.addItem(new SObject(records[x]));
+							sobjects.addItem(records[x]);
 						}
 						this[i] = sobjects;
 					} else if (val is ObjectProxy) {

@@ -27,10 +27,6 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.salesforce.objects
 {
-	import mx.utils.ObjectProxy;
-	import com.salesforce.XmlWriter;
-	import flash.utils.*;
-	
   /**
    * Not implemented at this time
    * 
@@ -39,56 +35,9 @@ package com.salesforce.objects
    * @author rhess
    * 
    */	
-   [Bindable]
-	public class ProcessSubmitRequest extends ObjectProxy {
-		
-		private var _objectId:String;
-		public var nextOwnerId:String;
-		public var comment:String;
-		
-    	public function ProcessSubmitRequest():void { 
- 
-     	}
-
-		public function set objectId(value:String):void {
-			_objectId = value;
-		}
-		public function get objectId():String {
-			return _objectId;
-		}
-		/**
-		 * @private
-		 * 
-		 */		
-		public function toXml(sobjectNs:String, name:String, writer:XmlWriter):void
-  		{
-    		writer.writeStartElement(name, sobjectNs);
-    		writer.writeXsiType('ProcessSubmitRequest');  // need to apply our own xsi type
-
-    		var classInfo:XML = describeType(this); // used to walk thru the variable names of this class
-    		
-    		for each (var v:XML in classInfo..accessor) {
-         		var propName:String = v.@name;
-           		var propVal:Object = this[propName];
-           		
-           		if (!propVal || propName == "uid") continue;			// skip empty properties
-        		if (propVal is Array) {
-            		for (var propArrayVal:String in propVal) {
-                		writer.writeNameValueNode( propName, propVal[propArrayVal]);
-            		}
-        		} else {
-        			writer.writeNameValueNode( propName , propVal);
-        		}
-        		
-    		}
-    		
-    		writer.writeEndElement(name, sobjectNs);
-  		}	
-
-
-
-
-
-
+	public class ProcessSubmitRequest {
+    public function ProcessSubmitRequest(o:Object):void { 
+    	throw('not implemented');
+    }
 	}
 }

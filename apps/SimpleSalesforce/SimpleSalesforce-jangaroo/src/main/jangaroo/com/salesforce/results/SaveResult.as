@@ -39,13 +39,7 @@ package com.salesforce.results
 	 */	
 	public dynamic class SaveResult
 	{
-		public var id:String;
-		public var Id:String;
-		public var success:Boolean;
-		public var errors:ArrayCollection;
-		public var type:String;
-		
-		public function SaveResult(result:ObjectProxy=null) {
+		public function SaveResult(result:ObjectProxy) {
 	  		for (var i:String in result) {
 				var val:Object = result[i];
 				if (i != "xsi:type") {
@@ -62,9 +56,8 @@ package com.salesforce.results
 						if (val.hasOwnProperty("xsi:nil")) {
 							this[i] = null;
 						} else {
-							if (i == "errors") { 
-								this[i] = new ArrayCollection(null);
-								this[i].addItem(new com.salesforce.results.Error(val as ObjectProxy));
+							if (i == "errors") {
+								this[i] = new com.salesforce.results.Error(val as ObjectProxy);
 							}
 						}
 					} else {

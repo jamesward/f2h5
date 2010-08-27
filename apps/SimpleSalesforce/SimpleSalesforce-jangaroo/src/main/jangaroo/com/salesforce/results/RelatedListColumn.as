@@ -34,7 +34,7 @@ package com.salesforce.results
 	{
 		public var name:String;
 		public var label:String;
-		public var format:Object;
+		public var format:String;
 		public var field:String;
 		
 		public function RelatedListColumn(obj:Object) {		

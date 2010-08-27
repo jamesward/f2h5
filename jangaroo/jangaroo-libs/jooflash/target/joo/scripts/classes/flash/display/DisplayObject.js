@@ -33,6 +33,7 @@ import flash.geom.Transform*/
 
   "public var",{ visible/*:Boolean*/: undefined},
 
+  "public var",{ name/* : String*/: undefined},
 
   "public function DisplayObject",function $DisplayObject() {
     this[$super]();

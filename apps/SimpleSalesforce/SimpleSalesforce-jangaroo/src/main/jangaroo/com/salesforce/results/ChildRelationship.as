@@ -43,15 +43,10 @@ package com.salesforce.results
 		public var cascadeDelete:Boolean;
 		public var childSObject:String;
 		public var field:String; 
-		public var relationshipName:String;
 		
 		public function ChildRelationship(obj:ObjectProxy) {
 			for (var key:String in obj) {
 				this[key] = obj[key];
-			}
-			// construct a unique relationship name if we dont have one 
-			if (this.relationshipName == null && this.childSObject && this.field) { 
-				this.relationshipName = this.childSObject + '_' + this.field;
 			}
 		}
 	}

@@ -43,7 +43,7 @@ this.url=url;
 
 
 
-"public var",{contentType: undefined},
+"public var",{contentType:"application/x-www-form-urlencoded"},
 
 
 

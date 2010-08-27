@@ -28,9 +28,6 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package com.salesforce.events
 {
 	import flash.events.Event;
-	
-	import mx.logging.Log;
-	import mx.rpc.IResponder;
 	/**
 	 * Event used to wait for the async return from a SOAP request. Connection() adds a listner of this event type 
 	 * when begining a SOAP request using Transport()
@@ -41,39 +38,23 @@ package com.salesforce.events
 	public class SendEvent extends Event
 	{
         // Public constructor.
-        public function SendEvent(type:String, soapRequest:String="empty", responder:IResponder=null) {
+        public function SendEvent(type:String, soapRequest:String="empty") {
 			// Call the constructor of the superclass.
             super(type);
     
             // Set the new property.
-            this.responder = responder;
             this.soapRequest = soapRequest;
-            this.method = getMethod(soapRequest);
         }
 
         // Define static constant.
         public static const SEND_REQUEST:String = "sendRequest";
 
+        // Define static constant.
 		public var soapRequest:String;
-		public var method:String;		
-		public var responder:IResponder;
-		
-		private function getMethod(sr:String):String {
-			var xml:XML = new XML(sr);
-			var sNs:Namespace = new Namespace("se", "http://schemas.xmlsoap.org/soap/envelope/");
-			var body:XMLList = xml.sNs::Body;
-			var mthd:String = "don't know";
-			for each (var prop:XML in body.children()) {
-				Log.getLogger("com.salesforce.events.SendEvent").debug("Method name is: " + prop.localName());
-				mthd = prop.localName();
-				break;
-			}
-			return (new Date()).toLocaleTimeString() + " - " + mthd;
-		}
 		
         // Override the inherited clone() method.
         override public function clone():Event {
-            return new SendEvent(type, soapRequest, responder);
+            return new SendEvent(type, soapRequest);
         }
 
 	}

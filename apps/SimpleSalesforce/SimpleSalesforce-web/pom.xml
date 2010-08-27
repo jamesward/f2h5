@@ -24,12 +24,16 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <webappDirectory>/var/www/${project.build.finalName}</webappDirectory>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <configuration>
           <failOnMissingWebXml>false</failOnMissingWebXml>
+          <webappDirectory>/var/www/${project.build.finalName}</webappDirectory>
         </configuration>
       </plugin>
     </plugins>

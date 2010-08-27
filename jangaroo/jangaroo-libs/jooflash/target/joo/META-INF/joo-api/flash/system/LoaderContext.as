@@ -1,0 +1,16 @@
+package flash.system
+{
+
+public class LoaderContext
+{
+
+  public var allowCodeImport : Boolean;
+  public var applicationDomain : ApplicationDomain = null;
+  public var checkPolicyFile : Boolean = false;
+  public var securityDomain : SecurityDomain = null;
+
+  public native function LoaderContext(checkPolicyFile:Boolean = false, applicationDomain:ApplicationDomain = null, securityDomain:SecurityDomain = null);
+
+}
+
+}

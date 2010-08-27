@@ -51,25 +51,14 @@ package com.salesforce.results
 					// one of detailLayoutSections, editLayoutSections, relatedList
 					if (key == "detailLayoutSections" || key == "editLayoutSections") {
 						this[key] = new ArrayCollection();
-						if(val is ArrayCollection) {
-							for (var i:int = 0;i<(val as ArrayCollection).length;i++) { 
-								this[key].addItem( new DescribeLayoutSection((val as ArrayCollection)[i]) );
-							}
-				      	} 
-				      	else {
-				      		this[key].addItem( new DescribeLayoutSection((val as ObjectProxy)));
-				      	}
-				      		
+						for (var i:int = 0;i<(val as ArrayCollection).length;i++) { 
+							this[key].addItem( new DescribeLayoutSection((val as ArrayCollection)[i]) );
+						}		
 					} else if (key == "relatedLists") {
 						this[key] = new ArrayCollection();
-						if(val is ArrayCollection) {
-							for (var i2:int = 0;i2 < (val as ArrayCollection).length;i2++) {
-								this[key].addItem( new RelatedList((val as ArrayCollection)[i2]) );
-							}
-				      	} 
-				      	else {
-				      		this[key].addItem( new RelatedList((val as ObjectProxy)));
-				      	}	
+						for (var i2:int = 0;i2<(val as ArrayCollection).length;i2++) { 
+							this[key].addItem( new RelatedList( (val as ArrayCollection)[i2])  );
+						}	
 					} else {
 						this[key] = val;
 					}

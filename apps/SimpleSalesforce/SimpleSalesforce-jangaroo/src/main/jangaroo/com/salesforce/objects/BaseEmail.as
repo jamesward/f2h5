@@ -48,8 +48,6 @@ package com.salesforce.objects
 		public var emailPriority:String; // Highest,High,Normal,Low,Lowest
 		public var replyTo:String;
 		public var subject:String;
-		public var templateId:String; 			// added in 11.0
-		public var senderDisplayName:String; 	// added in 11.0
 		
 		/**
 		 * Constructor for the BaseEmail class.

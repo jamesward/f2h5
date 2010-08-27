@@ -27,13 +27,9 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.salesforce
 {
-import com.salesforce.events.ApexFaultEvent;
-
-import mx.logging.Log;
 import mx.rpc.IResponder;
-import mx.rpc.events.FaultEvent;
 import mx.rpc.events.ResultEvent;
-import mx.utils.ObjectProxy;
+import mx.rpc.events.FaultEvent;
 import mx.utils.ObjectUtil;
 /**
  * Simple responder class, extends IResponder, calls the success or fault functions with data or data from an event, 
@@ -96,22 +92,16 @@ public class AsyncResponder implements IResponder
   {
     if (data is FaultEvent)
     {
-    	var apexFaultEvent:ApexFaultEvent = new ApexFaultEvent(data as FaultEvent, context);
-      _faultHandler(apexFaultEvent);
+      _faultHandler((data as FaultEvent).fault);
     }
     else
     {
-      if (data is String) {
-    	var newData:ObjectProxy = new ObjectProxy({ fault:data, context:_context })
-    	data = newData;
-      }
-      try {data.context = _context;} catch(e:Error) {}
       _faultHandler(data);
     }
   }
   
-  private function defaultFault(fault:Object):void {
-    Log.getLogger("com.salesforce.AsyncResponder").error(ObjectUtil.toString(fault));
+  private function defaultFault (fault:Object):void {
+    //Alert.show(ObjectUtil.toString(fault));
   }
 }
 }

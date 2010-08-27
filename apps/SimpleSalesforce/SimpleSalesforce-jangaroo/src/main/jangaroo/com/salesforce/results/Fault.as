@@ -30,6 +30,8 @@ package com.salesforce.results
 {
 	import mx.collections.ArrayCollection;
 	import mx.utils.ObjectProxy;
+	import flash.utils.ByteArray;
+
 	/**
 	 * A Fault contains information about an error that occurred during a create, 
 	 * merge, process, update, upsert, delete, or undelete call.
@@ -45,16 +47,15 @@ package com.salesforce.results
 		public var faultcode:String;
 		public var faultstring:String;
 		public var detail:ObjectProxy;
-		import flash.utils.ByteArray;
 		
 		public function Fault(result:ObjectProxy)
 		{
 			for (var i:String in result) {
 				var val:Object = result[i];
-				if (val is ObjectProxy) {
-					this[i] = clone( val ); // deep copy
-				
-				} else this[i] = val;
+				//if (val is ObjectProxy) {
+				//	this[i] = clone( val ); // deep copy
+				//} else
+                                this[i] = val;
 			}
 		}
 		
@@ -67,12 +68,12 @@ package com.salesforce.results
 		 * This function accepts an object so that it can be used with any of objects,  
 		 * indexed arrays and associative arrays:
 		 */		
-		private function clone(source:Object):*
-		{
-		    var myBA:ByteArray = new ByteArray();
-		    myBA.writeObject(source);
-		    myBA.position = 0;
-		    return(myBA.readObject());
-		}
+		//private function clone(source:Object):*
+		//{
+		//    var myBA:ByteArray = new ByteArray();
+		//    myBA.writeObject(source);
+		//    myBA.position = 0;
+		//    return(myBA.readObject());
+		//}
 	}
 }

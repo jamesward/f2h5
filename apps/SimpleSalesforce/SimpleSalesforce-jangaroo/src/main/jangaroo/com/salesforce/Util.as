@@ -27,17 +27,18 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.salesforce
 {
-	import mx.logging.Log;
+	import com.salesforce.events.DebugEvent;
+	
+	import mx.core.Application;
 /**
  * Utility Date routines to transform UTC dates from their SOAP style to and from Action Script dates and date times
  * 
- * @author rhess dcarroll
+ * @author rhess
  * 
  */	
 public class Util
 {
-  
-  public static const millisecondsPerMinute:int = 1000 * 60;
+  	public static const millisecondsPerMinute:int = 1000 * 60;
 	public static const millisecondsPerHour:int = 1000 * 60 * 60;
 	public static const millisecondsPerDay:int = 1000 * 60 * 60 * 24;
 	
@@ -51,13 +52,8 @@ public class Util
     return  year + "-" + month + "-" + day;
   }
   */
-  
-  public static function debug(obj:Object, message:String):void {
-    Log.getLogger("com.salesforce.Util").debug(message);
-	}
+	
 	public static function dateToString(theDate:Date):String {
-		
-	if(theDate == null) return null;
 		
     var today:Date = theDate;
     var year:Number = today.getFullYear();
@@ -85,16 +81,14 @@ public class Util
     }
     return  year + "-" + monthString + "-" + dayString;
   }
-  
-
-	
+	public static function debug(obj:Object, message:String):void {
+		obj.dispatchEvent(new DebugEvent(DebugEvent.DEBUG_EVENT, message));
+	}
   /*
    * todo: convert to Flex's DateFormatter
    */
   public static function dateTimeToString(theDate:Date):String
   {
-    if( theDate == null ) return( null );
-    
     var today:Date = theDate;
     var year:Number = today.getFullYear();
     var month:Number = today.getMonth() + 1;
@@ -102,15 +96,12 @@ public class Util
     var hour:Number = today.getHours();
     var hourUTC:Number = today.getUTCHours();
     var diff:Number = hour - hourUTC;
-
+    
     if (diff > 12)
     {
         diff = diff - 24;
     }
-    if (diff < -12)
-    {
-        diff = diff + 24;
-    } 
+    
     var hourdifference:Number = Math.abs(diff);
     var minute:Number = today.getMinutes();
     var minuteUTC:Number = today.getUTCMinutes();
@@ -226,7 +217,7 @@ public class Util
   {
     var bc:Boolean = false;
     if (source === null || source.length === 0) {
-        throw "Unable to parse date";
+        throw "Unable to parse dateTime";
     }
 
     if (source.charAt(0) == '+') {
@@ -270,8 +261,7 @@ public class Util
   {
     var bc:Boolean = false;
     if (source === null || source.length === 0) {
-        //throw "Unable to parse dateTime";
-        return null;
+        throw "Unable to parse dateTime";
     }
 
     if (source.charAt(0) == '+') {

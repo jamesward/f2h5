@@ -32,7 +32,8 @@ joo.classLoader.prepare("package flash.net",
 
 
 "public function URLRequestHeader",function(name,value){if(arguments.length<2){if(arguments.length<1){name="";}value="";}this[$super]();
-
+this.name=name;
+this.value=value;
 },
 
 ];},[],[]

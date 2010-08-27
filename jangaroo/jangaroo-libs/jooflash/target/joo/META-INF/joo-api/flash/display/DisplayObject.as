@@ -21,6 +21,7 @@ public class DisplayObject extends flash.events.EventDispatcher implements flash
 
   public var visible:Boolean;
 
+  public var name : String;
 
   public native function DisplayObject();
 

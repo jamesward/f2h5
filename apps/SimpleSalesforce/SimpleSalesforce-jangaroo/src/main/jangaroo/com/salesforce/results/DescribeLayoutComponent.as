@@ -41,8 +41,7 @@ package com.salesforce.results
 	 */	
 	public dynamic class DescribeLayoutComponent
 	{
-		//TG: Changed to allow null when we deserialize from disk
-		public function DescribeLayoutComponent(obj:ObjectProxy = null) {
+		public function DescribeLayoutComponent(obj:ObjectProxy) {
 			for (var key:String in obj) {
 				var val:Object = obj[key];	
 				this[key] = val;

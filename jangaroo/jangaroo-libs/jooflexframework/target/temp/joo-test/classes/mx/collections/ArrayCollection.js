@@ -64,9 +64,7 @@ joo.classLoader.prepare(
 
 
 
-
-
-"mx_internal static const",{VERSION:"3.3.0.4852"},
+"public static const",{VERSION:"4.1.0.16076"},
 
 
 

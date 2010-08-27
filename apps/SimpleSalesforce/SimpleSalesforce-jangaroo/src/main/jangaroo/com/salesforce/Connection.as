@@ -17,7 +17,7 @@ are met:
 THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR
 IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
 OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, 
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
 INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
 NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
 DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
@@ -33,18 +33,16 @@ package com.salesforce
 	
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
+	import flash.system.ApplicationDomain;
 	import flash.system.Security;
-	import flash.utils.ByteArray;
 	
-	import mx.logging.ILogger;
-	import mx.logging.Log;
 	import mx.rpc.IResponder;
-	import mx.utils.ObjectProxy;
+	import mx.rpc.events.ResultEvent;
+	import mx.rpc.http.HTTPService;
 	import mx.utils.URLUtil;
-	
+
 	  
 	use namespace salesforce_internal;
-	
 	/**
 	* Event used internaly to collect responses and pass them back to the responder callbacks
 	*/	
@@ -70,9 +68,9 @@ package com.salesforce
 	 * 
 	 * @see http://www.salesforce.com/us/developer/docs/api/index.htm Apex Developer Doc
 	 * 
-	 * @author rhess @ salesforce.com, dcarroll @ saleforce.com, jaward @ adobe.com, jdavies @ 360vantage.com
+	 * @author rhess @ salesforce.com, dcarroll @ saleforce.com, jaward @ adobe.com 
 	 */	
-	public class Connection extends EventDispatcher	implements IGeneralConnection{
+	public class Connection extends EventDispatcher	{
 	  /**
 	  * @private
 	  */	  
@@ -89,9 +87,6 @@ package com.salesforce
 	  * @private
 	  */	  
 	  salesforce_internal var isLoggedIn:Boolean = false;
-	  
-	  public function get IsLoggedIn():Boolean { return isLoggedIn;}
-	  
 	  /**
 	  * @private
 	  */	  
@@ -108,35 +103,28 @@ package com.salesforce
 	  salesforce_internal var _applicationUrl:String = null;		// 9.0 or greater
 	  /**
 	  * @private
-	  */	  
+	  */
 	  salesforce_internal var _applicationDomain:String = null;
 	  /**
 	  * @private
 	  */
 	  salesforce_internal var _protocol:String = 'https'; // also possible is http
 	  
-	  public static var PROTOCOL_HTTP:String = "http";
-	  
-	  private var updateMru:String;
-	  private var _client:String;
+	  private var updateMru:String = null;
+	  private var client:String = null;
 	  private var _batchSize:Number;
-	  private var _organizationId:String; //TG 11-26-2008 - Added the underscore and accessor functions below
-	  private var _portalId:String //TG 11-26-2008 - Added portalId so we can log in portal users
-	  private var emailHeader:Object;
-	  private var assignmentRuleHeader:Object;
-	  private var transferToUserId:String;
-	  private var debuggingHeader:Object;
+	  private var organizationId:String = null;
+	  private var emailHeader:Object = null;
+	  private var assignmentRuleHeader:Object = null;
+	  private var transferToUserId:String = null;
+	  private var debuggingHeader:Object = null;
 	  private var sforceNs:String = "urn:partner.soap.sforce.com";
 	  private var sobjectNs:String = "sobject.partner.soap.sforce.com";
-	  private var metadataNs:String = "http://soap.sforce.com/2006/04/metadata";
-	  salesforce_internal var _defaultServerUrl:String = "https://www.salesforce.com/services/Soap/u/15.0"; // default endpoint to this
-	  private var logger:ILogger;
-       
+	  
 	  private static var namespaceMap:Array = [
 	    {ns: "urn:partner.soap.sforce.com", prefix: null},
 	    {ns: "sobject.partner.soap.sforce.com", prefix: "ns1"}
 	    ];
-	  
 	  /**
 	   * Use this method to determine if a connection has or has not been initialized by loginWithCredentials() or loginWithSessionId() via an scontrol
 	   * 
@@ -193,28 +181,6 @@ package com.salesforce
 	  	public function get applicationServerName():String {
 	  		return this._applicationServerName;
 	  	}
-	  	
-	  	/**
-	  	 * protocol to use, can be set to http, defaults to https
-	  	 * @return String
-	  	 * 
-	  	 */	  	
-	  	public function get protocol():String {
-	  		return this._protocol;
-	  	}
-
-		public function set protocol(value:String):void { 
-	  		this._protocol = value;
-	  		/* if protocol is set after serverUrl is set, we need to fix the serverUrl to match 
-	  		 * the specified protocol.  Normally this is only used when running the flex 
-	  		 * app on a webserver that is not hosted on https (like localhost)
-	  		 */
-	  		if ( this._protocol == 'http' && _internalServerUrl && _internalServerUrl.match("^https.*") ) {
-				serverUrl = serverUrl.replace('https', 'http'); 
-				
-			}
-	  	}
-	  	
 	  	/**
 	  	 * URL web services endpoint, set in the login process
 	  	 * @return String
@@ -223,7 +189,19 @@ package com.salesforce
 	  	public function get applicationUrl():String {
 	  		return this._applicationUrl;
 	  	}
-
+	  	
+		/**
+	  	 * protocol to use, can be set to http, defaults to https
+	  	 * @return String
+	  	 * 
+	  	 */	  	
+	  	public function get protocol():String {
+	  		return this._protocol;
+	  	}
+		public function set protocol(prot:String):void {
+	  		this._protocol = prot;
+	  	}
+	  	
 	  	/**
 	  	 * URL web services endpoint, set in the login process, no need to set this directly
 	  	 * @param url 
@@ -247,227 +225,134 @@ package com.salesforce
 		 */	  	
 		public function set serverUrl(serverUrl:String):void {
 			//Build a new url
-			logger.debug("App Domain = " + this._applicationDomain);
+			Util.debug(this, "App Domain = " + this._applicationDomain);
 			var apiServerName:String = URLUtil.getServerName(serverUrl);
-			logger.debug("Api Server name = " + apiServerName);
+			Util.debug(this, "Api Server name = " + apiServerName);
 			
 			if (this._applicationDomain == "salesforce.com") {
 				serverUrl = serverUrl.replace(apiServerName, this._applicationServerName);
-			}
-			 
+			} 
 			if ( this._protocol == 'http' && serverUrl.match("^https.*") ) {
 				serverUrl = serverUrl.replace('https', 'http'); // allow specified http 
 			}
-			
-	    _internalServerUrl = serverUrl;
-	    
-	    logger.debug('_internalServerUrl = ' + _internalServerUrl);
-	    
-	    //logger.debug("_internalServerUrl set to " + _internalServerUrl);
+	    	_internalServerUrl = serverUrl;
+	    	Util.debug(this, "_internalServerUrl set to " + _internalServerUrl);
 
-      /* 
-       * load the policy file if our sandbox is remote and we are past login (www)
-       *  normally happens after login when we are setting the server url for na1,na2,etc.
-       */
-      
-      if (Security.sandboxType == Security.REMOTE
-      	&& apiServerName != "www.salesforce.com" 
-      	&& apiServerName != "test.salesforce.com" ) { 
-          var policyUrl:String = _internalServerUrl;
-          
-          var s:String = "/services/Soap/";
-          var i:int = _internalServerUrl.indexOf(s);
-          policyUrl = _internalServerUrl.substr(0, (i + s.length));
-          policyUrl += "cross-domain.xml";
-
-          loadPolicyFile(policyUrl);
-          
-          
-      }
-      else { 
-        logger.debug("set serverUrl: skip the policy file for sandboxType:" + Security.sandboxType + ' and server:' + apiServerName);
+            /* 
+             * load the policy file if our sandbox is remote and we are past login (www)
+             *  normally happens after login when we are setting the server url for na1,na2,etc.
+             */
+            if (Security.sandboxType == Security.REMOTE && apiServerName != "www.salesforce.com" ) { 
+	            var policyUrl:String = _internalServerUrl;
+	            var s:String = "/services/Soap/u/";
+	            var i:int = _internalServerUrl.indexOf(s);
+	            policyUrl = _internalServerUrl.substr(0, (i + s.length));
+	            policyUrl += "cross-domain.xml";
+	            
+	            Util.debug(this, "loading the policy file: " + policyUrl);
+	            Security.loadPolicyFile(policyUrl);
+	            
+            } else { 
+            	Util.debug(this, "set serverUrl: skip the policy file for sandboxType:" + Security.sandboxType + ' and server:' + apiServerName);
+            }
 	  	}
-
-    }
 	  
-  	public function get serverUrl():String {
-    	return _internalServerUrl;
-  	}
+	  	public function get serverUrl():String {
+	    	return _internalServerUrl;
+	  	}
+	  	/**
+	  	 * Change the default size of the batches returned from Query() and QueryMore(), the minimum size is 200, the maximum size is 2000
+	  	 * the system will also reserve the right to return other sizes, this is a suggestion.
+	  	 * @param num Number
+	  	 * 
+	  	 */	  	
+	  	public function set batchSize(num:Number):void { this._batchSize = num;}
 
-  	
-  	/**
-  	 * Change the default size of the batches returned from Query() and QueryMore(), the minimum size is 200, the maximum size is 2000
-  	 * the system will also reserve the right to return other sizes, this is a suggestion.
-  	 * @param num Number
-  	 * 
-  	 */	  	
-  	public function set batchSize(num:Number):void {
-  	  this._batchSize = num;
-  	}
-  	
-  	//TG 11-26-2008
-  	/**
-  	 * Explicitly set the Organization ID to allow portal users to log in
-  	 * @param value String
-  	 */
-  	public function set organizationId(value:String):void
- 	{
- 		_organizationId = value;	
- 	}
-  	
-  	//TG 11-26-2008
-  	/**
-  	 * get the organization ID
-  	 */
- 	public function get organizationId():String
- 	{
- 		return _organizationId;	
- 	}
-  	
-  	//TG 11-26-2008
-  	/**
-  	 * Explicitly set the Portal ID to allow portal users to log in
-  	 * @param value String
-  	 */
-  	public function set portalId(value:String):void
-  	{
-  		_portalId = value;	
-  	}
-  	
-  	//TG 11-26-2008
-  	/**
-  	 * get the portal ID
-  	 */
-  	public function get portalId():String
-  	{
-  		return _portalId;	
-  	}
-  	
-  	/**
-  	 * Sets the API token to be used for this session.
-  	 * @param value String
-  	 */
-  	public function set client(value:String):void {
-  		_client = value;
-  	}
+	    /* end PROPERTIES */
 
-    /* end PROPERTIES */
-
-    /**
-     * Constructor for Connection class, no arguments
-     * @return
-     *
-     */
-    public function Connection() {
-      logger = Log.getLogger("com.salesforce.Connection");
-    }
-    
-    /*
-     * Flash Player will not load the crossdomain file from an https server if the application is not also running on an https server
-     */
-    private function loadPolicyFile(url:String):void
-  	{
-  	  logger.debug("loading the policy file: " + url);
-  	  if (protocol == "https")
-  	  {
-  	    logger.info("Your application must be running on a https server in order to use https to communicate with salesforce.com!");
-  	  }
-      Security.loadPolicyFile(url);
-  	}
+        /**
+         * Constructor for Connection class, no arguments
+         * @return
+         *
+         */
+        public function Connection() {
+        }
 
 		/**
 		 * Called rather than login if the applicaiton has access to the server and session information provided 
 		 * by salesforce. Example is when running from inside an SControl, this may be called, passing the scontrol 
 		 * merge fields
 		 * 
-		 * @private
 		 * @param sessionId 
 		 * @param serverUrl 
 	  	 * @param callback
 		 * 
 	  	 */	
-		private function loginWithSessionId(sessionId:String, serverUrl:String, callback:IResponder=null):void {
-			logger.debug("\nloginWithSessionId(\n sid: " + sessionId + "\n surl: " + serverUrl + '\n);' );
-			
+		public function loginWithSessionId(sessionId:String, serverUrl:String, callback:IResponder=null):void {
+			Util.debug(this, "\nloginWithSessionId(\n sid: " + sessionId + "\n surl: " + serverUrl + '\n);' );
 			this.applicationUrl = serverUrl;
-	    	this.sessionId = sessionId;
-		  	this.serverUrl = serverUrl; 
-	  		
-      // Store the client callback so we can use it after we test the sessionId
-      _loginCallback = callback;
-        	
-			// Create our internal callback
-			var oCallBack:AsyncResponder = new AsyncResponder(_resultGetUserInfo, callback.fault );
-			            
-			// Call the getUserInfo function and pass in our callback
-			invoke("getUserInfo", [], oCallBack);
-		}
+			
+			this.sessionId = sessionId;
+		    this.serverUrl = serverUrl; 
+	    	this.isLoggedIn = true;
+	  	
+            if (callback != null) {
+            	
+            	// Store the client callback so we can use it after we test the sessionId
+            	_loginCallback = callback;
+            	
+                // respond with a callback here in case the user wants one
+                // TODO should populate a userInfo object, just like the normal loginWithCredentials() does?!
+                
+                // Create our internal callback
+                var oCallBack:AsyncResponder = new AsyncResponder(_resultGetUserInfo);
+                
+                // Call the getUserInfo function and pass in our callback
+                invoke("getUserInfo", [], false, oCallBack);
+            }
+	  	}
 
-	  	/**
-		 * @private
-		 * @param userInfo
-		 * 
-		 */
 	  	private function _resultGetUserInfo(userInfo:UserInfo):void
 	  	{
-	  		// If we got here we have a valid sessionId & serverUrl
+	  		// Need to valid the results then build the
+	  		// loginresults and return them to the client
 	  		
-	  		// Create a LoginResult to return
 	  		var loginResult:LoginResult = new LoginResult();
-	  		
 	  		loginResult.serverUrl = this.serverUrl;
 	  		loginResult.sessionId = this.sessionId;
 	  		loginResult.userId = userInfo.userId;
 	  		loginResult.userInfo = userInfo;
 	  		
-	  		// Set the connection properties
-	  		this.organizationId = userInfo.organizationId;
-	  		this._loginResult = loginResult;
-			this.isLoggingIn = false;
-			this.isLoggedIn = true;
-	  		
-	  		// Check to see if we need to send the callback
-	  		if (this._loginCallback != null)
-	  		{
-		  		// Send the results to the client callback
-		  		this._loginCallback.result(loginResult);
-            }
+	  		// Send the results to the client callback
+	  		this._loginCallback.result(loginResult);
 	  	}
 
 	  	/**
-	  	 * This function is used to login with a username and password.  If the Server URL is not set
-	  	 * it will be defaulted to https://www.salesforce.com/services/Soap/u/10.0
-	  	 * 
-	  	 * @private
+	  	 * Normal login, used if running from a localhost
 	  	 * @param username 
 	  	 * @param password 
 	  	 * @param callback
 	  	 * 
 	  	 */	
-	  	private function loginWithCredentials(username:String, password:String, callback:IResponder):void 	
-	  	{
-        logger.debug('login with creds');
-        if (this.serverUrl == null) 
-        {
-				  this.serverUrl = this._defaultServerUrl;
-        }
+	  	public function loginWithCredentials(username:String, password:String, callback:IResponder):void {
+            if (this.serverUrl == null)
+            {
+                this.serverUrl = "https://www.salesforce.com/services/Soap/u/9.0";
+            }
 	    	var arg1:Parameter = new Parameter("username", username, false);
-			  var arg2:Parameter = new Parameter("password", password, false);
+			var arg2:Parameter = new Parameter("password", password, false);
 	    	this.isLoggingIn = true;
 	    	
-	    	/* get the security (sandbox) settings correct for any flex app not running inside salesforce 
-	    	 * hosted frame, ie: scontrol's dont need this.
-	    	 * epxect that it may be a salesforce sandbox ( test or tapp0 ), or some other server
-	    	 * need to find and load the policy file from saleforce servers which will permit the login call
-	    	 */
-	    	if (Security.sandboxType == Security.REMOTE ) 
-	    	{ 
-	    		var sn:String = URLUtil.getServerName(this.serverUrl); // don't assume WWW.salesforce.com
-	    		var policyUrl:String = this._protocol + "://" + sn + "/services/crossdomain.xml";
-	    		loadPolicyFile(policyUrl);
-	    	} 
+	    	if (Security.sandboxType == Security.REMOTE ) { 
+	    		// for a remote sandbox, pickup the crossdomain file to allow the login call
+	    		var policyUrl:String = this._protocol + "://www.salesforce.com/services/crossdomain.xml";
+				Util.debug(this, "loading the policy file: " + policyUrl);
+	            Security.loadPolicyFile(policyUrl);
+	    	} else { 
+            	Util.debug(this, "loginWithCredentials: skip the policy file for sandboxType:" + Security.sandboxType);
+            }
             
-	    	invoke("login", [arg1, arg2], callback);
+	    	invoke("login", [arg1, arg2], false, callback);
 	  	}
 
 		/**
@@ -477,9 +362,7 @@ package com.salesforce
 		 * @param loginRequest
 		 * 
 		 */
-		 //TG: The encryptionKey isn't used here, but it is used in the AIRConnection override
-		 //    of this method, and the parameter list has to match
-		public function login( loginRequest:LoginRequest, encryptionKey:ByteArray=null ) :void {
+		public function login( loginRequest:LoginRequest ) :void {
 			try { 
 
 				if ((loginRequest.session_id != null) && (loginRequest.server_url != null )) {
@@ -502,12 +385,6 @@ package com.salesforce
 		 	}
 		}	
 		
-		//not used in Connection.as, but overridden in AIRConnection
-		public function flush(deleteTable:String):void
-		{
-			
-		}
-		
 	  	/**
 	  	 * Query table or table and related tables using Salesforce SOQL language strings, the responder
 	  	 * will return the results asynchronously to the callback functions (response,fault)
@@ -517,11 +394,9 @@ package com.salesforce
 	  	 * @param callback
 	  	 * 
 	  	 */	
-	  	 //TG: Added queryLocal. It's not used here, but it is used in the AIRConnection override of this
-	  	 //    method.
-	  	public function query(queryString:String, callback:IResponder, queryLocal:Boolean = false, passThrough:Object=null, flush:Boolean=false):void {
+	  	public function query(queryString:String, callback:IResponder):void {
 	    	var arg:Parameter = new Parameter("queryString", queryString, false);
-	    	invoke("query", [arg], callback);
+	    	invoke("query", [arg], false, callback);
 	  	}
 	  	/**
 	  	 * Create new records in the salesforce database, pass in an array of SObjects, and a responder callback pair of functions
@@ -533,39 +408,11 @@ package com.salesforce
 	  	 * @param callback
 	  	 * 
 	  	 */	
-	  	 //TG: queryAfterCreate is used by AIRConnection
-	  	public function create(sobjects:Array, callback:IResponder, queryAfterCreate:Boolean=false):void {
+	  	public function create(sobjects:Array, callback:IResponder):void {
 	    	var arg:Parameter = new Parameter("sObjects", sobjects, true);
-	    	invoke("create", [arg], callback);
+	    	invoke("create", [arg], true, callback);
 	  	}
 	
-		private function getMetadataUrl():String {
-	    	var tempUrl:String = URLUtil.getProtocol(serverUrl) + "//" + URLUtil.getServerName(serverUrl);
-	    	return serverUrl.substr(tempUrl.length + 1).replace("/u", "/m");
-		}
-		
-		public function createObject(customObjects:Array, callback:IResponder):void {
-	    	var arg:Parameter = new Parameter("metadata", customObjects, true);
-	    	var tempUrl:String = URLUtil.getProtocol(serverUrl) + "//" + URLUtil.getServerName(serverUrl);
-	    	tempUrl = serverUrl.substr(tempUrl.length + 1).replace("/u", "/m");
-	    	invoke("create", [arg], callback, [{ns: metadataNs, prefix: null}], getMetadataUrl(), metadataNs, metadataNs);
-		}
-		
-		public function updateObject(customObjects:Array, callback:IResponder):void {
-	    	var arg:Parameter = new Parameter("metadata", customObjects, true);
-	    	invoke("update", [arg], callback, [{ns: metadataNs, prefix: null}], getMetadataUrl(), metadataNs, metadataNs);
-		}
-
-		public function deleteObject(customObjects:Array, callback:IResponder):void {
-	    	var arg:Parameter = new Parameter("metadata", customObjects, true);
-	    	invoke("delete", [arg], callback, [{ns: metadataNs, prefix: null}], getMetadataUrl(), metadataNs, metadataNs);
-		}
-
-		public function checkStatus(requestIds:Array, callback:IResponder):void {
-			var arg:Parameter = new Parameter("asyncProcessId", requestIds, true);
-			invoke("checkStatus", [arg], callback, [{ns: metadataNs, prefix: null}], getMetadataUrl(), metadataNs, metadataNs);
-		}
-		
 	  	/**
 	  	 * Update existing records in the salesforce database, the array of sobjects must have a valid ID filled in for
 	  	 * each record to be updated
@@ -580,7 +427,7 @@ package com.salesforce
 	  	 */	
 	  	public function update(sobjects:Array, callback:IResponder):void {
 	    	var arg:Parameter = new Parameter("sObjects", sobjects, true);
-	    	invoke("update", [arg], callback);
+	    	invoke("update", [arg], true,  callback);
 	  	}
 	  	/**
 	  	 * Delete a list of objects from salesforce.com database, the array contains just the id strings
@@ -590,34 +437,22 @@ package com.salesforce
 	  	 */	
 	  	public function deleteIds(ids:Array, callback:IResponder):void {
 	    	var arg:Parameter = new Parameter("ids", ids, true);
-	    	invoke("delete", [arg], callback);
+	    	invoke("delete", [arg], true, callback);
 	  	}
 	  	/**
 	  	 * Used to execute Apex Code packages (Apex Code is currently in developer preview)
 	  	 *  
 	  	 * @param packageName
 	  	 * @param method
-	  	 * @param args - needs to be an array of Parameter objects
+	  	 * @param args
 	  	 * @param callback
 	  	 * @param isArray
 	  	 * 
 	  	 */	
-	  	public function execute(packageName:String, method:String, args:Array, callback:IResponder, apexNamespace:String = null, isArray:Boolean=false):void {
+	  	public function execute(packageName:String, method:String, args:Array, callback:IResponder, isArray:Boolean=false):void {
 			//sforce.Apex.prototype.execute = function (package, method, args, callback, isArray) {
 
-   			var endpoint:String = "/services/Soap/class/";
-   			var sobjectNs:String = "http://soap.sforce.com/schemas/class/";
-   			
-   			if (apexNamespace != null && apexNamespace != "") {
-   				endpoint += apexNamespace + "/";
-   				sobjectNs += apexNamespace + "/";
-   			}
-   			endpoint += packageName;
-   			sobjectNs += packageName;
-   			
-   			// logger.debug(endpoint); 		logger.debug(sobjectNs);
-    		//var sobjectNs:String = "http://soap.sforce.com/schemas/class/<namespace>/<className>" 
-    		//var endpoint:String = "/services/Soap/class/<namespace>/<className>"
+    		var sobjectNs:String = "http://soap.sforce.com/schemas/package/" + packageName;
     		
     		var nsmap:Array = [{ns:sobjectNs, prefix:""}];
 
@@ -626,10 +461,16 @@ package com.salesforce
     		}
 
     		var params:Array = [];
-
+    		/*for (var field:String in args) {
+        		var value:Object = args[field];
+        		var arrayParam:Boolean = value === null ? false : (value is Array ? true : false);
+        		var param:Parameter = new Parameter(field, value, arrayParam);
+        		params.push(param);
+    		}*/
     		for (var i:int = 0;i<args.length;i++) {
-    			if (args[i] is Parameter) {
-    				logger.debug("argument is a parameter type");
+    			if (!args[i] is Parameter) {
+    				throw "Apex arguments must of type Parameter.";
+    			} else {
     				var param:Parameter = args[i] as Parameter;
     				if (param.value is Array) {
     					param.isArray = true;
@@ -637,13 +478,16 @@ package com.salesforce
     					param.isArray = false;
     				}
     				params.push(args[i]);
-    			} else {
-    				logger.debug("argument is NOT a parameter type");
-    				throw "Apex arguments must be Array of type Parameter.";
     			}
     		}
-   			
-    		invoke(method, params, callback, nsmap, endpoint, sobjectNs, sobjectNs);
+
+    		var isRealArray:Boolean = true;
+
+    		if (isArray === false) {
+        		isRealArray = false;
+    		}
+   
+    		invoke(method, params, isRealArray, callback, nsmap, "/services/Soap/package/" + packageName, sobjectNs, sobjectNs);
 		}
 		/**
 		 * Retrieve a list of sobjects given an array of object ids
@@ -659,16 +503,11 @@ package com.salesforce
 	    	var arg1:Parameter = new Parameter("fieldList", fieldList, false);
 	    	var arg2:Parameter = new Parameter("sObjectType", sObjectType, false);
 	    	var arg3:Parameter = new Parameter("ids", ids, true);
-	    	invoke("retrieve", [arg1, arg2, arg3], callback);
+	    	invoke("retrieve", [arg1, arg2, arg3], true,  callback);
 	  	}
 	
-	  	/**
-	  	 * Retrieves personal information for the user associated with the current session.
-	  	 * 
-	  	 * @param callback
-	  	 */
 		public function getUserInfo(callback:IResponder):void {
-	    	invoke("getUserInfo", [], callback);
+	    	invoke("getUserInfo", [], false, callback);
 	  	}
 	  	/**
 	  	 * search for objects in one or more tables within the salesforce database
@@ -681,7 +520,7 @@ package com.salesforce
 	  	 */	
 	  	public function search(searchString:String, callback:IResponder):void {
 	    	var arg1:Parameter = new Parameter("searchString", searchString, false);
-	    	invoke("search", [arg1], callback);
+	    	invoke("search", [arg1], false, callback);
 	  	}
 		/**
 		 * use describeSObjects instead
@@ -691,7 +530,7 @@ package com.salesforce
 		 */	
 		public function describeSObject(type:String, callback:IResponder):void {
 			var arg:Parameter = new Parameter("sObjectType", type, false);
-			invoke("describeSObject", [arg], callback);
+			invoke("describeSObject", [arg], false, callback);
 		}
 		/**
 		 * return the object description in detail for one or more salesforce custom or standard objects
@@ -702,7 +541,7 @@ package com.salesforce
 		 */	
 		public function describeSObjects(types:Array, callback:IResponder):void {
 			var arg:Parameter = new Parameter("sObjectType", types, true);
-			invoke("describeSObjects", [arg], callback);
+			invoke("describeSObjects", [arg], true, callback);
 		}
 		/**
 		 * returns a list of all valid objects (table names) in the salesforce database, used to check that a desired table 
@@ -712,7 +551,7 @@ package com.salesforce
 		 * 
 		 */	
 		public function describeGlobal(callback:IResponder):void {
-	    	invoke("describeGlobal", [], callback);
+	    	invoke("describeGlobal", [], false, callback);
 	  	}
 
 		/**
@@ -731,12 +570,9 @@ package com.salesforce
 	       		recordTypes = [];
 	    	}
 	    	var arg2:Parameter = new Parameter("recordTypeIds", recordTypes, true);
-	    	invoke("describeLayout", [arg1, arg2], callback);
+	    	invoke("describeLayout", [arg1, arg2], false, callback);
 	  	}
 	  	/**
-	  	 * Retrieves the current system timestamp
-	  	 * (Greenwich Mean Time (GMT) or Coordinated Universal Time (UTC) time zone) from the API.
-	  	 * 
 	  	 * responder will be called with a timestamp from the server, used to record when an getUpdated or getDeleted 
 	  	 * call was last made, or to syncronize unrelated systems.
 	  	 * 
@@ -744,7 +580,7 @@ package com.salesforce
 	  	 * 
 	  	 */	
 	  	public function getServerTimestamp(callback:IResponder):void {
-	    	invoke("getServerTimestamp", [], callback);
+	    	invoke("getServerTimestamp", [], false, callback);
 	  	}
 	
 	  	/**
@@ -755,7 +591,7 @@ package com.salesforce
 	  	 * 
 	  	 */	
 	  	public function describeTabs(callback:IResponder):void {
-	    	invoke("describeTabs", [], callback);
+	    	invoke("describeTabs", [], true, callback);
 	  	}
 	  	/**
 	  	 * given a time range, returns a list of records ( of any type) that were deleted in that time 
@@ -772,7 +608,7 @@ package com.salesforce
 	    	var arg1:Parameter = new Parameter("sObjectType", sObjectType, false);
 	    	var arg2:Parameter = new Parameter("startDate", startDate, false);
 	    	var arg3:Parameter = new Parameter("endDate", endDate, false);
-	    	invoke("getDeleted", [arg1, arg2, arg3], callback);
+	    	invoke("getDeleted", [arg1, arg2, arg3], false, callback);
 	  	}
 	  	/**
 	  	 * utility function that will perform a create or update depending on the presence of an existing record
@@ -785,7 +621,7 @@ package com.salesforce
 	  	public function upsert(externalIDFieldName:String, sobjects:Array, callback:IResponder):void {
 	    	var arg1:Parameter = new Parameter("externalIDFieldName", externalIDFieldName, false);
 	    	var arg2:Parameter = new Parameter("sObjects", sobjects, true);
-	    	invoke("upsert", [arg1, arg2], callback);
+	    	invoke("upsert", [arg1, arg2], true, callback);
 	  	}
 		/**
 		 * list the objects that have been updated by the system in the time windows passed in
@@ -801,7 +637,7 @@ package com.salesforce
 	    	var arg1:Parameter = new Parameter("sObjectType", sObjectType, false);
 	    	var arg2:Parameter = new Parameter("startDate", startDate, false);
 	    	var arg3:Parameter = new Parameter("endDate", endDate, false);
-	    	invoke("getUpdated", [arg1, arg2, arg3], callback);
+	    	invoke("getUpdated", [arg1, arg2, arg3], false, callback);
 	  	}
 	 	/**
 	 	 * this version of query will include in it's scope the recycle bin as well as the live data
@@ -812,7 +648,7 @@ package com.salesforce
 	 	 */		
 	 	public function queryAll(queryString:String, callback:IResponder):void {
 	    	var arg:Parameter = new Parameter("queryString", queryString, false);
-	    	invoke("queryAll", [arg], callback);
+	    	invoke("queryAll", [arg], false, callback);
 	  	}
 	 	/**
 	 	 * looping portion of the query() queryMore() method for accessing large data sets
@@ -822,9 +658,9 @@ package com.salesforce
 	 	 * @param callback
 	 	 * 
 	 	 */			
-	  	public function queryMore(queryLocator:Object, callback:IResponder,passThrough:Object=null,cacheThisQuery:Boolean = false):void {
+	  	public function queryMore(queryLocator:Object, callback:IResponder):void {
 	    	var arg:Parameter = new Parameter("queryLocator", queryLocator, false);
-	    	invoke("queryMore", [arg], callback);
+	    	invoke("queryMore", [arg], false, callback);
 	  	}
 	
 
@@ -840,7 +676,7 @@ package com.salesforce
 	  	 */	  	
 	  	public function sendEmail(messgeList:Array,callback:IResponder):void {
 	    	var arg1:Parameter = new Parameter("messages", messgeList, false);
-	    	invoke("sendEmail", [arg1], callback);
+	    	invoke("sendEmail", [arg1], false, callback);
 	  	}
 
 
@@ -852,7 +688,7 @@ package com.salesforce
 	  	 */		
 	  	public function merge(mergeRequest:MergeRequest, callback:IResponder):void {
 	    	var arg1:Parameter = new Parameter("request", mergeRequest, true);
-	    	invoke("merge", [arg1], callback);
+	    	invoke("merge", [arg1], true, callback);
 	  	}
 	  	/**
 	  	 * to be tested
@@ -862,7 +698,7 @@ package com.salesforce
 	  	 */	
 	  	public function undelete(ids:Array, callback:IResponder):void {
 	    	var arg1:Parameter = new Parameter("ids", ids, true);
-	    	invoke("undelete", [arg1], callback);
+	    	invoke("undelete", [arg1], true, callback);
 	  	}
 		/**
 		 * to be tested
@@ -872,29 +708,31 @@ package com.salesforce
 		 */
 		public function convertLead(leadConverts:Array, callback:IResponder):void {
 	    	var arg1:Parameter = new Parameter("leadConverts", leadConverts, true);
-	    	invoke("convertLead", [arg1], callback);
+	    	invoke("convertLead", [arg1], true, callback);
 	  	}
 		/**
-		 * Changes a user’s password to a temporary, system-generated value.
+		 * to be tested
 		 * @param userId
 		 * @param callback
 		 * 
 		 */			
 		public function resetPassword(userId:String, callback:IResponder):void {
+	    	throw("not implemented");
 	    	var arg1:Parameter = new Parameter("userId", userId, false);
-	    	invoke("resetPassword", [arg1], callback);
+	    	invoke("resetPassword", [arg1], false, callback);
 	  	}
 	  	/**
-	  	 * Sets the specified user’s password to the specified value.
+	  	 * to be tested
 	  	 * @param userId
 	  	 * @param password
 	  	 * @param callback
 	  	 * 
 	  	 */	
 	  	public function setPassword(userId:String, password:String, callback:IResponder):void {
+	    	throw("not implemented");
 	    	var arg1:Parameter = new Parameter("userId", userId, false);
 	    	var arg2:Parameter = new Parameter("password", password, false);
-	    	invoke("setPassword", [arg1, arg2], callback);
+	    	invoke("setPassword", [arg1, arg2], false, callback);
 	  	}
 	  	/**
 	  	 * to be tested
@@ -903,8 +741,9 @@ package com.salesforce
 	  	 * 
 	  	 */	
 	  	public function process(actions:Array, callback:IResponder):void {
+	    	throw("not implemented");
 	    	var arg1:Parameter = new Parameter("actions", actions, true);
-	    	invoke("process", [arg1], callback);
+	    	invoke("process", [arg1], true, callback);
 	  	}
 
 		/* END PUBLIC END PUBLIC end of public methods  */
@@ -926,20 +765,15 @@ package com.salesforce
 	        	writer.writeEndElement("SessionHeader", headerNs);
 	    	}
 	    
-	    	//TG Modified 11-26-2008 to include portalId in the LoginScopeHeader
-	    	if (organizationId !== null || portalId !== null) 
-	    	{
+	    	if (organizationId !== null) {
 	        	writer.writeStartElement("LoginScopeHeader", headerNs);
-	        	if (organizationId !== null)
-	        		writer.writeNameValueNode("organizationId", organizationId);
-	        	if (portalId !== null)
-	        		writer.writeNameValueNode("portalId", portalId);	
+	        	writer.writeNameValueNode("organizationId", organizationId);
 	        	writer.writeEndElement("LoginScopeHeader", headerNs);
 	    	}
-	    		    
-	    	if (_client !== null) {
+	    
+	    	if (client !== null) {
 	        	writer.writeStartElement("CallOptions", headerNs);
-	        	writer.writeNameValueNode("client", _client);
+	        	writer.writeNameValueNode("client", client);
 	        	writer.writeEndElement("CallOptions", headerNs);
 	    	}
 	    
@@ -999,6 +833,7 @@ package com.salesforce
 		 * @private
 		 * @param method
 		 * @param args
+		 * @param isArray
 		 * @param responder
 		 * @param nsMap
 		 * @param intServerUrl
@@ -1006,24 +841,21 @@ package com.salesforce
 		 * @param sobjNs
 		 * 
 		 */	
-		private function invoke(method:String, args:Array, responder:IResponder, nsMap:Array=null, intServerUrl:String=null, sfNs:String=null, sobjNs:String=null):void {		
+		private function invoke(method:String, args:Array, isArray:Boolean, responder:IResponder, nsMap:Array=null, intServerUrl:String=null, sfNs:String=null, sobjNs:String=null):void {		
 			// all responses go thru Saleforce Responder class to construct proper objects types
-			logger.debug("invoke " + method);
-			
 			var sf_responder:SalesForceResponder =  new SalesForceResponder(this, responder);
 			if (nsMap == null) {
 				nsMap = namespaceMap;
 			}
 			if (intServerUrl == null) {
-        logger.debug("intServerUrl is null");
+                // Util.debug(this, "intServerUrl is null");
 				intServerUrl = _internalServerUrl;
 			} else {
 				var proto:String = URLUtil.getProtocol(_internalServerUrl);
 				var server:String = URLUtil.getServerName(_internalServerUrl);
 				intServerUrl = proto + "://" + server + intServerUrl;
 			}
-			
-      logger.debug("intServerUrl = " + intServerUrl);
+            // Util.debug(this, "intServerUrl = " + intServerUrl);
 			
 			if (sfNs == null) {
 				sfNs = sforceNs;
@@ -1031,15 +863,16 @@ package com.salesforce
 			if (sobjNs == null) {
 				sobjNs = sobjectNs;
 			}
-			
-	    return _invoke(method, args, sf_responder, nsMap, intServerUrl, sfNs, sobjNs);
-    }
+	    	return _invoke(method, args, isArray, sf_responder, nsMap, intServerUrl, sfNs, sobjNs);
+	  	}
 
-
+	
+		// TODO refactor to remove isArray, appears that this is not used
 		/**
 		 * @private
 		 * @param method
 		 * @param args
+		 * @param isArray
 		 * @param responder
 		 * @param namespaces
 		 * @param url
@@ -1047,8 +880,7 @@ package com.salesforce
 		 * @param sobjectNs
 		 * 
 		 */		
-		private function _invoke(method:String, args:Array, responder:IResponder, namespaces:Array, url:String, headerNs:String, sobjectNs:String):void {
-		    logger.debug("_invoke " + method);
+		private function _invoke(method:String, args:Array, isArray:Boolean, responder:IResponder, namespaces:Array, url:String, headerNs:String, sobjectNs:String):void {
 	    	var writer:XmlWriter = new XmlWriter();
 	    	writer.startEnvelope();
 	    	writeHeader(writer, headerNs);
@@ -1064,7 +896,17 @@ package com.salesforce
 	      		if (arg.value === null) {
 	        		throw "arg " + i + " '" + arg.name + "' not specified";
 	      		}
-	      		writeArg(writer, arg.value, arg.name, sobjectNs);
+	      		if (arg.value is Array) {
+	        		for (var j:int = 0; j < arg.value.length; j++) {
+	          			var obj:Object = arg.value[j];
+	          			if (!obj) {
+	            			throw "Array element at " + j + " is null.";
+	          			}
+	          			writeOne(writer, arg.name, obj, sobjectNs);
+	          		}
+	      		} else {
+	        		writeOne(writer, arg.name, arg.value, sobjectNs);
+	      		}
 	    	}
 	    
 	    	writer.writeEndElement(method);
@@ -1074,7 +916,7 @@ package com.salesforce
 	    	var transport:Transport = new Transport();
 	    	transport.addEventListener(SendEvent.SEND_REQUEST, sendRequestHandler);
 	    
-            // logger.debug("url = " + url); logger.debug("serverUrl = " + serverUrl);
+            // Util.debug(this, "url = " + url); Util.debug(this, "serverUrl = " + serverUrl);
 	    	var trans:String = URLUtil.getProtocol(serverUrl);
 	    	var server:String = URLUtil.getServerName(serverUrl);
 	    	
@@ -1090,40 +932,12 @@ package com.salesforce
 	    	} else {
 	      		transport.url = thisUrl;
 	    	}
-			
-	
-            // logger.debug("transport.url = " + transport.url);
+            
+            Util.debug(this, "transport.url = " + transport.url);
 	    	
 	    	transport.send(writer,responder);
 	  	}
-		
-		private function writeArg(writer:XmlWriter, argValue:Object, argName:String, sobjectNs:String):void {
-      		if (argValue is Array) {
-        		for (var j:int = 0; j < argValue.length; j++) {
-          			var obj:Object = argValue[j];
-          			if (!obj) {
-            			throw "Array element at " + j + " is null.";
-          			}
-          			if (obj is ObjectProxy) {
-          				writeArg(writer, obj, argName, sobjectNs);
-          			} else {
-          				writeOne(writer, argName, obj, sobjectNs);
-          			}
-          		}
-      		} else if ( argValue is ObjectProxy && !(argValue is SObject)
-      					&& !argValue.hasOwnProperty("toXml") ) {
-      			writer.writeStartElement(argName);
-      			for (var key:String in argValue) {
-      				writeArg(writer, argValue[key], key, sobjectNs);
-      				//writeOne(writer, key, argValue[key], sobjectNs);
-      			}
-      			writer.writeEndElement(argName);
-      		} else {
-        		writeOne(writer, argName, argValue, sobjectNs);
-      		}
-			
-		}
-		
+
 		/**
 		 * @private
 		 * @param writer
@@ -1132,13 +946,8 @@ package com.salesforce
 		 * @param sobjectNs
 		 * 
 		 */
-		private function writeOne(writer:XmlWriter, name:String, value:Object, sobjectNs:String):void {
-		    if (value == null)
-		    {
-		      value = "";
-		    }
-		    
-	    	if (value.hasOwnProperty("toXml"))  // is SObject || value is SingleEmailMessage)
+		private function writeOne(writer:XmlWriter, name:String, value:Object, sobjectNs:String):void { 
+	    	if (value is SObject || value is SingleEmailMessage || value is LeadConvert)
 	    	{
 	     		value.toXml(sobjectNs, name, writer);
 	    	} else {
@@ -1170,233 +979,4 @@ package com.salesforce
 	    	dispatchEvent(event);
 	  	}
 	}
-}
-
-import mx.rpc.IResponder;
-import mx.utils.ObjectProxy;
-import mx.utils.ObjectUtil;
-import mx.collections.ArrayCollection;
- 
-import com.salesforce.salesforce_internal;
-import com.salesforce.results.*;
-import com.salesforce.objects.*;
-import com.salesforce.Util;
-import com.salesforce.Connection;
-import mx.rpc.Fault;
-
-
-use namespace salesforce_internal;
-/**
-* @private
-*/
-class SalesForceResponder implements IResponder {
-
- 	/**
- 	 * This class is used to package up the results from raw xml into sobjects, queryResponses and other 
- 	 * Apex specific structures 
- 	 * @param connection
- 	 * @param clientResponder
- 	 * @return 
- 	 * 
- 	 */ 
- 	public function SalesForceResponder(connection:Connection, clientResponder:IResponder) {
-    	this.connection = connection;
-    	this.clientResponder = clientResponder;
-        this._context = clientResponder;
-  	}
-  
-  	private var clientResponder:IResponder;
-  	private var connection:Connection;
-    private var _context:Object;
-  
-  	private function getResponseType(result:Object):String {
-		var response:ObjectProxy = result.result.Envelope.Body;
-		var responseKey:String;
-    	for (var key:String in response) {
-    		responseKey = key;
-    		break;
-    	}
-    	return responseKey;
-  	}
-  	
-  	private function getResponse(result:Object):Object {
-		var response:Object = result.result.Envelope.Body;
-    	try { 
-	    	for (var key:String in response) {
-	    		response = response[key].result;
-	    		break;
-	    	} 
-    	} catch (e:Object) {
-    		return null; // when a webservice is set to return void we end up here
-    	} 
-    	return response;
-  	}
-  	
-  	public function result(result:Object):void {    
-    	var resultObject:Object;
-    	var response:Object = getResponse(result);
-    	var responseType:String = getResponseType(result);
-    	var i:int;
-    	
-    	Util.debug(connection, "responseType: " + responseType);
-    	switch (responseType) {
-    		case "checkStatusResponse":
-    /* TODO createResponse on Meta API
-     * TODO this response type is overloaded, needs testing with API and Meta API
-     * TODO for now leave the API code active and comment out this one
-     */
-    //	 	case "createResponse":
-    			resultObject = new Array();
-    			if (response is ObjectProxy) {
-    				resultObject.push(new AsyncResult(response));
-    			} else {
-    				for (i=0;i<response.length;i++) {
-    					resultObject.push(new AsyncResult(response[i]));
-    				}
-    			}
-    			break;
-    		case "loginResponse": 
-    			connection._loginResult = new LoginResult(result);
-    			resultObject = connection.loginResult;
-      			connection.sessionId = resultObject.sessionId;
-      			connection.serverUrl = resultObject.serverUrl;
-      			connection.isLoggingIn = false;
-      			connection.isLoggedIn = true;
-    			break;
-    			
-    		case "describeSObjectsResponse": // describe an array of one or more sobject results
-    			resultObject = new Array();
-				response = ensureArray(response);
-				for (i=0; i<response.length;i++) {
-					resultObject.push( new DescribeSObjectResult(response[i] as ObjectProxy) );
-				}
-    			break; 
-    			
-    		case "describeSObjectResponse": // obsolete, use describeSObjects with one element in the array 
-    			resultObject = new DescribeSObjectResult(response as ObjectProxy);
-    			break;
-    			
-    		case "searchResponse":
-     			resultObject = new SearchResult(response as ObjectProxy);
-    			break;
-    			
-    		case "queryMoreResponse":	
-       		case "queryAllResponse":
-       		case "queryResponse":
-    			resultObject = new QueryResult(response as ObjectProxy);
-    			break;
-    		
-    		case "deleteResponse":
-    		case "createResponse":
-    		case "updateResponse":
-    			resultObject = createSaveResult(response);
-    			break; 
-    		
-    		case "upsertResponse": 
-    			resultObject = new Array();
-    			response = ensureArray(response); // if we have a single object, make an array of one
-				for (i=0;i<response.length;i++) {
-					resultObject.push( new UpsertResult(response[i] as ObjectProxy) );
-				} 
-    			break;
-    			
-       		case "retrieveResponse":
-    			resultObject = new Array();
-				response = ensureArray(response);
-				for (i=0;i<response.length;i++) {
-					resultObject.push( new SObject(response[i] as ObjectProxy) );
-				} 
-				break;
-				
-    		case "getServerTimestampResponse":
-    			resultObject = new GetServerTimestampResult(response as ObjectProxy);
-    			break;
-    		case "getUpdatedResponse":
-    			resultObject = new UpdatedResponse(response as ObjectProxy);
-    			break;
-			case "getDeletedResponse":
-				resultObject = new DeletedResponse(response as ObjectProxy);
-				break;
-			case "describeGlobalResponse":
-			 	resultObject = response;	// in this case simple is fine
-			 	break;
-			case "describeLayoutResponse":
-				resultObject = new DescribeLayoutResult(response as ObjectProxy);
-				break;
-			case "sendEmailResponse":
-				resultObject = new SendEmailResult(response as ObjectProxy);
-				break;
-			case "describeTabsResponse":
-				resultObject = new Array();
-				response = ensureArray(response);
-				for (i=0;i<response.length;i++) {
-					resultObject.push( new DescribeTabSetResult(response[i] as ObjectProxy) );
-				}
-				break;
-			case "getUserInfoResponse":
-				resultObject = new UserInfo(response as ObjectProxy);
-				break;
-			case "setPasswordResponse":
-				resultObject = new SetPasswordResponse(response as ObjectProxy);
-				break;
-			case "resetPasswordResponse":
-				resultObject = new ResetPasswordResponse(response as ObjectProxy);
-				break;
-
-			case "Fault": 
-				var fault:Object = new ObjectProxy(result.result.Envelope.Body.Fault);
-				try { 					
-					resultObject = new com.salesforce.results.Fault(fault as ObjectProxy);
-					Util.debug(connection, "Saleforce Soap Fault: " + resultObject.faultcode + '\n' + resultObject.faultstring);
-				} catch(e:*) { 
-					// could not convert rpc fault to salesforce fault, just leave it
-					resultObject = fault; 
-					Util.debug(connection, "Other Fault: " + resultObject.toString());
-				}
-				break;
-
-			default:
-				resultObject = response as Object;
-				break;
-    	}  
-    	
-        // Make sure the user gave us a callback to work with
-        if (clientResponder != null) {
-	        if (responseType == 'Fault') {
-	        	clientResponder.fault(resultObject);
-	        } else {
-	        	clientResponder.result(resultObject);
-	        }
-  		}
-  	}
-  	
-  	// make an object into an array of one element
-  	private function ensureArray(result:Object):ArrayCollection {
-  		if ( result is ArrayCollection ) {
-  			return result as ArrayCollection; // all is well
-  		}
-  		var resultArray:ArrayCollection = new ArrayCollection();
-  		resultArray.addItem( result ); 
-  		return resultArray;
-  	}
-  	
-  	private function createSaveResult(result:Object):Array {
-  		var rArray:ArrayCollection = new ArrayCollection();
-  	
-  		if (result is ArrayCollection) {
-			rArray = result as ArrayCollection;
-  		} else {
-  			rArray.addItem(result);
-  		}
-		var resultObject:Array = new Array();
-		for (var i:int=0;i<rArray.length;i++) {
-			resultObject[i] = new SaveResult(rArray[i] as ObjectProxy);
-		}
-		return resultObject;
-  	}
-  	
-  	public function fault(fault:Object):void {
-    	// do logging here
-    	clientResponder.fault(fault);
-  	}
 }

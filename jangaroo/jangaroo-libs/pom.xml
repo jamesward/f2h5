@@ -115,6 +115,9 @@
           <groupId>net.jangaroo</groupId>
           <artifactId>jangaroo-maven-plugin</artifactId>
           <version>${jangaroo_version}</version>
+          <configuration>
+            <verbose>true</verbose>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -137,8 +140,8 @@
     <module>jangaroo-browser</module>
     -->
     <module>jooflash</module>
-    <!--
     <module>jooflexframework</module>
+    <!--
     <module>joounit</module>
 
     <module>ext-core</module>

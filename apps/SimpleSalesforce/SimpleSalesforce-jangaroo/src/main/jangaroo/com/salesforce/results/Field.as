@@ -54,31 +54,22 @@ package com.salesforce.results
 		public var picklistValues:ArrayCollection;
 		public var referenceTo:String;
 		
-		//TG: added the ability for the obj parameter to be null so readObject
-		//    doesn't bomb out.
-		public function Field(obj:ObjectProxy=null) {
-			if(obj != null)
-			{
-				for (var key:String in obj) {
-					var val:Object = obj[key];	
-					if (key == "picklistValues" ) { 				
-						this[key] = new ArrayCollection();
-						if (val is ObjectProxy) { 
-							this[key].addItem( new PickListEntry(val as ObjectProxy) ); 	
-						} else {
-							for (var i:int = 0;i<(val as ArrayCollection).length;i++) { 
-								this[key].addItem( new PickListEntry((val as ArrayCollection)[i]) );
-							}			
-						}
-					}
-					else {
-						this[key] = obj[key];
+		public function Field(obj:ObjectProxy) {
+			for (var key:String in obj) {
+				var val:Object = obj[key];	
+				if (key == "picklistValues" ) { 				
+					this[key] = new ArrayCollection();
+					if (val is ObjectProxy) { 
+						this[key].addItem( new PickListEntry(val as ObjectProxy) ); 	
+					} else {
+						for (var i:int = 0;i<(val as ArrayCollection).length;i++) { 
+							this[key].addItem( new PickListEntry((val as ArrayCollection)[i]) );
+						}			
 					}
 				}
-			}
-			else
-			{
-				//trace("Warning: Field Object is null");	
+				else {
+					this[key] = obj[key];
+				}
 			}
 		}
 	}

@@ -33,6 +33,7 @@ public class DisplayObject extends EventDispatcher implements IBitmapDrawable {
 
   public var visible:Boolean;
 
+  public var name : String;
 
   public function DisplayObject() {
     super();

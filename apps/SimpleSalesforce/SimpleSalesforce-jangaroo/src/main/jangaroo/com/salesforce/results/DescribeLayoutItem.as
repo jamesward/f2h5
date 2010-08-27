@@ -46,8 +46,7 @@ package com.salesforce.results
 		
 		public var layoutComponents:ArrayCollection;
 		
-		//TG: Changed to allow null when we deserialize from disk
-		public function DescribeLayoutItem(obj:ObjectProxy = null) {
+		public function DescribeLayoutItem(obj:ObjectProxy) {
 			for (var key:String in obj) {
 				var val:Object = obj[key];	
 				if (key == "layoutComponents") { 

@@ -28,8 +28,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 package com.salesforce.results
 {
 	import mx.utils.ObjectProxy;
-	import flash.utils.ByteArray;
-
+	
 	/**
 	 * Salesforce picklist entry returned by describe calls like describeSObjects()
 	 * 
@@ -41,12 +40,8 @@ package com.salesforce.results
 	 */
 	public dynamic class PickListEntry
 	{
-		public var active : Boolean; 
-		public var defaultValue: Boolean
-		public var label: String;
-		public var value: String;	
 		
-		public function PickListEntry(obj:ObjectProxy = null) {
+		public function PickListEntry(obj:ObjectProxy) {
 			for (var key:String in obj) {
 				this[key] = obj[key];
 			}

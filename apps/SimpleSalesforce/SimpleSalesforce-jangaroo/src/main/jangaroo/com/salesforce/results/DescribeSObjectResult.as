@@ -27,99 +27,63 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package com.salesforce.results
 {
-    import flash.utils.ByteArray;
-    
-    import mx.collections.ArrayCollection;
-    import mx.utils.ObjectProxy;
-
+	import mx.utils.ObjectProxy;
+	import mx.collections.ArrayCollection;
+	import mx.controls.List;
+	import mx.events.ChildExistenceChangedEvent;
+	
   /**
    * Returned in the response to describeSObject(), contains detailed information on the custom or standard object
-   *
+   * 
    * @see http://www.salesforce.com/us/developer/docs/api/Content/sforce_api_calls_describesobjects_describesobjectresult.htm Apex Developer Guide
-   *
+   * 
    * @author rhess
-   *
-   */
-    public dynamic class DescribeSObjectResult
-    {
-        public var activateable:Boolean;
-        public var childRelationships:Array;
-        public var childRelationshipsBytes:ByteArray;
-        public var createable:Boolean;
-        public var custom:Boolean;
-        public var deletable:Boolean;
-        public var fields:Array;
-        public var fieldsBytes:ByteArray;
-        public var keyPrefix:String;
-        public var layoutable:Boolean;
-        public var label:String;
-        public var labelPlural:String;
-        public var mergeable:Boolean;
-        public var name:String;
-        public var queryable:Boolean;
-        public var recordTypeInfos:Array;
-        public var recordTypeInfosBytes:ByteArray;
-        public var replicateable:Boolean;
-        public var retrieveable:Boolean;
-        public var searchable:Boolean;
-        public var undeletable:Boolean;
-        public var updateable:Boolean;
-        public var urlDetail:String;
-        public var urlEdit:String;
-        public var urlNew:String;
-
-        public function DescribeSObjectResult(obj:ObjectProxy=null) {
-          if (obj != null)
-          {
-            for (var key:String in obj) {
-                var val:Object = obj[key];
-                if (val is ArrayCollection || val is ObjectProxy) {
-                    if (key == "fields") {
-                        var fieldArray:Array = new Array();
-                        for (var i:int = 0;i<(val as ArrayCollection).length;i++) {
-                            var field:Field = new Field((val as ArrayCollection)[i]);
-                            fieldArray[field.name] = field;
-                            fieldArray.length++;
-                        }
-                        this[key] = fieldArray;
-                    } else if (key == "childRelationships") {
-                        var crArray:Array = new Array();
-                        var cr:ChildRelationship;
-
-                        if ( val is ObjectProxy ) {
-                            cr = new ChildRelationship(val as ObjectProxy);
-                            crArray[cr.relationshipName] = cr;
-                            crArray.length++;
-                        } else {
-                            for (var i2:int = 0;i2<(val as ArrayCollection).length;i2++) {
-                                cr = new ChildRelationship((val as ArrayCollection)[i2]);
-                                crArray[cr.relationshipName] = cr;
-                                crArray.length++;
-                            }
-                        }
-                        this[key] = crArray;
-                    } else if (key == "recordTypeInfos") {
-                        var rtArray:Array = new Array();
-                        var rt:RecordTypeInfo;
-
-                        if ( val is ObjectProxy ) {
-                            rt = new RecordTypeInfo(val as ObjectProxy);
-                            rtArray[rt.name] = rt;
-                            rtArray.length++;
-                        } else {
-                            for (var i3:int=0;i3<(val as ArrayCollection).length;i3++) {
-                                rt = new RecordTypeInfo((val as ArrayCollection)[i3]);
-                                rtArray[rt.name] = rt;
-                                rtArray.length++;
-                            }
-                        }
-                        this[key] = rtArray;
-                    }
-                } else {
-                    this[key] = obj[key]
-                }
-            }
-        }
-      }
-    }
+   * 
+   */		
+	public dynamic class DescribeSObjectResult
+	{
+		public function DescribeSObjectResult(obj:ObjectProxy) {
+			for (var key:String in obj) {
+				var val:Object = obj[key];
+				if (val is ArrayCollection || val is ObjectProxy) {
+					if (key == "fields") {
+						var fieldArray:Array = new Array();
+						for (var i:int = 0;i<(val as ArrayCollection).length;i++) {
+							var field:Field = new Field((val as ArrayCollection)[i]);
+							fieldArray[field.name] = field;
+						}
+						this[key] = fieldArray;
+					} else if (key == "childRelationships") {
+						var crArray:Array = new Array();
+						var cr:ChildRelationship;
+						if (!val is ObjectProxy) {
+							cr = new ChildRelationship(val as ObjectProxy);
+							crArray[cr.relationshipName] = cr;
+						} else {
+							for (var i2:int = 0;i2<(val as ArrayCollection).length;i2++) {
+								cr = new ChildRelationship((val as ArrayCollection)[i2]);
+								crArray[cr.relationshipName] = cr;
+							}
+						}
+						this[key] = crArray;
+					} else if (key == "recordTypeInfos") {
+						var rtArray:Array = new Array();
+						var rt:RecordTypeInfo;
+						if (val is ObjectProxy) {
+							rt = new RecordTypeInfo(val as ObjectProxy);
+							rtArray[rt.name] = rt;
+						} else {
+							for (var i3:int=0;i3<(val as ArrayCollection).length;i3++) {
+								rt = new RecordTypeInfo((val as ArrayCollection)[i3]);
+								rtArray[rt.name] = rt;
+							}
+						}
+						this[key] = rtArray;
+					}
+				} else {
+					this[key] = obj[key]
+				}
+			}
+		}
+	}
 }

@@ -123,13 +123,25 @@ public class URLLoader extends EventDispatcher {
     }
     this.xmlHttpRequest.onreadystatechange = this.readyStateChanged;
     this.xmlHttpRequest.open(request.method, request.url, true);
-    this.xmlHttpRequest.send(null);
+    for each (var h:URLRequestHeader in request.requestHeaders)
+    {
+      this.xmlHttpRequest.setRequestHeader(h.name, h.value);
+    }
+    this.xmlHttpRequest.setRequestHeader("Content-Type", request.contentType);
+    this.xmlHttpRequest.send(request.data);
   }
 
   private function readyStateChanged() : void {
     trace("URLLoader: "+this.xmlHttpRequest.readyState);
-    if (this.xmlHttpRequest.readyState==XMLHttpRequest.DONE) {
-      this.data = this.xmlHttpRequest.responseText;
+    if (this.xmlHttpRequest.readyState==4) {
+      if (dataFormat == URLLoaderDataFormat.TEXT)
+      {
+        this.data = this.xmlHttpRequest.responseText;
+      }
+      else if (dataFormat == "xml")
+      {
+        this.data = this.xmlHttpRequest.responseXML;
+      }
     }
     var event : flash.events.Event = this.createEvent();
     if (event) {
@@ -139,12 +151,13 @@ public class URLLoader extends EventDispatcher {
 
   private function createEvent() : flash.events.Event {
     switch (this.xmlHttpRequest.readyState) {
-      case XMLHttpRequest.OPENED: return new flash.events.Event(flash.events.Event.OPEN, false, false);
-      case XMLHttpRequest.DONE: return new flash.events.Event(flash.events.Event.COMPLETE, false, false);
+      case 1: return new flash.events.Event(flash.events.Event.OPEN, false, false);
+      case 4: return new flash.events.Event(flash.events.Event.COMPLETE, false, false);
     }
     return null;
     
   }
   private var xmlHttpRequest : XMLHttpRequest;
+
 }
 }

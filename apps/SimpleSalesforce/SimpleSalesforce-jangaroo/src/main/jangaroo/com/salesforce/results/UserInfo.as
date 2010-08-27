@@ -33,25 +33,7 @@ package com.salesforce.results
 	
 	public dynamic class UserInfo
 	{
-		public var accessibilityMode:Boolean;
-		public var currencySymbol:String;
-		public var licenseType:String;
-		public var profileId:String;
-		public var organizationId:String;
-		public var organizationMultiCurrency:Boolean;
-		public var organizationName:String;
-		public var roleId:String;
-		public var userDefaultCurrencyIsoCode:String;
-		public var userEmail:String;
-		public var userFullName:String;
-		public var userId:String;
-		public var userLanguage:String;
-		public var userLocale:String;
-		public var userName:String;
-		public var userTimeZone:String;
-		public var userUiSkin:String;
-		
-		public function UserInfo(obj:ObjectProxy =null) {
+		public function UserInfo(obj:ObjectProxy) {
 			for (var prop:String in obj) {
 				if (obj[prop] is ObjectProxy) {
 					if (obj[prop].hasOwnProperty("xsi:nil")) {

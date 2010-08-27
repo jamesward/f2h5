@@ -33,30 +33,18 @@ package com.salesforce.results
 	public dynamic class SendEmailResult
 	{
 		public var success:Boolean;
-		public var errors:ArrayCollection;
+		public var Error:ArrayCollection;
 		
 		public function SendEmailResult(result:ObjectProxy):void {
-			for (var i:String in result)
-			{
+			for (var i:String in result) {
 				var val:Object = result[i];
 				
-				if (i == "errors")
-				{	// this is the Error array
-					var records:ArrayCollection = val as ArrayCollection;
-					var errors:ArrayCollection = new ArrayCollection(null);
-					// When only a single record is returned, it's not actually
-					// an arraycollection, so we need to force it.
-					if (records == null) {
-						records = new ArrayCollection();
-						records.addItem(val);
+				if (val is ArrayCollection) {	// this is the Error array
+					this[i] = new ArrayCollection();
+					for (var x:int = 0; x < val.length;x++) {
+						this[i].addItem(val[x]);
 					}
-					for (var x:int = 0;x<records.length;x++) {
-						errors.addItem(records[x]);
-					}
-					this[i] = errors;
-				}
-				else
-				{
+				} else {
 					this[i] = val;
 				}
 			}	

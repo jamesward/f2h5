@@ -1,0 +1,131 @@
+joo.classLoader.prepare(////////////////////////////////////////////////////////////////////////////////
+//
+//  ADOBE SYSTEMS INCORPORATED
+//  Copyright 2005-2007 Adobe Systems Incorporated
+//  All Rights Reserved.
+//
+//  NOTICE: Adobe permits you to use, modify, and distribute this file
+//  in accordance with the terms of the license agreement accompanying it.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+"package mx.messaging.messages",/*
+{
+
+import flash.utils.IDataInput
+import flash.utils.IDataOutput
+
+[RemoteClass(alias="flex.messaging.messages.AcknowledgeMessage")]*/
+
+/**
+ *  An AcknowledgeMessage acknowledges the receipt of a message that 
+ *  was sent previously.
+ *  Every message sent within the messaging system must receive an
+ *  acknowledgement.
+ *  
+ *  @langversion 3.0
+ *  @playerversion Flash 9
+ *  @playerversion AIR 1.1
+ *  @productversion BlazeDS 4
+ *  @productversion LCDS 3 
+ */
+"public class AcknowledgeMessage extends mx.messaging.messages.AsyncMessage implements mx.messaging.messages.ISmallMessage",function($$l,$$private){var is=joo.is,assert=joo.assert,trace=joo.trace,$$bound=joo.boundMethod,$super=$$l+'super',$getSmallMessage=$$l+'getSmallMessage',$readExternal=$$l+'readExternal',$writeExternal=$$l+'writeExternal';return[function(){joo.classLoader.init(mx.messaging.messages.AcknowledgeMessageExt);},
+
+    //--------------------------------------------------------------------------
+    //
+    // Static Constants
+    // 
+    //--------------------------------------------------------------------------
+    
+    /**
+     *  Header name for the error hint header.
+     *  Used to indicate that the acknowledgement is for a message that
+     *  generated an error.
+     *  
+     *  @langversion 3.0
+     *  @playerversion Flash 9
+     *  @playerversion AIR 1.1
+     *  @productversion BlazeDS 4
+     *  @productversion LCDS 3 
+     */
+    "public static const",{ ERROR_HINT_HEADER/*:String*/ : "DSErrorHint"},
+    
+    //--------------------------------------------------------------------------
+    //
+    // Constructor
+    // 
+    //--------------------------------------------------------------------------
+    
+    /**
+     *  Constructs an instance of an AcknowledgeMessage with an empty body and header.
+     *  
+     *  @langversion 3.0
+     *  @playerversion Flash 9
+     *  @playerversion AIR 1.1
+     *  @productversion BlazeDS 4
+     *  @productversion LCDS 3 
+     */
+    "public function AcknowledgeMessage",function $AcknowledgeMessage()
+    {
+        this[$super]();
+    },
+    
+    //--------------------------------------------------------------------------
+    //
+    // Overridden Methods
+    // 
+    //--------------------------------------------------------------------------
+
+    /**
+     * @private
+     */
+    "override public function getSmallMessage",function getSmallMessage()/*:IMessage*/
+    {
+        var o/*:Object*/ = this;
+        if (o.constructor == mx.messaging.messages.AcknowledgeMessage)
+            return new mx.messaging.messages.AcknowledgeMessageExt(this);
+        return null;
+    },
+
+    /**
+     * @private
+     */
+    "override public function readExternal",function readExternal(input/*:IDataInput*/)/*:void*/
+    {
+        this[$readExternal](input);
+
+        var flagsArray/*:Array*/ = this.readFlags(input);
+        for (var i/*:uint*/ = 0; i < flagsArray.length; i++)
+        {
+            var flags/*:uint*/ = flagsArray[i]/*as uint*/;
+            var reservedPosition/*:uint*/ = 0;
+
+            // For forwards compatibility, read in any other flagged objects
+            // to preserve the integrity of the input stream...
+            if ((flags >> reservedPosition) != 0)
+            {
+                for (var j/*:uint*/ = reservedPosition; j < 6; j++)
+                {
+                    if (((flags >> j) & 1) != 0)
+                    {
+                        input.readObject();
+                    }
+                }
+            }
+        }
+    },
+
+    /**
+     * @private
+     */
+    "override public function writeExternal",function writeExternal(output/*:IDataOutput*/)/*:void*/
+    {
+        this[$writeExternal](output);
+
+        var flags/*:uint*/ = 0;
+        output.writeByte(flags);
+    },
+    
+];},[],["mx.messaging.messages.AsyncMessage","mx.messaging.messages.ISmallMessage","mx.messaging.messages.AcknowledgeMessageExt"]
+
+);

@@ -1,6 +1,8 @@
-package {
-public class QName {
-  public function QName() {
-  }
+package
+{
+
+public final class QName
+{
+
 }
 }

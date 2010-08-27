@@ -43,8 +43,8 @@ package com.salesforce.results
 	{
 		public var layoutItems:ArrayCollection;
 		public var numItems:int;
-		//TG: Changed to allow null when we deserialize from disk
-		public function DescribeLayoutRow( obj:ObjectProxy = null) {
+		
+		public function DescribeLayoutRow( obj:ObjectProxy) {
 			for (var key:String in obj) {
 				var val:Object = obj[key];	
 				if (key == "layoutItems") {

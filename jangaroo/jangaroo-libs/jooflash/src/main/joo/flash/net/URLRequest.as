@@ -43,7 +43,7 @@ public class URLRequest {
    *  <p><b>Note:</b> The FileReference.upload() and FileReference.download() methods do not support the
    *  URLRequest.contentType parameter.
    */
-  public var contentType : String;
+  public var contentType : String = "application/x-www-form-urlencoded";
 
   /**
    * An object containing data to be transmitted with the URL request.
